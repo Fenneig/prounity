@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad22b1e16be433a973336f79c490c0d, type: 3}
+  m_Name: Ship Config (Enemy)
+  m_EditorClassIdentifier: Game::Game.Ships.ShipConfig
+  <Prefab>k__BackingField: {fileID: 2676717880399519208, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+  <Health>k__BackingField: 2
+  <Team>k__BackingField: 2
+  <MoveSpeed>k__BackingField: 3
+  <FireCooldown>k__BackingField: 1.25
+  <BulletConfig>k__BackingField: {fileID: 11400000, guid: 3c761ad7c4690c44fb23cccdb7bd3c1f, type: 2}
+  <VisualConfig>k__BackingField: {fileID: 11400000, guid: a3f0a43b582205941a53bec8e0521592, type: 2}

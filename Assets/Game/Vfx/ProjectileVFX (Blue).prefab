@@ -9828,6 +9828,7 @@ GameObject:
   - component: {fileID: 4856003205012124}
   - component: {fileID: 198496799367628614}
   - component: {fileID: 199816237285177124}
+  - component: {fileID: 4280479290412092070}
   m_Layer: 0
   m_Name: ProjectileVFX (Blue)
   m_TagString: Untagged
@@ -9862,7 +9863,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.25
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -14734,3 +14735,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4280479290412092070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850901694530676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a121c7d3fb4afeab71f30c4d913c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.Visual.AutoReturnToPool
