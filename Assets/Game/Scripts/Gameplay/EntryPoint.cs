@@ -27,8 +27,9 @@ namespace Game.Gameplay
 
         private PlayerShip _player;
         
-        private void ShowGameOver(AbstractShip _)
+        private void GameOver(AbstractShip playerShip)
         {
+            Destroy(playerShip.gameObject);
             _gameOverView.Show();
             _shipsWorld.StopGame();
         }
@@ -60,12 +61,12 @@ namespace Game.Gameplay
 
         private void Start()
         {
-            _player.OnDead += ShowGameOver;
+            _player.OnDead += GameOver;
         }
 
         private void OnDestroy()
         {
-            _player.OnDead -= ShowGameOver;
+            _player.OnDead -= GameOver;
         }
     }
 }

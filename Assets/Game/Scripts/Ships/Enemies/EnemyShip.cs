@@ -50,7 +50,7 @@ namespace Game.Ships.Enemies
 
         private void Fire()
         {
-            if (!_isReachFireDistance)
+            if (_target == null || !_isReachFireDistance)
                 return;
             
             Vector2 direction = _target.position - FirePoint;
