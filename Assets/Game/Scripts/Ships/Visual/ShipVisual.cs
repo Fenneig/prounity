@@ -25,17 +25,6 @@ namespace Game.Ships.Visual
         
         private void Fire()
         {
-            if (_damageAnimation.IsActive())
-                _damageAnimation.Kill();
-
-            _damageAnimation = DOVirtual.Float(
-                0f,
-                1f,
-                _ship.ShipConfig.VisualConfig.HitDuration,
-                progress => _material?.SetFloat(_ship.ShipConfig.VisualConfig.HitPropertyName,
-                    _ship.ShipConfig.VisualConfig.HitAnimationCurve.Evaluate(progress))
-            ).SetLink(_renderer.gameObject);
-
             if (_fireSFX)
                 _audioSource.PlayOneShot(_fireSFX);
             
@@ -47,6 +36,17 @@ namespace Game.Ships.Visual
         {
             if (_damageSFX)
                 _audioSource.PlayOneShot(_damageSFX);
+            
+            if (_damageAnimation.IsActive())
+                _damageAnimation.Kill();
+
+            _damageAnimation = DOVirtual.Float(
+                0f,
+                1f,
+                _ship.ShipConfig.VisualConfig.HitDuration,
+                progress => _material?.SetFloat(_ship.ShipConfig.VisualConfig.HitPropertyName,
+                    _ship.ShipConfig.VisualConfig.HitAnimationCurve.Evaluate(progress))
+            ).SetLink(_renderer.gameObject);
         }
 
         private void Dead(AbstractShip _)
@@ -58,6 +58,7 @@ namespace Game.Ships.Visual
         private void Start()
         {
             _renderer.material = _ship.ShipConfig.VisualConfig.MaterialPrefab;
+            _material = _renderer.material;
         }
 
         private void OnEnable()
