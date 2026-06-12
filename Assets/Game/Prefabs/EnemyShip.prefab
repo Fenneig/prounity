@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: 4560017961611896118}
   - component: {fileID: 2414096643657561934}
   - component: {fileID: 2676717880399519208}
+  - component: {fileID: 5506173753717360341}
+  - component: {fileID: 362081840723497867}
+  - component: {fileID: 379471893000378494}
+  - component: {fileID: 3406373423174352188}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -210,13 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e89d130240447b994a6f324fd3ef42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ships.ShipVisual
-  _ship: {fileID: 2676717880399519208}
+  _weaponComponent: {fileID: 5506173753717360341}
+  _healthComponent: {fileID: 362081840723497867}
   _renderer: {fileID: 1333951631294404335}
   _viewTransform: {fileID: 2570692159425164225}
   _audioSource: {fileID: 4560017961611896118}
   _fireVFX: {fileID: 1792961037914348205}
-  _fireSFX: {fileID: 0}
-  _damageSFX: {fileID: 0}
+  _fireSFX: {fileID: 8300000, guid: 9cc2a755bf3be1a418991bf0785b482c, type: 3}
+  _damageSFX: {fileID: 8300000, guid: a6ed263e807940048af5295b8f7144d3, type: 3}
 --- !u!114 &2676717880399519208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,8 +234,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6da19032be466c8bdee2f81143acef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ships.Enemies.EnemyShip
-  _firePoint: {fileID: 3195880656587174614}
+  _shipVisual: {fileID: 2414096643657561934}
   _viewTransform: {fileID: 2570692159425164225}
+  _moveComponent: {fileID: 379471893000378494}
+  _shipConfig: {fileID: 11400000, guid: 1edefaf365ecd3643bbd5621a8578dfd, type: 2}
+  WeaponComponent: {fileID: 5506173753717360341}
+  _enemyFireDistanceChecker: {fileID: 3406373423174352188}
+--- !u!114 &5506173753717360341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7c0468b22048348382813be0623be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameObjects.Ships.WeaponComponent
+  _firePoint: {fileID: 3195880656587174614}
+--- !u!114 &362081840723497867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21aea46e949f4b7e80b159c41ea079f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameObjects.Ships.HealthComponent
+--- !u!114 &379471893000378494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d91390f1014d868acc67ff23b1cd39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameObjects.Movement.RigidbodyMoveComponent
+--- !u!114 &3406373423174352188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db47aa45f63745bf887e1eccc02f2598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameObjects.Ships.Enemies.EnemyFireDistanceChecker
   _stoppingDistance: 0.25
 --- !u!1 &1074127585690423075
 GameObject:

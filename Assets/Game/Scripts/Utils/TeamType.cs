@@ -1,6 +1,5 @@
 ﻿namespace Game.Utils
 {
-    // +
     public enum TeamType
     {
         None = 0,

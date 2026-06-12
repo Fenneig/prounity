@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 356897957427340444}
   - component: {fileID: 2535961138973201305}
   - component: {fileID: 7196145968430324238}
+  - component: {fileID: 6203244772383062326}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -127,6 +128,7 @@ MonoBehaviour:
   _damageComponent: {fileID: 356897957427340444}
   _vfxContainer: {fileID: 2743036428890533593}
   _bulletVisual: {fileID: 7196145968430324238}
+  _moveComponent: {fileID: 6203244772383062326}
 --- !u!114 &7196145968430324238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +144,18 @@ MonoBehaviour:
   _vfxContainer: {fileID: 8447445479419591331}
   _blueTeamVfx: {fileID: 3632099393870379189}
   _redTeamVfx: {fileID: 5919952461515397643}
+--- !u!114 &6203244772383062326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fe4b43ff95476ea951334d31f6b823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameObjects.Movement.TransformMoveComponent
 --- !u!1 &3276060438849189846
 GameObject:
   m_ObjectHideFlags: 0
