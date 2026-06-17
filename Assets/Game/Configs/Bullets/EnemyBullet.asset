@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba395757dcd45a28321263be2181a4f, type: 3}
   m_Name: EnemyBullet
   m_EditorClassIdentifier: Game::Game.Bullets.BulletConfig
-  <BulletPrefab>k__BackingField: {fileID: 2535961138973201305, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
-  <Team>k__BackingField: 2
   <Damage>k__BackingField: 1
   <Speed>k__BackingField: 3
-  <VfxPrefab>k__BackingField: {fileID: 1552236684049608, guid: 45c622ce0f6291e44b1acdaece3f0e59, type: 3}
   <ExplosionVFX>k__BackingField: {fileID: 1101452535904402, guid: 742ae5c3589574c4195065193e9181b5, type: 3}

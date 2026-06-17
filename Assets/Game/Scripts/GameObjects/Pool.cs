@@ -1,37 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Systems
+namespace Game.GameObjects
 {
-    public sealed class Pool : MonoBehaviour
+    public abstract class Pool<T> : MonoBehaviour where T : MonoBehaviour
     {
-        [SerializeField] private Transform _prefab;
+        [SerializeField] private Factory<T> _factory;
         [SerializeField] private int _preloadCount;
-        [SerializeField] private Transform _container;
         
-        private readonly Stack<Transform> _pool = new();
+        private readonly Stack<T> _pool = new();
 
         private void Awake()
         {
             for (int i = 0; i < _preloadCount; i++)
             {
-                var poolObject = Instantiate(_prefab, _container);
+                var poolObject = _factory.Create();
                 poolObject.gameObject.SetActive(false);
                 _pool.Push(poolObject);
             }
         }
 
-        public Transform Get()
+        public T Get()
         {
-            if (_pool.TryPop(out Transform poolObject))
+            if (_pool.TryPop(out T poolObject))
                 poolObject.gameObject.SetActive(true);
             else
-                return Instantiate(_prefab, _container);
+                return _factory.Create();
             
             return poolObject;
         }
         
-        public void Return(Transform poolObject) 
+        public void Return(T poolObject) 
         {
             poolObject.gameObject.SetActive(false);
             _pool.Push(poolObject);

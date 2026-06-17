@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Game.GameObjects.Movement
+namespace Game.GameObjects.Components
 {
     public abstract class MoveComponent : MonoBehaviour
     {
         public abstract void Move(Vector2 normalizedDirection);
-        public abstract void UpdateSpeed(float speed);
+        public abstract void Initialize(float speed);
     }
 }

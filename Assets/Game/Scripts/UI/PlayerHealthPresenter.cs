@@ -1,4 +1,5 @@
-﻿using Game.GameObjects.Ships;
+﻿using Game.GameObjects.Components;
+using Game.Systems.Player;
 using Modules.UI;
 using UnityEngine;
 
@@ -6,17 +7,23 @@ namespace Game.UI
 {
     public sealed class PlayerHealthPresenter : MonoBehaviour
     {
-        [SerializeField] private HealthComponent _playerHealthComponent;
-        private HealthView _healthView;
+        [SerializeField] private PlayerShipProvider _playerShipProvider;
+        [SerializeField] private HealthView _healthView;
+        
+        private HealthComponent _playerHealthComponent;
 
-        public void Construct(HealthView healthView) => _healthView = healthView;
+        private void Start()
+        {
+            _playerHealthComponent = _playerShipProvider.Player.GetComponent<HealthComponent>();
 
-        private void Start() => _healthView.SetHealth(_playerHealthComponent.CurrentHealth, _playerHealthComponent.CurrentHealth);
+            _healthView.SetHealth(_playerHealthComponent.CurrentHealth, _playerHealthComponent.CurrentHealth);
+            _playerHealthComponent.OnDamaged += UpdateHealth;
+        }
+        
+        private void UpdateHealth(int oldHealth, int newHealth, int maxHealth) =>
+            _healthView.SetHealth(newHealth, maxHealth);
 
-        private void UpdateHealth(int oldHealth, int newHealth, int maxHealth) => _healthView.SetHealth(newHealth, maxHealth);
-
-        private void OnEnable() => _playerHealthComponent.OnDamaged += UpdateHealth;
-
-        private void OnDisable() => _playerHealthComponent.OnDamaged -= UpdateHealth;
+        private void OnDestroy() =>
+            _playerHealthComponent.OnDamaged -= UpdateHealth;
     }
 }

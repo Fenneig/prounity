@@ -1,9 +1,10 @@
 ﻿using System;
+using Game.GameObjects.Ships;
 using Game.Systems.Damage;
 using Game.Utils;
 using UnityEngine;
 
-namespace Game.GameObjects.Ships
+namespace Game.GameObjects.Components
 {
     public sealed class HealthComponent : MonoBehaviour, IDamageable
     {
@@ -13,7 +14,7 @@ namespace Game.GameObjects.Ships
         private int _currentCurrentHealth;
 
         public event HealthChanged OnDamaged;
-        public event Action<AbstractShip> OnDead;
+        public event Action<Ship> OnDead;
 
         private TeamType _team;
 
@@ -37,7 +38,7 @@ namespace Game.GameObjects.Ships
             OnDamaged?.Invoke(oldValue, _currentCurrentHealth, _maxHealth);
             
             if (_currentCurrentHealth <= 0) 
-                OnDead?.Invoke(GetComponent<AbstractShip>());
+                OnDead?.Invoke(GetComponent<Ship>());
         }
     }
 }

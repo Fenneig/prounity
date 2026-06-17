@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Game.GameObjects.Components;
 using Game.GameObjects.Ships;
 using Game.UI.Visual;
 using UnityEngine;
@@ -53,7 +54,7 @@ namespace Game.UI.Ship
             ).SetLink(_renderer.gameObject);
         }
 
-        private void Dead(AbstractShip _)
+        private void Dead(GameObjects.Ships.Ship _)
         {
             ParticleSystem prefab = _shipConfig.VisualConfig.DestroyEffectPrefab;
             _vfxPool.Get(prefab.gameObject, _viewTransform.position, prefab.transform.rotation);

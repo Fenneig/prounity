@@ -14,11 +14,15 @@ namespace Game.GameObjects.Bullets
         private GameObject _explosionVfx;
         private VfxPool _vfxPool;
 
-        public void Initialize(BulletConfig config, TeamType team, VfxPool vfxPool)
+        public void Construct(VfxPool vfxPool)
+        {
+            _vfxPool = vfxPool;
+        }
+
+        public void Initialize(BulletConfig config, TeamType team)
         {
             _explosionVfx = config.ExplosionVFX;
             SetupVfx(team);
-            _vfxPool = vfxPool;
         }
 
         public void EndLife(BulletEndReason reason)

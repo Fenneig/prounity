@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Game.Systems.Player;
+using UnityEngine;
 
-namespace Game.GameObjects.Ships.Player
+namespace Game.UI
 {
     public sealed class InputHandler : MonoBehaviour
     {
-        [SerializeField] private PlayerShip _playerShip;
+        [SerializeField] private PlayerShipProvider _playerShipProvider;
         
         private Vector2 _moveDirection;
         
@@ -13,13 +14,16 @@ namespace Game.GameObjects.Ships.Player
 
         public void Update()
         {
+            if (_playerShipProvider.Player == null) 
+                return;
+            
             if (Input.GetKeyDown(KeyCode.Space))
-                _playerShip.Fire();
+                _playerShipProvider.Player.Fire();
 
             _moveDirection.x = Input.GetAxisRaw(HORIZONTAL_AXIS);
             _moveDirection.y = Input.GetAxisRaw(VERTICAL_AXIS);
 
-            _playerShip.SetMoveDirection(_moveDirection.normalized);
+            _playerShipProvider.Player.SetMoveDirection(_moveDirection.normalized);
         }
     }
 }

@@ -7,7 +7,9 @@ namespace Game.Systems
     {
         public event Action OnGameStarted, OnGameEnded;
         
-        public void StartGame() => OnGameStarted?.Invoke();
-        public void EndGame() => OnGameEnded?.Invoke();
+        public void StartGame() => 
+            OnGameStarted?.Invoke();
+        public void EndGame() =>
+            OnGameEnded?.Invoke();
     }
 }

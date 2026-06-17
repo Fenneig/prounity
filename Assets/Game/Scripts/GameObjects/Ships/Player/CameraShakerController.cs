@@ -1,9 +1,10 @@
-﻿using Modules.Utils;
+﻿using Game.GameObjects.Components;
+using Modules.Utils;
 using UnityEngine;
 
 namespace Game.GameObjects.Ships.Player
 {
-    public sealed class PlayerView : MonoBehaviour
+    public sealed class CameraShakerController : MonoBehaviour
     {
         [SerializeField] private HealthComponent _playerHealthComponent;
         private CameraShaker _cameraShaker;

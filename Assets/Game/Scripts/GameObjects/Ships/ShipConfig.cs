@@ -7,7 +7,7 @@ namespace Game.GameObjects.Ships
 {
     public sealed class ShipConfig : ScriptableObject
     {
-        [field: SerializeField] public AbstractShip Prefab { get; private set; }
+        [field: SerializeField] public Ship Prefab { get; private set; }
         [field: Header("Core")]
         [field: SerializeField] public int Health { get; private set; } = 5;
         [field: SerializeField] public TeamType Team { get; private set; }

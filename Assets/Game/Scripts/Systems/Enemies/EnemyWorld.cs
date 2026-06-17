@@ -1,24 +1,46 @@
-﻿using Game.GameObjects.Ships;
+﻿using Game.GameObjects.Components;
+using Game.GameObjects.Ships;
 using Game.GameObjects.Ships.Enemies;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Systems.Enemies
 {
-    public sealed class EnemyWorld : MonoBehaviour
+    public class EnemyWorld : MonoBehaviour
     {
-        [SerializeField] private EnemyDieMediator _enemyDieMediator;
-        [SerializeField] private EnemyFactory _enemyFactory;
-
-        public void SpawnEnemy()
+        [SerializeField] private EnemyPool _enemyPool;
+        [Header("Points")] 
+        [SerializeField] private PositionDistributor _spawnPositions;
+        [SerializeField] private PositionDistributor _attackPositions;
+        [Header("Score")] 
+        [SerializeField] private ScorePresenter _scorePresenter;
+        
+        private int _index;
+        
+        public void Spawn()
         {
-            EnemyShip ship = _enemyFactory.Spawn();
-            ship.GetComponent<HealthComponent>().OnDead += CountDead;
+            EnemyBehaviour enemy = _enemyPool.Get();
+
+            enemy.transform.position = _spawnPositions.GetNextPosition();
+            enemy.GetComponent<Ship>().Initialize();
+            
+            SetupBehaviour(_attackPositions.GetNextPosition(), enemy);
+
+            enemy.GetComponent<HealthComponent>().OnDead += EnemyDied;
+        }
+        
+        private void SetupBehaviour(Vector2 attackPosition, EnemyBehaviour enemyShip)
+        {
+            enemyShip.Initialize(attackPosition);
+            enemyShip.name = $"Enemy {++_index}";
+            enemyShip.gameObject.SetActive(true);
         }
 
-        private void CountDead(AbstractShip destroyedShip)
+        private void EnemyDied(Ship ship)
         {
-            destroyedShip.GetComponent<HealthComponent>().OnDead -= CountDead;
-            _enemyDieMediator.EnemyDied();
+            ship.GetComponent<HealthComponent>().OnDead -= EnemyDied;
+            _scorePresenter.CountScore();
+            _enemyPool.Return(ship.GetComponent<EnemyBehaviour>());
         }
     }
 }

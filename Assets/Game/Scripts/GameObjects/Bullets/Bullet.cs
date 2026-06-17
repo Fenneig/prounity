@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.GameObjects.Movement;
+using Game.GameObjects.Components;
 using Game.Systems.Damage;
 using Modules.Utils;
 using UnityEngine;
@@ -14,24 +14,12 @@ namespace Game.GameObjects.Bullets
         [SerializeField] private BulletVisual _bulletVisual;
         [SerializeField] private MoveComponent _moveComponent;
         
-        private float _speed;
         private TransformBounds _levelBounds;
 
-        private Action<Bullet> _returnAction;
+        public event Action<Bullet> OnDispose;
 
-        public void Initialize(float speed, TransformBounds levelBounds)
-        {
-            _speed = speed;
-
-            _damageComponent.OnDamageApplied += OnHit;
-
-            _moveComponent.UpdateSpeed(_speed);
-
+        public void Construct(TransformBounds levelBounds) => 
             _levelBounds = levelBounds;
-        }
-
-        public void SetLifeEndAction(Action<Bullet> returnAction) =>
-            _returnAction = returnAction;
 
         private void OnHit() =>
             EndLife(BulletEndReason.Hit);
@@ -42,7 +30,7 @@ namespace Game.GameObjects.Bullets
             
             _damageComponent.OnDamageApplied -= OnHit;
 
-            _returnAction?.Invoke(this);
+            OnDispose?.Invoke(this);
         }
 
         private void FixedUpdate()
@@ -51,6 +39,16 @@ namespace Game.GameObjects.Bullets
 
             if (!_levelBounds.InBounds(transform.position))
                 EndLife(BulletEndReason.OutOfBounds);
+        }
+
+        private void OnEnable()
+        {
+            _damageComponent.OnDamageApplied += OnHit;
+        }
+
+        private void OnDisable()
+        {
+            _damageComponent.OnDamageApplied -= OnHit;
         }
     }
 }

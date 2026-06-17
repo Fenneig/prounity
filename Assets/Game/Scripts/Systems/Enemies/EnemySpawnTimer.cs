@@ -13,14 +13,13 @@ namespace Game.Systems.Enemies
 
         private Timer _spawnTime = new();
         private bool _isGameInProgress;
-
-
+        
         private void SpawnEnemy()
         {
             if (!_isGameInProgress)
                 return;
             
-            _enemyWorld.SpawnEnemy();
+            _enemyWorld.Spawn();
             ResetSpawnTimer();
         }
         

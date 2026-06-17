@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.GameObjects.Movement
+namespace Game.GameObjects.Components
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public sealed class RigidbodyMoveComponent : MoveComponent
@@ -17,7 +17,7 @@ namespace Game.GameObjects.Movement
             _rigidbody.MovePosition(newPosition);
         }
 
-        public override void UpdateSpeed(float speed) =>
+        public override void Initialize(float speed) =>
             _speed = speed;
 
         private void Awake() => 

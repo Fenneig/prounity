@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad22b1e16be433a973336f79c490c0d, type: 3}
   m_Name: Ship Config (Player)
   m_EditorClassIdentifier: Game::Game.Ships.ShipConfig
-  <Prefab>k__BackingField: {fileID: 962765078788729570, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  <Prefab>k__BackingField: {fileID: 2584297799103020840, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
   <Health>k__BackingField: 10
   <Team>k__BackingField: 1
   <MoveSpeed>k__BackingField: 7

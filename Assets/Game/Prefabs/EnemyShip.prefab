@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5506173753717360341}
   - component: {fileID: 362081840723497867}
   - component: {fileID: 379471893000378494}
-  - component: {fileID: 3406373423174352188}
+  - component: {fileID: 7744401626784656497}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -234,12 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6da19032be466c8bdee2f81143acef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ships.Enemies.EnemyShip
-  _shipVisual: {fileID: 2414096643657561934}
-  _viewTransform: {fileID: 2570692159425164225}
-  _moveComponent: {fileID: 379471893000378494}
-  _shipConfig: {fileID: 11400000, guid: 1edefaf365ecd3643bbd5621a8578dfd, type: 2}
-  WeaponComponent: {fileID: 5506173753717360341}
-  _enemyFireDistanceChecker: {fileID: 3406373423174352188}
+  _self: {fileID: 7744401626784656497}
+  _stoppingDistance: 0.25
 --- !u!114 &5506173753717360341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d91390f1014d868acc67ff23b1cd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.GameObjects.Movement.RigidbodyMoveComponent
---- !u!114 &3406373423174352188
+--- !u!114 &7744401626784656497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,10 +282,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db47aa45f63745bf887e1eccc02f2598, type: 3}
+  m_Script: {fileID: 11500000, guid: cda2a811191d4d83aedfb3fdccec50e5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game::Game.GameObjects.Ships.Enemies.EnemyFireDistanceChecker
-  _stoppingDistance: 0.25
+  m_EditorClassIdentifier: Game::Game.GameObjects.Ships.Ship
+  _shipVisual: {fileID: 2414096643657561934}
+  _viewTransform: {fileID: 2570692159425164225}
+  _moveComponent: {fileID: 379471893000378494}
+  _shipConfig: {fileID: 11400000, guid: 1edefaf365ecd3643bbd5621a8578dfd, type: 2}
+  _weaponComponent: {fileID: 5506173753717360341}
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0

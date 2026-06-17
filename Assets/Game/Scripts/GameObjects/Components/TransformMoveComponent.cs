@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.GameObjects.Movement
+namespace Game.GameObjects.Components
 {
     public sealed class TransformMoveComponent : MoveComponent
     {
@@ -12,7 +12,7 @@ namespace Game.GameObjects.Movement
             transform.position += moveStep;
         }
 
-        public override void UpdateSpeed(float speed) => 
+        public override void Initialize(float speed) => 
             _speed = speed;
     }
 }

@@ -1,6 +1,5 @@
-﻿using Game.GameObjects.Ships;
-using Game.GameObjects.Ships.Player;
-using Game.Systems.Enemies;
+﻿using Game.GameObjects.Ships.Player;
+using Game.Systems.Player;
 using UnityEngine;
 
 namespace Game.Systems
@@ -8,38 +7,15 @@ namespace Game.Systems
     public sealed class EntryPoint : MonoBehaviour
     {
         [Header("Scene entities")] 
-        [SerializeField] private EnemyFactory _enemyFactory;
         [SerializeField] private PlayerFactory _playerFactory;
         [Header("Systems")]
         [SerializeField] private GameCycle _gameCycle;
-
-        private PlayerShip _player;
+        [SerializeField] private PlayerShipProvider _playerShipProvider; 
         
-        private void GameOver(AbstractShip playerShip)
-        {
-            Destroy(playerShip.gameObject);
-            _gameCycle.EndGame();
-        }
+        private void Awake() => 
+            _playerShipProvider.Player = _playerFactory.Get();
 
-        private void SetupEnemyFactory() => 
-            _enemyFactory.Construct(_player.transform);
-
-        private void Awake()
-        {
-            _player = _playerFactory.Get();
-            SetupEnemyFactory();
-            
-            _player.GetComponent<HealthComponent>().OnDead += GameOver;
-        }
-
-        private void Start()
-        {
+        private void Start() => 
             _gameCycle.StartGame();
-        }
-
-        private void OnDestroy()
-        {
-            _player.GetComponent<HealthComponent>().OnDead -= GameOver;
-        }
     }
 }
