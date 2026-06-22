@@ -1,11 +1,10 @@
 ﻿using Game.GameObjects.Bullets;
 using Game.GameObjects.Components;
-using Game.Systems.Player;
-using Game.UI.Ship;
-using Game.UI.Visual;
+using Game.Systems;
+using Game.UI;
 using UnityEngine;
 
-namespace Game.GameObjects.Ships.Enemies
+namespace Game.GameObjects.Ships
 {
     public sealed class EnemyFactory : Factory<EnemyBehaviour>
     {

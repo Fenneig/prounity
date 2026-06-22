@@ -1,5 +1,5 @@
 ﻿using Game.GameObjects.Components;
-using Game.Systems.Damage;
+using Game.Systems;
 using Game.Utils;
 using UnityEngine;
 
@@ -16,6 +16,7 @@ namespace Game.GameObjects.Bullets
             SetTransform(position, direction, bullet);
             
             bullet.GetComponent<MoveComponent>().Initialize(config.Speed);
+            bullet.GetComponent<MoveComponent>().Direction = direction;
             bullet.GetComponent<BulletVisual>().Initialize(config, team);
             bullet.GetComponent<DamageComponent>().Initialize(config.Damage, team);
             

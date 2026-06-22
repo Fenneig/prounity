@@ -1,5 +1,5 @@
 ﻿using Game.GameObjects.Components;
-using Game.Systems.Player;
+using Game.Systems;
 using Modules.UI;
 using UnityEngine;
 

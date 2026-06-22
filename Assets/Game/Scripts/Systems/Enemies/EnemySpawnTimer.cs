@@ -1,7 +1,7 @@
 ﻿using Game.Utils;
 using UnityEngine;
 
-namespace Game.Systems.Enemies
+namespace Game.Systems
 {
     public sealed class EnemySpawnTimer : MonoBehaviour
     {

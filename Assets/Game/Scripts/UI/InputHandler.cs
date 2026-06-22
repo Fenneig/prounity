@@ -1,4 +1,5 @@
-﻿using Game.Systems.Player;
+﻿using Game.GameObjects.Components;
+using Game.Systems;
 using UnityEngine;
 
 namespace Game.UI
@@ -8,9 +9,17 @@ namespace Game.UI
         [SerializeField] private PlayerShipProvider _playerShipProvider;
         
         private Vector2 _moveDirection;
+        private MoveComponent _moveComponent;
+        private WeaponComponent _weaponComponent;
         
         private const string HORIZONTAL_AXIS = "Horizontal";
         private const string VERTICAL_AXIS = "Vertical";
+
+        private void Start()
+        {
+            _moveComponent = _playerShipProvider.Player.GetComponent<MoveComponent>();
+            _weaponComponent = _playerShipProvider.Player.GetComponent<WeaponComponent>();
+        }
 
         public void Update()
         {
@@ -18,12 +27,12 @@ namespace Game.UI
                 return;
             
             if (Input.GetKeyDown(KeyCode.Space))
-                _playerShipProvider.Player.Fire();
+                _weaponComponent.Fire(_playerShipProvider.Player.transform.up);
 
             _moveDirection.x = Input.GetAxisRaw(HORIZONTAL_AXIS);
             _moveDirection.y = Input.GetAxisRaw(VERTICAL_AXIS);
 
-            _playerShipProvider.Player.SetMoveDirection(_moveDirection.normalized);
+            _moveComponent.Direction = _moveDirection.normalized;
         }
     }
 }

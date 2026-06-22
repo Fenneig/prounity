@@ -1,6 +1,5 @@
 ﻿using Game.GameObjects.Components;
 using Game.GameObjects.Ships;
-using Game.Systems.Player;
 using UnityEngine;
 
 namespace Game.Systems

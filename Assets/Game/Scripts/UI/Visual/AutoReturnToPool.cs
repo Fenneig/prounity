@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Game.UI.Visual
+namespace Game.UI
 {
     public sealed class AutoReturnToPool : MonoBehaviour
     {

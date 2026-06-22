@@ -655,6 +655,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: '[Camera]'
   m_TagString: MainCamera
@@ -797,6 +798,20 @@ MonoBehaviour:
   _strength: {x: 0.11, y: 0.11, z: 0.11}
   _vibrato: 4
   _randomnessMode: 0
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d34a53fc2e94c09bda10ef4e04c988e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.UI.CameraShakerController
+  _cameraShaker: {fileID: 519420034}
+  _playerShipProvider: {fileID: 1879759791}
 --- !u!1 &522898773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2786,7 +2801,6 @@ MonoBehaviour:
   _playerShipConfig: {fileID: 11400000, guid: 4b06e52fe30984b49a80089dc775d5d0, type: 2}
   _playerStartPosition: {fileID: 402088394}
   _playerContainer: {fileID: 1163092677}
-  _cameraShaker: {fileID: 519420034}
   _playerArea: {fileID: 1498479408}
   _vfxPool: {fileID: 1271664067}
   _bulletSpawner: {fileID: 738613847}

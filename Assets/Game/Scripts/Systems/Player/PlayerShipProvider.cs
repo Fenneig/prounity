@@ -1,7 +1,7 @@
 ﻿using Game.GameObjects.Ships;
 using UnityEngine;
 
-namespace Game.Systems.Player
+namespace Game.Systems
 {
     public sealed class PlayerShipProvider : MonoBehaviour
     {

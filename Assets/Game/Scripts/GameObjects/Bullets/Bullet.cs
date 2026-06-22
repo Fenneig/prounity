@@ -1,6 +1,6 @@
 ﻿using System;
 using Game.GameObjects.Components;
-using Game.Systems.Damage;
+using Game.Systems;
 using Modules.Utils;
 using UnityEngine;
 
@@ -35,8 +35,6 @@ namespace Game.GameObjects.Bullets
 
         private void FixedUpdate()
         {
-            _moveComponent.Move(transform.forward);
-
             if (!_levelBounds.InBounds(transform.position))
                 EndLife(BulletEndReason.OutOfBounds);
         }

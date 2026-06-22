@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4075764219798992963}
   - component: {fileID: 8141832910989862937}
   - component: {fileID: 962765078788729570}
-  - component: {fileID: 7097730990803407518}
   - component: {fileID: 3973719426337287682}
   - component: {fileID: 6893399472546087683}
   - component: {fileID: 8656156017460853748}
@@ -215,19 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f587e76584584ea6b1dfc7f1f6d22ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ships.Player.PlayerShip
---- !u!114 &7097730990803407518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4109394316656653739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d34a53fc2e94c09bda10ef4e04c988e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.Ships.Player.PlayerView
-  _playerHealthComponent: {fileID: 2891189418929766754}
 --- !u!114 &3973719426337287682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e89d130240447b994a6f324fd3ef42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ships.ShipVisual
+  _shipConfig: {fileID: 11400000, guid: 2833a959c2dea374f836989fab439fda, type: 2}
   _weaponComponent: {fileID: 8656156017460853748}
   _healthComponent: {fileID: 2891189418929766754}
+  _moveComponent: {fileID: 6893399472546087683}
   _renderer: {fileID: 795037679980988590}
   _viewTransform: {fileID: 1249406481267314197}
   _audioSource: {fileID: 8141832910989862937}
@@ -297,7 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda2a811191d4d83aedfb3fdccec50e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.GameObjects.Ships.Ship
-  _shipVisual: {fileID: 3973719426337287682}
   _viewTransform: {fileID: 1249406481267314197}
   _moveComponent: {fileID: 6893399472546087683}
   _shipConfig: {fileID: 11400000, guid: 4b06e52fe30984b49a80089dc775d5d0, type: 2}

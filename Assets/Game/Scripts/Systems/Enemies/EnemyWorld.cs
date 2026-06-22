@@ -1,10 +1,9 @@
 ﻿using Game.GameObjects.Components;
 using Game.GameObjects.Ships;
-using Game.GameObjects.Ships.Enemies;
 using Game.UI;
 using UnityEngine;
 
-namespace Game.Systems.Enemies
+namespace Game.Systems
 {
     public class EnemyWorld : MonoBehaviour
     {

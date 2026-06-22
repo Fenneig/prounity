@@ -1,4 +1,4 @@
-﻿using Game.UI.Visual;
+﻿using Game.UI;
 using Modules.Utils;
 using UnityEngine;
 

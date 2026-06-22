@@ -1,7 +1,7 @@
 ﻿using Modules.Utils;
 using UnityEngine;
 
-namespace Game.Systems.Player
+namespace Game.Systems
 {
     public sealed class PlayerShipBoundsClamper : MonoBehaviour
     {

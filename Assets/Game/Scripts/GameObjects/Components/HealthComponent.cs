@@ -1,6 +1,6 @@
 ﻿using System;
 using Game.GameObjects.Ships;
-using Game.Systems.Damage;
+using Game.Systems;
 using Game.Utils;
 using UnityEngine;
 

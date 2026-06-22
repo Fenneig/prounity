@@ -214,8 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e89d130240447b994a6f324fd3ef42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ships.ShipVisual
+  _shipConfig: {fileID: 11400000, guid: a3f0a43b582205941a53bec8e0521592, type: 2}
   _weaponComponent: {fileID: 5506173753717360341}
   _healthComponent: {fileID: 362081840723497867}
+  _moveComponent: {fileID: 379471893000378494}
   _renderer: {fileID: 1333951631294404335}
   _viewTransform: {fileID: 2570692159425164225}
   _audioSource: {fileID: 4560017961611896118}
@@ -285,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda2a811191d4d83aedfb3fdccec50e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.GameObjects.Ships.Ship
-  _shipVisual: {fileID: 2414096643657561934}
   _viewTransform: {fileID: 2570692159425164225}
   _moveComponent: {fileID: 379471893000378494}
   _shipConfig: {fileID: 11400000, guid: 1edefaf365ecd3643bbd5621a8578dfd, type: 2}

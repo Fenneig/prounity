@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.UI.Ship
+namespace Game.UI
 {
     [CreateAssetMenu(menuName = "Game/ShipVisual", order = 0)]
     public sealed class ShipVisualConfig : ScriptableObject

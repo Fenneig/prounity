@@ -1,22 +1,20 @@
 ﻿using Game.GameObjects.Components;
 using UnityEngine;
 
-namespace Game.GameObjects.Ships.Enemies
+namespace Game.GameObjects.Ships
 {
     public sealed class EnemyBehaviour : MonoBehaviour
     {
-        [SerializeField] private Ship _self;
         [SerializeField] private float _stoppingDistance = 0.25f;
 
         private Vector3 _fireDestination;
         private Transform _target;
         private WeaponComponent _weaponComponent;
         private MoveComponent _moveComponent;
-        private Vector2 _moveDirection;
 
         private bool IsReachedFireDistance => 
-            Vector3.Dot(_fireDestination - transform.position, _moveDirection) <= _stoppingDistance;
-        
+            Vector3.Distance(transform.position, _fireDestination) <= _stoppingDistance;
+
         public void Construct(Transform targetShip) => 
             _target = targetShip;
 
@@ -38,22 +36,19 @@ namespace Game.GameObjects.Ships.Enemies
                 return;
             
             if (IsReachedFireDistance)
-                _self.Fire((_target.position - transform.position).normalized);
+                _weaponComponent.Fire((_target.position - transform.position).normalized);
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (!IsReachedFireDistance) 
-                MoveToFireDistance();
+            if (IsReachedFireDistance) 
+                _moveComponent.Direction = Vector2.zero;
         }
-
-        private void MoveToFireDistance() => 
-            _moveComponent.Move(_moveDirection);
-
+        
         public void Initialize(Vector2 destination)
         {
             _fireDestination = destination;
-            _moveDirection = (_fireDestination - transform.position).normalized;
+            _moveComponent.Direction = (_fireDestination - transform.position).normalized;
         }
     }
 }

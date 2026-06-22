@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.UI.Visual
+namespace Game.UI
 {
     public sealed class VfxPool : MonoBehaviour
     {

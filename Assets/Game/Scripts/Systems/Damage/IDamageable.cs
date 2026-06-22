@@ -1,6 +1,6 @@
 ﻿using Game.Utils;
 
-namespace Game.Systems.Damage
+namespace Game.Systems
 {
     public interface IDamageable
     {

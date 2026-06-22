@@ -1,5 +1,4 @@
-﻿using Game.GameObjects.Ships.Player;
-using Game.Systems.Player;
+﻿using Game.GameObjects.Ships;
 using UnityEngine;
 
 namespace Game.Systems

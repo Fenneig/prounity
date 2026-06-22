@@ -2,7 +2,7 @@
 using Game.Utils;
 using UnityEngine;
 
-namespace Game.Systems.Damage
+namespace Game.Systems
 {
     public sealed class DamageComponent : MonoBehaviour
     {
