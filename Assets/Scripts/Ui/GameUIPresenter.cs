@@ -1,37 +1,26 @@
-﻿using Modules;
+﻿using System;
+using Modules;
 using SnakeGame;
 using Systems;
-using UnityEngine;
 using Zenject;
 
 namespace Ui
 {
-    public sealed class GameUIPresenter : MonoBehaviour
+    public sealed class GameUIPresenter : IInitializable, IDisposable
     {
         private IGameUI _gameUI;
         private IScore _score;
         private IDifficulty _difficulty;
-        private GameCycle _gameCycle;
+        private GameState _gameState;
 
-        [Inject]
-        public void Construct(IGameUI gameUI, IScore score, IDifficulty difficulty, GameCycle gameCycle)
+        public GameUIPresenter(IGameUI gameUI, IScore score, IDifficulty difficulty, GameState gameState)
         {
             _gameUI = gameUI;
             _score = score;
             _difficulty = difficulty;
-            _gameCycle = gameCycle;
+            _gameState = gameState;
         }
-
-        private void Start()
-        {
-            _score.OnStateChanged += UpdateScore;
-            _difficulty.OnStateChanged += UpdateLevel;
-            _gameCycle.OnGameEnded += ShowGameOver;
-
-            UpdateScore(_score.Current);
-            UpdateLevel();
-        }
-
+        
         private void UpdateLevel() => 
             _gameUI.SetDifficulty(_difficulty.Current, _difficulty.Max);
 
@@ -40,12 +29,22 @@ namespace Ui
 
         private void UpdateScore(int newScore) => 
             _gameUI.SetScore(newScore.ToString());
+        
+        public void Initialize()
+        {
+            _score.OnStateChanged += UpdateScore;
+            _difficulty.OnStateChanged += UpdateLevel;
+            _gameState.OnGameEnded += ShowGameOver;
 
-        private void OnDestroy()
+            UpdateScore(_score.Current);
+            UpdateLevel();
+        }
+
+        public void Dispose()
         {
             _score.OnStateChanged -= UpdateScore;
             _difficulty.OnStateChanged -= UpdateLevel;
-            _gameCycle.OnGameEnded -= ShowGameOver;
+            _gameState.OnGameEnded -= ShowGameOver;
         }
     }
 }

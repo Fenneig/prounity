@@ -1,5 +1,4 @@
-﻿using Modules;
-using SnakeGame;
+﻿using SnakeGame;
 using UnityEngine;
 using Zenject;
 
@@ -16,10 +15,14 @@ namespace Ui
                 .To<GameUI>()
                 .FromInstance(_gameUI)
                 .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<GameUIPresenter>()
+                .FromNew()
+                .AsSingle();
             
             Container
-                .Bind<IScore>()
-                .To<Score>()
+                .BindInterfacesAndSelfTo<InputHandler>()
                 .FromNew()
                 .AsSingle();
         }

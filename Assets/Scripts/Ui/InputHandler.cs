@@ -4,15 +4,14 @@ using Zenject;
 
 namespace Ui
 {
-    public sealed class InputHandler : MonoBehaviour
+    public sealed class InputHandler : ITickable
     {
         private ISnake _snake;
     
-        [Inject]
-        public void Construct(ISnake snake) => 
+        public InputHandler(ISnake snake) => 
             _snake = snake;
 
-        private void Update()
+        public void Tick()
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 _snake.Turn(SnakeDirection.UP);

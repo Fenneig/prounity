@@ -5,26 +5,27 @@ using SnakeGame;
 using UnityEngine;
 using Zenject;
 
-namespace GameObjects.Coins
+namespace Systems
 {
-    public sealed class CoinsWorld : IInitializable, IDisposable
+    public sealed class CoinsWorld
     {
         private CoinPool _coinPool;
         private IWorldBounds _worldBounds;
-        private IDifficulty _difficulty;
         private ISnake _snake;
 
         private List<Coin> _coins = new();
 
         public event Action<ICoin> OnCoinRemoved;
-        public event Action OnAllCoinsEaten;
+        public event Action OnAllCoinsRemoved;
 
         [Inject]
-        private void Construct(CoinPool coinPool, IWorldBounds worldBounds, IDifficulty difficulty, ISnake snake)
+        private void Construct(
+            CoinPool coinPool, 
+            IWorldBounds worldBounds,
+            ISnake snake)
         {
             _coinPool = coinPool;
             _worldBounds = worldBounds;
-            _difficulty = difficulty;
             _snake = snake;
         }
 
@@ -40,7 +41,7 @@ namespace GameObjects.Coins
                 _coins.Remove(coin);
 
                 if (_coins.Count == 0)
-                    OnAllCoinsEaten?.Invoke();
+                    OnAllCoinsRemoved?.Invoke();
 
                 return true;
             }
@@ -48,15 +49,11 @@ namespace GameObjects.Coins
             return false;
         }
 
-        private void LevelChanged()
+        public bool TrySpawnCoin()
         {
-            for (int i = 0; i < _difficulty.Current; i++)
-                SpawnCoin();
-        }
+            const int MAX_ATTEMPTS = 10;
 
-        private void SpawnCoin()
-        {
-            while (true)
+            for (int i = 0; i < MAX_ATTEMPTS; i++)
             {
                 Vector2Int position = _worldBounds.GetRandomPosition();
 
@@ -66,10 +63,13 @@ namespace GameObjects.Coins
                 Coin coin = _coinPool.Spawn(position);
                 _coins.Add(coin);
 
-                return;
+                return true;
+                
             }
+
+            return false;
         }
-        
+
         private bool IsPositionOccupied(Vector2Int position)
         {
             if (_snake.HeadPosition == position)
@@ -81,11 +81,5 @@ namespace GameObjects.Coins
 
             return false;
         }
-
-        public void Initialize() =>
-            _difficulty.OnStateChanged += LevelChanged;
-
-        public void Dispose() =>
-            _difficulty.OnStateChanged -= LevelChanged;
     }
 }

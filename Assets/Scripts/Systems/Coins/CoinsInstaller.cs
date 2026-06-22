@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace GameObjects.Coins
+namespace Systems
 {
     public sealed class CoinsInstaller : MonoInstaller
     {
@@ -18,7 +18,7 @@ namespace GameObjects.Coins
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<CoinsWorld>()
+                .Bind<CoinsWorld>()
                 .FromNew()
                 .AsSingle();
         }

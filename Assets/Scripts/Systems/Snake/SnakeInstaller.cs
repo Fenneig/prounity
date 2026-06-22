@@ -2,17 +2,17 @@
 using UnityEngine;
 using Zenject;
 
-namespace GameObjects.Snake
+namespace Systems
 {
     public sealed class SnakeInstaller : MonoInstaller
     {
-        [SerializeField] private Modules.Snake _snake;
+        [SerializeField] private Snake _snake;
     
         public override void InstallBindings()
         {
             Container
                 .Bind<ISnake>()
-                .To<Modules.Snake>()
+                .To<Snake>()
                 .FromInstance(_snake)
                 .AsSingle();
 
