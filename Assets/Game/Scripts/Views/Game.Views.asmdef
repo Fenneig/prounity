@@ -5,7 +5,9 @@
         "Unity.TextMeshPro",
         "UIComponents",
         "Zenject",
-        "dotweenModules"
+        "dotweenModules",
+        "Utils",
+        "Planets"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
