@@ -7,13 +7,16 @@ using UnityEngine;
 
 namespace Game.Presenters
 {
-    public class MoneyPresenter : IDisposable
+    public sealed class MoneyPresenter : IDisposable
     {
-        private IMoneyStorage _moneyStorage;
-        private MoneyView _moneyView;
-        private ParticleAnimator _particleAnimator;
+        private readonly IMoneyStorage _moneyStorage;
+        private readonly MoneyView _moneyView;
+        private readonly ParticleAnimator _particleAnimator;
+        
         private Tween _moneyTween;
         private int _displayedMoney;
+        
+        private const float ANIMATION_DURATION = .5f;
         
         public MoneyPresenter(IMoneyStorage moneyStorage, MoneyView moneyView, ParticleAnimator particleAnimator)
         {
@@ -48,7 +51,7 @@ namespace Game.Presenters
                         _moneyView.SetMoney(_displayedMoney.ToString("N0"));
                     },
                     targetMoney,
-                    1f)
+                    ANIMATION_DURATION)
                 .SetEase(Ease.OutQuart);
         }
         

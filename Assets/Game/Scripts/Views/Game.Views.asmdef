@@ -6,8 +6,7 @@
         "UIComponents",
         "Zenject",
         "dotweenModules",
-        "Utils",
-        "Planets"
+        "Utils"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,20 +1,17 @@
 ﻿using System;
-using DG.Tweening;
 using Game.Views;
 using Modules.Planets;
 using Zenject;
 
 namespace Game.Presenters
 {
-    public class PlanetPresenter : IDisposable
+    public sealed class PlanetPresenter : IDisposable
     {
-        private PlanetView _planetView;
+        private readonly PlanetView _planetView;
+        private readonly Planet _planet;
+        private readonly PlanetPopupPresenter _planetPopupPresenter;
+        private readonly MoneyPresenter _moneyPresenter;
         
-        private Planet _planet;
-        private PlanetPopupPresenter _planetPopupPresenter;
-        private Tween _highlightTween;
-        private MoneyPresenter _moneyPresenter;
-
         public PlanetPresenter(Planet planet, PlanetView planetView, PlanetPopupPresenter planetPopupPresenter, MoneyPresenter moneyPresenter)
         {
             _planet = planet;
@@ -24,7 +21,8 @@ namespace Game.Presenters
             
             Subscribe();
 
-            _planetView.SetPlanet(_planet);
+            _planetView.SetIcon(_planet.GetIcon(_planet.IsUnlocked));
+            _planetView.SetCost(_planet.Price.ToString());
             _planetView.HideProgressBar();
             _planetView.HideCoin();
         }
@@ -76,6 +74,7 @@ namespace Game.Presenters
         private void UnlockPlanet()
         {
             _planetView.UnlockPlanet();
+            _planetView.SetIcon(_planet.GetIcon(_planet.IsUnlocked));
             _planetView.ShowProgressBar();
             _planetView.HideCost();
         }

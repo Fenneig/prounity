@@ -14,11 +14,6 @@ namespace Game.Presenters
         public override void InstallBindings()
         {
             Container
-                .Bind<PlanetProvider>()
-                .FromNew()
-                .AsSingle();
-            
-            Container
                 .Bind<PlanetPopupPresenter>()
                 .FromNew()
                 .AsSingle();
@@ -28,7 +23,7 @@ namespace Game.Presenters
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<PlanetPresenterBootstrap>()
+                .BindInterfacesAndSelfTo<PlanetCollectionPresenter>()
                 .FromNew()
                 .AsSingle();
 

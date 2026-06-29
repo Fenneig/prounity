@@ -248,6 +248,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
       value: 
       objectReference: {fileID: 11400000, guid: d47be69243fca4a0cb97f35f6a336174, type: 2}
@@ -439,6 +443,10 @@ PrefabInstance:
       value: -130
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
       value: 
       objectReference: {fileID: 11400000, guid: 8a44cf2b9ec1d4983a765b469d371f88, type: 2}
@@ -619,6 +627,10 @@ PrefabInstance:
     - target: {fileID: 3033779123653569042, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #4
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
@@ -1075,6 +1087,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
       value: 
       objectReference: {fileID: 11400000, guid: 52fda50523abb4a76b668ab249b6414e, type: 2}
@@ -1253,6 +1269,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
       value: 
       objectReference: {fileID: 11400000, guid: 14e9d2b748cd44f1d8e05595f0420051, type: 2}
@@ -1391,6 +1411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 873220071}
   - component: {fileID: 873220075}
+  - component: {fileID: 873220076}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -1428,17 +1449,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planetPopup: {fileID: 1052078977217180738}
-  _views:
-  - {fileID: 7237256081421283248}
-  - {fileID: 1207399037}
-  - {fileID: 734240813}
-  - {fileID: 2099633116}
-  - {fileID: 1816778729}
-  - {fileID: 2006967878}
-  - {fileID: 1936454215}
-  - {fileID: 1000499689}
-  - {fileID: 1590732293}
+  _planetViewsCollection: {fileID: 873220076}
   _moneyView: {fileID: 6121086404576301248}
+--- !u!114 &873220076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873220070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab68b923f11b491283afb3ec5588cbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetViewsCollection
+  _entries:
+  - Id: Planet #1
+    View: {fileID: 7237256081421283248}
+  - Id: Planet #2
+    View: {fileID: 1207399037}
+  - Id: Planet #3
+    View: {fileID: 734240813}
+  - Id: Planet #4
+    View: {fileID: 2099633116}
+  - Id: Planet #5
+    View: {fileID: 1816778729}
+  - Id: Planet #6
+    View: {fileID: 2006967878}
+  - Id: Planet #7
+    View: {fileID: 1936454215}
+  - Id: Planet #8
+    View: {fileID: 1000499689}
+  - Id: Planet #9
+    View: {fileID: 1590732293}
 --- !u!1 &974007725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,6 +1653,10 @@ PrefabInstance:
     - target: {fileID: 3033779123653569042, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #8
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
@@ -1810,6 +1857,10 @@ PrefabInstance:
     - target: {fileID: 3033779123653569042, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #7
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
@@ -2202,6 +2253,10 @@ PrefabInstance:
     - target: {fileID: 3033779123653569042, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #6
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig
@@ -2686,6 +2741,10 @@ PrefabInstance:
     - target: {fileID: 3033779123653569042, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _id
+      value: Planet #1
       objectReference: {fileID: 0}
     - target: {fileID: 3148069817496731148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _planetConfig

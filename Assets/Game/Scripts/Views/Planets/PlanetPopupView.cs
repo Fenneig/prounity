@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
-    public class PlanetPopupView : MonoBehaviour
+    public sealed class PlanetPopupView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _title;
         [SerializeField] private Image _planetImage;
@@ -15,6 +15,8 @@ namespace Game.Views
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private Button _closeButton;
         [SerializeField] private TMP_Text _priceText;
+        [SerializeField] private GameObject _maxLevelContainer;
+        [SerializeField] private GameObject _upgradeContainer;
         
         public event UnityAction OnUpgradeClicked
         {
@@ -43,8 +45,20 @@ namespace Game.Views
         public void SetIncome(string income) => _income.text = income;
 
         public void SetPrice(string price) => _priceText.text = price;
+        
+        public void SetUpgradeInteractable(bool isInteractable) => _upgradeButton.interactable = isInteractable;
 
-        public void ShowPrice() => _upgradeButton.gameObject.SetActive(true);
-        public void HidePrice() => _upgradeButton.gameObject.SetActive(false);
+        public void ChangeToMaxLevelButton()
+        {
+            SetUpgradeInteractable(false);
+            _upgradeContainer.SetActive(false);
+            _maxLevelContainer.SetActive(true);
+        }
+        
+        public void ChangeToUpgradeButton()
+        {
+            _upgradeContainer.SetActive(true);
+            _maxLevelContainer.SetActive(false);
+        }
     }
 }

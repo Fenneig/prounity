@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Views
 {
-    public class MoneyView : MonoBehaviour
+    public sealed class MoneyView : MonoBehaviour
     {
         [SerializeField] private Transform _coinTarget;
         [SerializeField] private TMP_Text _text;

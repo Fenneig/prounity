@@ -6,7 +6,7 @@ namespace Game.Views
     public sealed class ViewsInstaller : MonoInstaller
     {
         [SerializeField] private PlanetPopupView _planetPopup;
-        [SerializeField] private PlanetView[] _views;
+        [SerializeField] private PlanetViewsCollection _planetViewsCollection;
         [SerializeField] private MoneyView _moneyView;
         
         public override void InstallBindings()
@@ -16,11 +16,10 @@ namespace Game.Views
                 .FromInstance(_planetPopup)
                 .AsSingle();
 
-            foreach (var view in _views)
-                Container
-                    .Bind<PlanetView>()
-                    .FromInstance(view)
-                    .AsCached();
+            Container
+                .Bind<PlanetViewsCollection>()
+                .FromInstance(_planetViewsCollection)
+                .AsSingle();
             
             Container
                 .Bind<MoneyView>()
