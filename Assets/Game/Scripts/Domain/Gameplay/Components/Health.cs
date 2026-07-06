@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace SampleGame.Gameplay
+namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class Health : MonoBehaviour
+    public sealed class Health : MonoBehaviour, ISaveSerializer<int>
     {
         ///Variable
         [field: SerializeField]
@@ -12,5 +12,9 @@ namespace SampleGame.Gameplay
         ///Const
         [field: SerializeField]
         public int Max { get; private set; } = 100;
+        
+        public int Serialize() => Current;
+        
+        public void Deserialize(int value) => Current = value;
     }
 }

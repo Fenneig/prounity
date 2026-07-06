@@ -1,13 +1,17 @@
 using SampleGame.Common;
 using UnityEngine;
 
-namespace SampleGame.Gameplay
+namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class Team : MonoBehaviour
+    public sealed class Team : MonoBehaviour, ISaveSerializer<int>
     {
         ///Variable
         [field: SerializeField]
         public TeamType Type { get; set; }
+
+        public int Serialize() => (int)Type;
+        
+        public void Deserialize(int value) => Type = (TeamType)value;
     }
 }
