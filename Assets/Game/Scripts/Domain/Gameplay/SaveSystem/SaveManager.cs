@@ -21,25 +21,32 @@ namespace Game.Gameplay
 
         public int Save()
         {
+            _version++;
+
             JObject gameData = new JObject();
 
             foreach (var serializer in _serializers)
                 gameData.Add(serializer.Key, serializer.Serialize());
 
-            _gameRepository.Save(gameData);
+            _gameRepository.Save(gameData, _version);
 
-            PlayerPrefs.SetInt(VERSION, ++_version);
+            PlayerPrefs.SetInt(VERSION, _version);
+            
             return _version;
         }
 
-        public void Load(int version = -1)
+        public int Load(int version = -1)
         {
-            (bool success, JObject gameData) = _gameRepository.Load(version);
+            int actualVersion = version == -1 ? _version : version;
+            
+            (bool success, JObject gameData) = _gameRepository.Load(actualVersion);
 
             if (success)
                 foreach (ISaveSerializer serializer in _serializers)
                     if (gameData.TryGetValue(serializer.Key, out JToken data))
                         serializer.Deserialize(data);
+
+            return actualVersion;
         }
     }
 }

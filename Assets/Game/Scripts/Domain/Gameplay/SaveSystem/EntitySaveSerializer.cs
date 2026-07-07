@@ -20,9 +20,9 @@ namespace Game.Gameplay
         public string Key => "Units";
         public EntityData[] Serialize()
         {
-            var entities = _entityWorld.GetAll();
-
             List<EntityData> unitData = new List<EntityData>();
+            
+            var entities = _entityWorld.GetAll();
 
             foreach (var entity in entities)
             {
@@ -80,18 +80,6 @@ namespace Game.Gameplay
         {
             foreach (var serializer in entity.GetComponents<ISaveSerializer>())
                 serializer.Deserialize(data.SaveData[serializer.Key]);
-        }
-    }
-    
-    public sealed class ResolveContext
-    {
-        public EntityWorld EntityWorld { get; }
-        public EntityCatalog EntityCatalog { get; }
-        
-        public ResolveContext(EntityWorld entityWorld, EntityCatalog entityCatalog)
-        {
-            EntityWorld = entityWorld;
-            EntityCatalog = entityCatalog;
         }
     }
 

@@ -4,7 +4,7 @@ namespace Game.App
 {
     public interface IGameRepository
     {
-        void Save(JObject data);
-        (bool, JObject) Load(int version = -1);
+        void Save(JObject data, int version);
+        (bool, JObject) Load(int version);
     }
 }

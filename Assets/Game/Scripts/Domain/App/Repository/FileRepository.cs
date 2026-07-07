@@ -15,14 +15,14 @@ namespace Game.App
             _filePath = filePath;
         }
 
-        public void Save(JObject data)
+        public void Save(JObject data, int version)
         {
             string json = data.ToString();
             byte[] bytes = Encoding.UTF8.GetBytes(json);
 
             try
             {
-                File.WriteAllBytes(_filePath, bytes);
+                File.WriteAllBytes($"{_filePath}_{version}", bytes);
             }
             catch(Exception e)
             {
@@ -30,18 +30,13 @@ namespace Game.App
             }
         }
 
-        public (bool, JObject) Load(int version = -1)
+        public (bool, JObject) Load(int version)
         {
             try
             {
-                byte[] bytes = File.ReadAllBytes(_filePath);
+                byte[] bytes = File.ReadAllBytes($"{_filePath}_{version}");
                 string json = Encoding.UTF8.GetString(bytes);
                 return (true, JObject.Parse(json));
-            }
-            catch (OperationCanceledException)
-            {
-                Debug.Log($"Load cancelled");
-                return (false, null);
             }
             catch (Exception e)
             {
