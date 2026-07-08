@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Game.Gameplay;
 
 namespace Game.Presentation
@@ -12,12 +13,20 @@ namespace Game.Presentation
             _saveManager = saveManager;
         }
 
-        public void Save(Action<bool, int> callback) => callback.Invoke(true, _saveManager.Save());
+        public void Save(Action<bool, int> callback) => SaveAsync(callback).Forget();
 
-        public void Load(string version, Action<bool, int> callback)
+        public void Load(string version, Action<bool, int> callback) => LoadAsync(version, callback).Forget();
+
+        private async UniTask SaveAsync(Action<bool, int> callback)
         {
-            int parsedVersion = int.TryParse(version, out int result) ? result : -1;
-            callback.Invoke(true, _saveManager.Load(parsedVersion));
+            var (success, version) = await _saveManager.Save();
+            callback.Invoke(success, version);
+        }
+
+        private async UniTask LoadAsync(string version, Action<bool, int> callback)
+        {
+            var (success, loadedVersion) = await _saveManager.Load(version);
+            callback.Invoke(success, loadedVersion);
         }
     }
 }

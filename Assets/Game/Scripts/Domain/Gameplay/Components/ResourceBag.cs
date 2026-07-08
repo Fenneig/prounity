@@ -1,4 +1,4 @@
-using SampleGame.Common;
+using Game.Common;
 using UnityEngine;
 
 namespace Game.Gameplay

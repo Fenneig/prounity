@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Game.Common;
 using Modules.Entities;
 using Newtonsoft.Json.Linq;
-using SampleGame.Common;
 using UnityEngine;
 
 namespace Game.Gameplay

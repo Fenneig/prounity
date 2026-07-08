@@ -1,4 +1,4 @@
-namespace SampleGame.Common
+namespace Game.Common
 {
     //Don't modify
     public enum TeamType

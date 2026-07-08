@@ -1,4 +1,6 @@
-﻿using Game.App;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using Game.App;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -19,7 +21,7 @@ namespace Game.Gameplay
             _version = PlayerPrefs.GetInt(VERSION, 0);
         } 
 
-        public int Save()
+        public UniTask<(bool, int)> Save(CancellationToken ct = default)
         {
             _version++;
 
@@ -28,25 +30,23 @@ namespace Game.Gameplay
             foreach (var serializer in _serializers)
                 gameData.Add(serializer.Key, serializer.Serialize());
 
-            _gameRepository.Save(gameData, _version);
-
             PlayerPrefs.SetInt(VERSION, _version);
             
-            return _version;
+            return _gameRepository.Save(gameData, _version);
         }
 
-        public int Load(int version = -1)
+        public async UniTask<(bool, int)> Load(string version, CancellationToken ct = default)
         {
-            int actualVersion = version == -1 ? _version : version;
+            int actualVersion = string.IsNullOrEmpty(version) ? -1 : int.Parse(version);
             
-            (bool success, JObject gameData) = _gameRepository.Load(actualVersion);
+            (bool success, JObject gameData) = await _gameRepository.Load(actualVersion);
 
             if (success)
                 foreach (ISaveSerializer serializer in _serializers)
                     if (gameData.TryGetValue(serializer.Key, out JToken data))
                         serializer.Deserialize(data);
 
-            return actualVersion;
+            return (success, actualVersion);
         }
     }
 }
