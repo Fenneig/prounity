@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Game.App;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -21,32 +20,35 @@ namespace Game.Gameplay
             _version = PlayerPrefs.GetInt(VERSION, 0);
         } 
 
-        public UniTask<(bool, int)> Save(CancellationToken ct = default)
+        public async UniTask<(bool, int)> Save(CancellationToken ct = default)
         {
             _version++;
 
-            JObject gameData = new JObject();
+            SaveWriter writer = new SaveWriter();
 
             foreach (var serializer in _serializers)
-                gameData.Add(serializer.Key, serializer.Serialize());
+                serializer.Serialize(ref writer);
 
             PlayerPrefs.SetInt(VERSION, _version);
-            
-            return _gameRepository.Save(gameData, _version);
+
+            return await _gameRepository.Save(writer.ToArray(), _version);
         }
 
         public async UniTask<(bool, int)> Load(string version, CancellationToken ct = default)
         {
-            int actualVersion = string.IsNullOrEmpty(version) ? -1 : int.Parse(version);
+            int actualVersion = string.IsNullOrEmpty(version) ? PlayerPrefs.GetInt(VERSION, 0) : int.Parse(version);
             
-            (bool success, JObject gameData) = await _gameRepository.Load(actualVersion);
+            (bool success, byte[] bytes) = await _gameRepository.Load(actualVersion);
 
-            if (success)
-                foreach (ISaveSerializer serializer in _serializers)
-                    if (gameData.TryGetValue(serializer.Key, out JToken data))
-                        serializer.Deserialize(data);
+            if (!success)
+                return (false, -1);
+            
+            SaveReader reader = new SaveReader(bytes);
+            
+            foreach (ISaveSerializer serializer in _serializers)
+                serializer.Deserialize(ref reader);
 
-            return (success, actualVersion);
+            return (true, actualVersion);
         }
     }
 }

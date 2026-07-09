@@ -4,14 +4,14 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class Team : MonoBehaviour, ISaveSerializer<int>
+    public sealed class Team : MonoBehaviour, ISaveSerializer
     {
         ///Variable
         [field: SerializeField]
         public TeamType Type { get; set; }
 
-        public int Serialize() => (int)Type;
-        
-        public void Deserialize(int value) => Type = (TeamType)value;
+        public void Serialize(ref SaveWriter writer) => writer.Write((int)Type);
+
+        public void Deserialize(ref SaveReader reader) => Type = (TeamType)reader.ReadInt();
     }
 }

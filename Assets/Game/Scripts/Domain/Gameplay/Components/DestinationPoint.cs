@@ -1,17 +1,15 @@
-using Game.Common;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class DestinationPoint : MonoBehaviour, ISaveSerializer<SerializedVector3>
+    public sealed class DestinationPoint : MonoBehaviour, ISaveSerializer
     {
         ///Variable
         [field: SerializeField]
         public Vector3 Value { get; set; }
-        
-        public SerializedVector3 Serialize() => Value;
-        
-        public void Deserialize(SerializedVector3 value) => Value = value;
+
+        public void Serialize(ref SaveWriter writer) => writer.Write(Value);
+        public void Deserialize(ref SaveReader reader) => Value = reader.ReadVector3();
     }
 }

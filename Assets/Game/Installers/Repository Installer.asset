@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab225fae14d34678a6f7c358bf9a33dc, type: 3}
   m_Name: Repository Installer
   m_EditorClassIdentifier: Assembly-CSharp::Game.App.RepositoryInstaller
-  _fileName: GameSave.txt
+  _fileName: GameSave

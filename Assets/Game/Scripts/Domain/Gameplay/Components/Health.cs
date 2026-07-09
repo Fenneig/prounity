@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class Health : MonoBehaviour, ISaveSerializer<int>
+    public sealed class Health : MonoBehaviour, ISaveSerializer
     {
         ///Variable
         [field: SerializeField]
@@ -12,9 +12,8 @@ namespace Game.Gameplay
         ///Const
         [field: SerializeField]
         public int Max { get; private set; } = 100;
-        
-        public int Serialize() => Current;
-        
-        public void Deserialize(int value) => Current = value;
+
+        public void Serialize(ref SaveWriter writer) => writer.Write(Current);
+        public void Deserialize(ref SaveReader reader) => Current = reader.ReadInt();
     }
 }

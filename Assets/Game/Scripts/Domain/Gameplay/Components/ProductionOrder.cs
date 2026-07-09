@@ -5,31 +5,36 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class ProductionOrder : MonoBehaviour, ISaveSerializer<string[]>, IReferenceResolver
+    public sealed class ProductionOrder : MonoBehaviour, ISaveSerializer, IReferenceResolver
     {
         ///Variable
-        [SerializeField]
-        private List<EntityConfig> _queue;
+        [SerializeField] private List<EntityConfig> _queue;
 
         private List<string> _queueNames;
-        
+
         public IReadOnlyList<EntityConfig> Queue
         {
             get { return _queue; }
             set { _queue = new List<EntityConfig>(value); }
         }
 
-        public string[] Serialize()
+        public void Serialize(ref SaveWriter writer)
         {
-            string[] data = new string[_queue.Count];
-            
+            writer.Write(_queue.Count);
+
             for (int i = 0; i < _queue.Count; i++)
-                data[i] = _queue[i].Name;
-            
-            return data;
+                writer.Write(_queue[i].Name);
         }
 
-        public void Deserialize(string[] value) => _queueNames = new List<string>(value);
+        public void Deserialize(ref SaveReader reader)
+        {
+            int count = reader.ReadInt();
+            
+            _queueNames = new List<string>(count);
+
+            for (int i = 0; i < count; i++)
+                _queueNames.Add(reader.ReadString());
+        }
 
         public void Resolve(ResolveContext context)
         {

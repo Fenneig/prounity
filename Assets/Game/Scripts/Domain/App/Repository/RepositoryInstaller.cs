@@ -7,7 +7,7 @@ namespace Game.App
     [CreateAssetMenu(fileName = "Repository Installer", menuName = "Game/Repository Installer")]
     public class RepositoryInstaller : ScriptableObjectInstaller
     {
-        [SerializeField] private string _fileName = "GameSave.txt";
+        [SerializeField] private string _fileName = "GameSave";
         
         public override void InstallBindings()
         {

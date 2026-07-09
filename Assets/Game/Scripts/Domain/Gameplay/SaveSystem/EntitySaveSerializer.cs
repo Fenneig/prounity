@@ -1,107 +1,86 @@
 ﻿using System.Collections.Generic;
-using Game.Common;
 using Modules.Entities;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class EntitySaveSerializer : ISaveSerializer<EntityData[]>
+    public class EntitySaveSerializer : ISaveSerializer
     {
-        private EntityWorld _entityWorld;
-        private ResolveContext _context;
+        private readonly EntityWorld _entityWorld;
+        private readonly ResolveContext _context;
         
+        private readonly List<Entity> _loadedEntities = new();
+
         public EntitySaveSerializer(EntityWorld entityWorld, ResolveContext resolveContext)
         {
             _entityWorld = entityWorld;
             _context = resolveContext;
         }
 
-        public string Key => "Units";
-        public EntityData[] Serialize()
+        public void Serialize(ref SaveWriter writer)
         {
-            List<EntityData> unitData = new List<EntityData>();
-            
             var entities = _entityWorld.GetAll();
+            writer.Write(entities.Count);
 
-            foreach (var entity in entities)
-            {
-                var saveData = new Dictionary<string, JToken>();
-
-                foreach (var serializer in entity.GetComponents<ISaveSerializer>()) 
-                    saveData.Add(serializer.Key, serializer.Serialize());
-
-                unitData.Add(new EntityData
-                {
-                    Name = entity.Name,
-                    Id = entity.Id,
-                    Transform = new SerializableTransform(entity.transform),
-                    SaveData = saveData
-                });
-            }
-
-            return unitData.ToArray();
+            foreach (var entity in entities) 
+                SaveEntity(ref writer, entity);
         }
 
-        public void Deserialize(EntityData[] value)
+        public void Deserialize(ref SaveReader reader)
         {
-            List<Entity> entities = new List<Entity>();
-            foreach (var data in value)
-            {
-                if (_entityWorld.TryGet(data.Id, out Entity entity))
-                {
-                    UpdateEntityTransform(entity, data);
-                    LoadEntity(entity, data);
-                    entities.Add(entity);
-                }
-                else
-                {
-                    var newEntity = _entityWorld.Spawn(data.Name, data.Transform.Position, Quaternion.Euler(data.Transform.Rotation), data.Id);
-                    LoadEntity(newEntity, data);
-                    entities.Add(newEntity);
-                }
-            }
+            _loadedEntities.Clear();
+            int entitiesCount = reader.ReadInt();
 
-            foreach (var entity in entities)
-            {
-                if (entity.TryGetComponent(out IReferenceResolver resolver))
+            for (int i = 0; i < entitiesCount; i++) 
+                LoadEntity(ref reader);
+
+            foreach (var entity in _loadedEntities)
+                foreach (var resolver in entity.GetComponents<IReferenceResolver>())
                     resolver.Resolve(_context);
-            }
         }
 
-        private void UpdateEntityTransform(Entity entity, EntityData data)
+        private void SaveEntity(ref SaveWriter writer, Entity entity)
         {
-            entity.transform.position = data.Transform.Position;
-            entity.transform.rotation = Quaternion.Euler(data.Transform.Rotation);
-            entity.transform.localScale = data.Transform.Scale;
+            writer.Write(entity.Name);
+            writer.Write(entity.Id);
+            
+            Transform entityTransform = entity.transform;
+
+            writer.Write(entityTransform.position);
+            writer.Write(entityTransform.rotation);
+
+            var serializers = entity.GetComponents<ISaveSerializer>();
+
+            foreach (var serializer in serializers)
+                serializer.Serialize(ref writer);
         }
 
-        private void LoadEntity(Entity entity, EntityData data)
+        private void LoadEntity(ref SaveReader reader)
+        {
+            string name = reader.ReadString();
+            int id = reader.ReadInt();
+
+            Vector3 position = reader.ReadVector3();
+            Quaternion rotation = reader.ReadQuaternion();
+            
+            if (_entityWorld.TryGet(id, out Entity entity))
+            {
+                entity.transform.position = position;
+                entity.transform.rotation = rotation;
+            }
+            else
+            {
+                entity = _entityWorld.Spawn(name, position, rotation, id);
+            }
+            
+            LoadComponents(ref reader, entity);
+            _loadedEntities.Add(entity);
+        }
+
+        private void LoadComponents(ref SaveReader reader, Entity entity)
         {
             foreach (var serializer in entity.GetComponents<ISaveSerializer>())
-                serializer.Deserialize(data.SaveData[serializer.Key]);
+                serializer.Deserialize(ref reader);
         }
-    }
-
-    public struct SerializableTransform
-    {
-        public SerializedVector3 Position;
-        public SerializedVector3 Rotation;
-        public SerializedVector3 Scale;
-        
-        public SerializableTransform(Transform transform)
-        {
-            Position = transform.position;
-            Rotation = transform.rotation.eulerAngles;
-            Scale = transform.localScale;
-        }
-    }
-    
-    public struct EntityData
-    {
-        public string Name;
-        public int Id;
-        public SerializableTransform Transform;
-        public Dictionary<string, JToken> SaveData;
     }
 }

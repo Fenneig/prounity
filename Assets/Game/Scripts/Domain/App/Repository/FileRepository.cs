@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using Cysharp.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Game.App
@@ -16,14 +14,11 @@ namespace Game.App
             _filePath = filePath;
         }
 
-        public async UniTask<(bool, int)> Save(JObject data, int version)
+        public async UniTask<(bool, int)> Save(byte[] data, int version)
         {
-            string json = data.ToString();
-            byte[] bytes = Encoding.UTF8.GetBytes(json);
-
             try
             {
-                await File.WriteAllBytesAsync($"{_filePath}_{version}", bytes);
+                await File.WriteAllBytesAsync($"{_filePath}_{version}.txt", data);
                 return (true, version); 
             }
             catch(Exception e)
@@ -33,13 +28,12 @@ namespace Game.App
             }
         }
 
-        public async UniTask<(bool, JObject)> Load(int version)
+        public async UniTask<(bool, byte[])> Load(int version)
         {
             try
             {
                 byte[] bytes = await File.ReadAllBytesAsync($"{_filePath}_{version}");
-                string json = Encoding.UTF8.GetString(bytes);
-                return (true, JObject.Parse(json));
+                return (true, bytes);
             }
             catch (Exception e)
             {

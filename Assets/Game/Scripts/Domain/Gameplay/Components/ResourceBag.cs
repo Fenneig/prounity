@@ -4,22 +4,8 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class ResourceBag : MonoBehaviour, ISaveSerializer<ResourceBag.Snapshot>
+    public sealed class ResourceBag : MonoBehaviour, ISaveSerializer
     {
-        public struct Snapshot
-        {
-            public ResourceType Type;
-            public int Current;
-            
-            public Snapshot(ResourceType type, int current)
-            {
-                Type = type;
-                Current = current;
-            }
-            
-            public Snapshot(ResourceBag bag) : this(bag.Type, bag.Current) {}
-        }
-        
         ///Variable
         [field: SerializeField]
         public ResourceType Type { get; set; }
@@ -31,13 +17,17 @@ namespace Game.Gameplay
         ///Const
         [field: SerializeField]
         public int Capacity { get; set; }
-
-        public Snapshot Serialize() => new(this);
-
-        public void Deserialize(Snapshot value)
+        
+        public void Serialize(ref SaveWriter writer)
         {
-            Type = value.Type;
-            Current = value.Current;
+            writer.Write((int)Type);
+            writer.Write(Current);
+        }
+
+        public void Deserialize(ref SaveReader reader)
+        {
+            Type = (ResourceType)reader.ReadInt();
+            Current = reader.ReadInt();
         }
     }
 }
