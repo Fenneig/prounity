@@ -10,14 +10,14 @@ namespace Game.Gameplay
         private readonly ISaveSerializer[] _serializers;
         private readonly IGameRepository _gameRepository;
         private int _version;
-        private const string VERSION = "Version";
+        private const string SAVE_VERSION_PREFS_KEY = "Version";
 
         public SaveManager(ISaveSerializer[] serializers, IGameRepository gameRepository)
         {
             _serializers = serializers;
             _gameRepository = gameRepository;
 
-            _version = PlayerPrefs.GetInt(VERSION, 0);
+            _version = PlayerPrefs.GetInt(SAVE_VERSION_PREFS_KEY, 0);
         } 
 
         public async UniTask<(bool, int)> Save(CancellationToken ct = default)
@@ -29,16 +29,19 @@ namespace Game.Gameplay
             foreach (var serializer in _serializers)
                 serializer.Serialize(ref writer);
 
-            PlayerPrefs.SetInt(VERSION, _version);
+            (bool success, int version) = await _gameRepository.Save(writer.ToArray(), _version, ct);
 
-            return await _gameRepository.Save(writer.ToArray(), _version);
+            if (success) 
+                PlayerPrefs.SetInt(SAVE_VERSION_PREFS_KEY, _version);
+            
+            return (success, version);
         }
 
         public async UniTask<(bool, int)> Load(string version, CancellationToken ct = default)
         {
-            int actualVersion = string.IsNullOrEmpty(version) ? PlayerPrefs.GetInt(VERSION, 0) : int.Parse(version);
+            int actualVersion = string.IsNullOrEmpty(version) ? PlayerPrefs.GetInt(SAVE_VERSION_PREFS_KEY, 0) : int.Parse(version);
             
-            (bool success, byte[] bytes) = await _gameRepository.Load(actualVersion);
+            (bool success, byte[] bytes) = await _gameRepository.Load(actualVersion, ct);
 
             if (!success)
                 return (false, -1);
