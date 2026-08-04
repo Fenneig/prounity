@@ -1,36 +1,38 @@
-using Sirenix.OdinInspector;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 namespace Game
 {
     public sealed class TrampolineView : MonoBehaviour
     {
         private static readonly int ThrowUp = Animator.StringToHash(nameof(ThrowUp));
-      
-        [SerializeField]
-        private TriggerComponent _triggerComponent;
-        
+
         [SerializeField]
         private AudioSource _audioSource;
 
         [SerializeField]
         private Animator _animator;
 
+        private TriggerComponent _triggerComponent;
+
         private Tween _tween;
+
+        private void Awake()
+        {
+            _triggerComponent = GetComponent<TriggerComponent>();
+        }
 
         private void OnEnable()
         {
-            _triggerComponent.OnEntered += this.OnEntered;
+            _triggerComponent.OnEntered += OnEntered;
         }
 
         private void OnDisable()
         {
-            _triggerComponent.OnEntered -= this.OnEntered;
+            _triggerComponent.OnEntered -= OnEntered;
             _tween?.Kill();
         }
 
-        [Button]
         private void OnEntered(Collider2D _)
         {
             _audioSource.Play();
