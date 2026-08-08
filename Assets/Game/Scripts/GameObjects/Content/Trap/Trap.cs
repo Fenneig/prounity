@@ -4,18 +4,17 @@ namespace Game
 {
     [RequireComponent(typeof(CollisionComponent))]
     [RequireComponent(typeof(TouchRequestComponent))]
-    [RequireComponent(typeof(DestroyTouchDamage))]
-    public class Trap : MonoBehaviour, TouchRequestComponent.IAction
+    public sealed class Trap : MonoBehaviour, TouchRequestComponent.IAction
     {
         private CollisionComponent _collisionComponent;
         private TouchRequestComponent _touchRequestComponent;
-        private DestroyTouchDamage _destroyTouchDamage;
+        private DealDamageComponent _dealDamageComponent;
         
         private void Awake()
         {
             _collisionComponent = GetComponent<CollisionComponent>();
             _touchRequestComponent = GetComponent<TouchRequestComponent>();
-            _destroyTouchDamage = GetComponent<DestroyTouchDamage>();
+            _dealDamageComponent = GetComponent<DealDamageComponent>();
 
             _touchRequestComponent.SetAction(this);
         }
@@ -33,8 +32,8 @@ namespace Game
         
         public void Invoke(GameObject target)
         {
-            if (target.gameObject.TryGetComponent(out HealthComponent healthComponent))
-                _destroyTouchDamage.Damage(healthComponent);
+            if (_dealDamageComponent.TryDealDamage(target))
+                Destroy(gameObject);
         }
     }
 }

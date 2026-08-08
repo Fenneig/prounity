@@ -26,10 +26,11 @@ namespace Game
 
         public bool IsMoving => Time.time <= _moveTime;
 
-        public void Move(Vector2 normalizedDirection) => _direction = normalizedDirection;
-
         public void SetAction(IAction action) => _action = action;
+        
         public void SetCondition(ICondition condition) => _condition = condition;
+        
+        public void Move(Vector2 normalizedDirection) => _direction = normalizedDirection;
 
         private void FixedUpdate()
         {

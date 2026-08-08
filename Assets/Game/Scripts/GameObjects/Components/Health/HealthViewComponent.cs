@@ -5,17 +5,11 @@ namespace Game
     public sealed class HealthViewComponent : MonoBehaviour
     {
         private static readonly int DeathKey = Animator.StringToHash("Death");
-        private HealthComponent _health;
-        private TakeDamageColorComponent _takeDamageColor;
-        private Animator _animator;
         
-        private void Awake()
-        {
-            _health = GetComponentInChildren<HealthComponent>();
-            _takeDamageColor = GetComponentInChildren<TakeDamageColorComponent>();
-            _animator = GetComponentInChildren<Animator>();
-        }
-
+        [SerializeField] private HealthComponent _health;
+        [SerializeField] private TakeDamageColorComponent _takeDamageColor;
+        [SerializeField] private Animator _animator;
+        
         private void OnEnable()
         {
             _health.OnHealthChanged += TakeDamage;

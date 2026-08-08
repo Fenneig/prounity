@@ -103,8 +103,8 @@ GameObject:
   - component: {fileID: 4089788546235685001}
   - component: {fileID: 7795604398667892277}
   - component: {fileID: 7209143011112300162}
-  - component: {fileID: 725929846784627333}
   - component: {fileID: 9066104530151589263}
+  - component: {fileID: 2001433457740710329}
   m_Layer: 8
   m_Name: Trap
   m_TagString: Untagged
@@ -225,19 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee21653d8d34ad888125c815ac6a3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TouchRequestComponent
---- !u!114 &725929846784627333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940468643134046639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb8516dd3384bf0b24aaf361cacb0f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.DestroyTouchDamage
-  _damage: 1
 --- !u!114 &9066104530151589263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,3 +237,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31557cdad1274e32ac8b3941a136e86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Trap.Trap
+--- !u!114 &2001433457740710329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940468643134046639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d855a53e8804b24a26fbff437ef1aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.DealDamageComponent
+  _amount: 1

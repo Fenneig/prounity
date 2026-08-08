@@ -13,23 +13,18 @@ GameObject:
   - component: {fileID: 6914819918122429636}
   - component: {fileID: 6791311892780448319}
   - component: {fileID: 4854764554086061708}
-  - component: {fileID: 6083848653570577285}
-  - component: {fileID: 1618572385813847751}
-  - component: {fileID: 2437105392730213095}
   - component: {fileID: 1807386138625082142}
   - component: {fileID: 5756764874343252110}
   - component: {fileID: 4470065136751482402}
-  - component: {fileID: 1800857949421319202}
-  - component: {fileID: 443177703693038118}
-  - component: {fileID: 5243177154991403968}
   - component: {fileID: 7249911167506035791}
   - component: {fileID: 3720066748323160084}
   - component: {fileID: 8127782424181578391}
-  - component: {fileID: 627079481999722359}
   - component: {fileID: 4141920059440503031}
-  - component: {fileID: 3678436936153856921}
   - component: {fileID: 5235167274373077448}
   - component: {fileID: 8659087546645442585}
+  - component: {fileID: 4050478693153480774}
+  - component: {fileID: 4042197806338853932}
+  - component: {fileID: 8044939273244517598}
   m_Layer: 8
   m_Name: Monkey
   m_TagString: Untagged
@@ -157,43 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ExtraGravityComponent
   _gravity: -7
---- !u!114 &6083848653570577285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 677d6c22b71b4c7dae9282994be17e15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GravityComponentView
---- !u!114 &1618572385813847751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 743c2d303840484fbc1e1480d90f9565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.JumpComponent
-  _jumpForce: 300
---- !u!114 &2437105392730213095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce30e0036df48168735fdd36678a53e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.JumpComponentView
 --- !u!114 &1807386138625082142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a88f060666f4fe4b09399905cc6247c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.JumpRequestComponent
+  _jumpForce: 300
 --- !u!114 &5756764874343252110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2636015066547048e3487369e8a04ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Monkey.Monkey
+  _jumpDelay: 1
 --- !u!114 &4470065136751482402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,49 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.HealthComponent
   _maxHealth: 5
---- !u!114 &1800857949421319202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ce3e526e687405e9a106e9a0d246816, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.HealthViewComponent
---- !u!114 &443177703693038118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55877ab43e1d46b990a7bc759f11c193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.PushComponent
-  _forceX: 20
-  _forceY: 2
---- !u!114 &5243177154991403968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7590e8fd7004c4b873bb51ef5d5e759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.AreaDetectorComponent
-  _detectOrigin: {fileID: 4238300519197751424}
-  _includedLayers:
-    serializedVersion: 2
-    m_Bits: 768
-  _detectRadius: 5
 --- !u!114 &7249911167506035791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,19 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf3df294d424bd996abcec5bfe2d12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TargetTrackerComponent
---- !u!114 &627079481999722359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc478291e43462ea5dfbd33e9441dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.CooldownComponent
-  _duration: 1
 --- !u!114 &4141920059440503031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,19 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee21653d8d34ad888125c815ac6a3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TouchRequestComponent
---- !u!114 &3678436936153856921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084178272520813888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98050f0537c84685842dac82498ef43f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.TouchDamage
-  _damage: 5
 --- !u!114 &5235167274373077448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +267,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.StandingPlatformComponent
   _groundedComponent: {fileID: 6791311892780448319}
+--- !u!114 &4050478693153480774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084178272520813888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86e192ed6a3486189754ee61773603b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TargetComponent
+--- !u!114 &4042197806338853932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084178272520813888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a645cd9c8c3048c9bb42662946726eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ForceComponent
+  _forceX: 20
+  _forceY: 2
+  _forceInitPoint: {fileID: 4238300519197751424}
+  _activateMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _radius: 5
+  _selfCollider: {fileID: 6914819918122429636}
+  _cooldown: 0
+--- !u!114 &8044939273244517598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084178272520813888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d855a53e8804b24a26fbff437ef1aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.DealDamageComponent
+  _amount: 5
 --- !u!1 &3667686093434619927
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +323,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8502224344827965514}
   - component: {fileID: 6958152867094090083}
+  - component: {fileID: 8422427615214510437}
+  - component: {fileID: 6470051640433395614}
+  - component: {fileID: 952612146146968952}
   m_Layer: 0
   m_Name: '[Visual]'
   m_TagString: Untagged
@@ -438,6 +378,50 @@ MonoBehaviour:
   _damagedColor: {r: 1, g: 0.6650944, b: 0.6650944, a: 1}
   _frequency: 0.2
   _loops: 3
+--- !u!114 &8422427615214510437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667686093434619927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce3e526e687405e9a106e9a0d246816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.HealthViewComponent
+  _health: {fileID: 4470065136751482402}
+  _takeDamageColor: {fileID: 6958152867094090083}
+  _animator: {fileID: 7716971095677979633}
+--- !u!114 &6470051640433395614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667686093434619927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 677d6c22b71b4c7dae9282994be17e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GravityComponentView
+  _groundedComponent: {fileID: 6791311892780448319}
+  _rigidbody: {fileID: 4964224926931193953}
+  _animator: {fileID: 7716971095677979633}
+--- !u!114 &952612146146968952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667686093434619927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce30e0036df48168735fdd36678a53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.JumpComponentView
+  _jumpComponent: {fileID: 1807386138625082142}
+  _animator: {fileID: 7716971095677979633}
 --- !u!1 &5037031314010455982
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +626,11 @@ SpriteRenderer:
 --- !u!212 &7065660415826569011 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8405434783778038837, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}
+  m_PrefabInstance: {fileID: 1632659114803643142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7716971095677979633 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9056860363101505783, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}
   m_PrefabInstance: {fileID: 1632659114803643142}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &8502633902376773403 stripped

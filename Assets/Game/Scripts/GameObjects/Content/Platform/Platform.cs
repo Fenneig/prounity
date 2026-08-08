@@ -2,16 +2,16 @@
 
 namespace Game
 {
-    public class Platform : MonoBehaviour, MoveRequestComponent.IAction
+    public sealed class Platform : MonoBehaviour, MoveRequestComponent.IAction
     {
         private MoveRequestComponent _moveRequestComponent;
-        private IMoveComponent _moveComponent;
+        private MoveTransformComponent _moveComponent;
         private PatrolComponent _patrolComponent;
 
         private void Awake()
         {
             _moveRequestComponent = GetComponentInChildren<MoveRequestComponent>();
-            _moveComponent = GetComponentInChildren<IMoveComponent>();
+            _moveComponent = GetComponentInChildren<MoveTransformComponent>();
             _patrolComponent = GetComponentInChildren<PatrolComponent>();
 
             _moveRequestComponent.SetAction(this);

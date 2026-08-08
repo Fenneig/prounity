@@ -2,23 +2,23 @@
 
 namespace Game
 {
-    public class ChaseMoveComponent : MonoBehaviour
+    public sealed class FollowTargetComponent : MonoBehaviour
     {
-        private TargetSensorComponent _targetSensorComponent;
+        private TargetComponent _targetComponent;
         private MoveRequestComponent _moveRequestComponent;
 
         private void Awake()
         {
-            _targetSensorComponent = GetComponent<TargetSensorComponent>();
+            _targetComponent = GetComponent<TargetComponent>();
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
         }
 
         private void FixedUpdate()
         {
-            if (_targetSensorComponent.HasTarget)
+            if (_targetComponent.HasTarget)
             {
                 var normalizedDirection =
-                    (_targetSensorComponent.Target.transform.position - transform.position).normalized;
+                    (_targetComponent.Target.transform.position - transform.position).normalized;
                 _moveRequestComponent.Move(normalizedDirection);
             }
         }

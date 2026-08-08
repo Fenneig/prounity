@@ -2,19 +2,17 @@
 
 namespace Game
 {
-    [RequireComponent(typeof(LookComponent))]
-    public class TargetTrackerComponent : MonoBehaviour
+    [RequireComponent(typeof(FlipComponent))]
+    public sealed class LookAtTargetComponent : MonoBehaviour
     {
-        private LookComponent _lookComponent;
+        private FlipComponent _flipComponent;
         
         private Transform _target;
 
-        private void Awake()
-        {
-            _lookComponent = GetComponent<LookComponent>();
-        }
+        private void Awake() => _flipComponent = GetComponent<FlipComponent>();
         
         public void SetTarget(Transform target) => _target = target;
+        
         public void UnsetTarget() => _target = null;
         
         private void Update()
@@ -22,7 +20,7 @@ namespace Game
             if (_target == null)
                 return;
             
-            _lookComponent.Look(_target);
+            _flipComponent.Flip(_target);
         }
     }
 }

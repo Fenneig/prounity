@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class MoveTransformComponent : MonoBehaviour, IMoveComponent
+    public sealed class MoveTransformComponent : MonoBehaviour
     {
         [SerializeField]
         private float _speed = 4.5f;

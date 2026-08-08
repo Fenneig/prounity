@@ -1,21 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public class TargetSensorComponent : MonoBehaviour
+    [RequireComponent(typeof(TargetComponent))]
+    public sealed class TargetSensorComponent : MonoBehaviour
     {
         [SerializeField] private LayerMask _targetMask;
         private TriggerComponent _fieldOfView;
-
-        public event Action<Collider2D> OnFoundTarget; 
-        public event Action<Collider2D> OnLostTarget;
-        public GameObject Target { get; private set; }
-        public bool HasTarget => Target != null;
+        private TargetComponent _targetComponent;
 
         private void Awake()
         {
             _fieldOfView = GetComponentInChildren<TriggerComponent>();
+            _targetComponent = GetComponent<TargetComponent>();
         }
 
         private void OnEnable()
@@ -32,20 +29,14 @@ namespace Game
 
         private void OnEntered(Collider2D checkCollider)
         {
-            if (IsTarget(checkCollider))
-            {
-                OnFoundTarget?.Invoke(checkCollider);
-                Target = checkCollider.gameObject;
-            }
+            if (IsTarget(checkCollider)) 
+                _targetComponent.SetTarget(checkCollider);
         }
 
         private void OnExited(Collider2D checkCollider)
         {
-            if (IsTarget(checkCollider))
-            {
-                OnLostTarget?.Invoke(checkCollider);
-                Target = null;
-            }
+            if (IsTarget(checkCollider)) 
+                _targetComponent.UnsetTarget();
         }
 
         private bool IsTarget(Collider2D checkCollider) => 

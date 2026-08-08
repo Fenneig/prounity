@@ -3,34 +3,31 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ReachSensorComponent : MonoBehaviour
+    public sealed class ReachSensorComponent : MonoBehaviour
     {
         [SerializeField] private Transform _attackPoint;
 
         [SerializeField] private LayerMask _enemyMask;
         [SerializeField] private float _detectRadius = .2f;
 
-        private TargetSensorComponent _targetSensorComponent;
+        private TargetComponent _targetComponent;
         
         private readonly Collider2D[] _results = new Collider2D[1];
 
         public event Action TargetReached;
 
-        private void Awake()
-        {
-            _targetSensorComponent = GetComponent<TargetSensorComponent>();
-        }
+        private void Awake() => _targetComponent = GetComponent<TargetComponent>();
 
         private void Update()
         {
-            if (!_targetSensorComponent.HasTarget)
+            if (!_targetComponent.HasTarget)
                 return;
             
-            if (HasTarget())
+            if (ReachTarget())
                 TargetReached?.Invoke();
         }
         
-        private bool HasTarget() =>
+        private bool ReachTarget() =>
             Physics2D.OverlapCircleNonAlloc(
                 _attackPoint.position,
                 _detectRadius,

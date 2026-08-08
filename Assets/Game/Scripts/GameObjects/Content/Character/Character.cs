@@ -4,88 +4,65 @@ namespace Game
 {
     public sealed class Character : MonoBehaviour,
         MoveRequestComponent.IAction,
-        MoveRequestComponent.ICondition
+        MoveRequestComponent.ICondition,
+        JumpComponent.IAction,
+        JumpComponent.ICondition
     {
-        [SerializeField] private PushAttack _pushAttack;
-        [SerializeField] private PushAttack _tossAttack;
-        
+        private DualWeaponComponent _dualWeaponComponent;
         private HealthComponent _health;
         
         private MoveRequestComponent _moveRequestComponent;
-        private IMoveComponent _moveComponent;
+        private MoveRigidbodyComponent _moveComponent;
         
-        private PhysicsComponent _physics;
-        private InputReader _inputReader;
-        
-        private JumpRequestComponent _jumpRequestComponent;
         private JumpComponent _jumpComponent;
         private GroundedComponent _groundedComponent;
         
-        private LookComponent _lookComponent;
-
-        private WeaponState _weaponState;
-        private AttackRequestComponent _pushAttackRequest;
-        private AttackRequestComponent _tossAttackRequest;
+        private FlipComponent _flipComponent;
 
         private void Awake()
         {
             _health = GetComponent<HealthComponent>();
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
-            _moveComponent = GetComponent<IMoveComponent>();
-            _physics = GetComponent<PhysicsComponent>();
+            _moveComponent = GetComponent<MoveRigidbodyComponent>();
             
-            _inputReader = GetComponent<InputReader>();
-
             _groundedComponent = GetComponent<GroundedComponent>();
             
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
             _jumpComponent = GetComponent<JumpComponent>();
                             
-            _lookComponent = GetComponent<LookComponent>();
+            _flipComponent = GetComponent<FlipComponent>();
+            _dualWeaponComponent = GetComponent<DualWeaponComponent>();
 
-            _weaponState = GetComponent<WeaponState>();
-            _pushAttackRequest = _pushAttack.GetComponent<AttackRequestComponent>();
-            _tossAttackRequest = _tossAttack.GetComponent<AttackRequestComponent>();
-
-            _jumpRequestComponent.SetAction(Jump);
-            _jumpRequestComponent.SetCondition(() => _groundedComponent.IsGrounded && _health.IsAlive);
-            
-            _pushAttackRequest.SetAction(Push);
-            _pushAttackRequest.SetCondition(() => _weaponState.CanAttack && _health.IsAlive);
-            _tossAttackRequest.SetAction(Toss);
-            _tossAttackRequest.SetCondition(() => _weaponState.CanAttack && _health.IsAlive);
+            _jumpComponent.SetAction(this);
+            _jumpComponent.SetCondition(this);
             
             _moveRequestComponent.SetAction(this);
+            _moveRequestComponent.SetCondition(this);
         }
 
-        private void OnEnable()
-        {
-            _health.OnDied += OnDied;
-        }
+        private void OnEnable() => _health.OnDied += OnDied;
 
-        private void OnDisable()
-        {
-            _health.OnDied -= OnDied;
-        }
+        private void OnDisable() => _health.OnDied -= OnDied;
 
-        public void Invoke(Vector2 direction)
+        public void Move(Vector2 readValue) => _moveRequestComponent.Move(readValue);
+
+        public void Jump() => _jumpComponent.Jump();
+
+        public void Push() => _dualWeaponComponent.Push();
+
+        public void Toss() => _dualWeaponComponent.Toss();
+
+        private void OnDied() => GetComponent<Rigidbody2D>().simulated = false;
+
+        void MoveRequestComponent.IAction.Invoke(Vector2 direction)
         {
-            _lookComponent.Look(direction.x);
+            _flipComponent.Flip(direction.x);
             _moveComponent.Move(direction);
         }
 
-        public bool Evaluate() => _health.IsAlive;
+        bool MoveRequestComponent.ICondition.Evaluate() => _health.IsAlive;
 
-        private void Jump() => _jumpComponent.Jump();
-
-        private void Push() => _pushAttack.Attack();
+        void JumpComponent.IAction.Invoke() => _jumpComponent.Jump();
         
-        private void Toss() => _tossAttack.Attack();
-
-        private void OnDied()
-        {
-            _inputReader.Disable();
-            _physics.Disable();
-        }
+        bool JumpComponent.ICondition.Evaluate() => _groundedComponent.IsGrounded && _health.IsAlive;
     }
 }

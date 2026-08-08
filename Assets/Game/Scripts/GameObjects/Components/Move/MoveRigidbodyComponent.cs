@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class MoveRigidbodyComponent : MonoBehaviour, IMoveComponent
+    public sealed class MoveRigidbodyComponent : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _speed;

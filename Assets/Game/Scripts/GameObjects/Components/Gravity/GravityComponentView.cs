@@ -6,25 +6,24 @@ namespace Game
     {
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
-        
-        private Animator _animator;
-        
-        private GroundedComponent _groundedComponent;
+        private const float FALLING_THRESHOLD = -.1f;
 
-        private void Awake()
-        {
-            _animator = GetComponentInChildren<Animator>();
-            
-            _groundedComponent = GetComponentInChildren<GroundedComponent>();
-        }
+        [SerializeField] private GroundedComponent _groundedComponent;
+        [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField] private Animator _animator;
+
         private void OnEnable() => _groundedComponent.OnGrounded += OnGrounded;
 
         private void OnDisable() => _groundedComponent.OnGrounded -= OnGrounded;
 
-        private void OnGrounded(bool isGround)
+        private void OnGrounded(bool isGround) => _animator.SetBool(IsGrounded, isGround);
+
+        private void FixedUpdate()
         {
-            _animator.SetBool(IsGrounded, isGround);
-            _animator.SetBool(IsFalling, !isGround);    
+            _animator.SetBool(
+                IsFalling,
+                !_groundedComponent.IsGrounded &&
+                _rigidbody.linearVelocity.y < FALLING_THRESHOLD);
         }
     }
 }

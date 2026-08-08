@@ -2,58 +2,45 @@
 
 namespace Game
 {
-    public class Snake : MonoBehaviour, 
-        MoveRequestComponent.IAction, 
-        MoveRequestComponent.ICondition
+    public sealed class Snake : MonoBehaviour,
+        MoveRequestComponent.IAction,
+        MoveRequestComponent.ICondition,
+        ForceComponent.ICondition,
+        AttackRequestComponent.ICondition
     {
-        private PushDamageAttack _pushDamageAttack;
-        private TargetSensorComponent _targetSensorComponent;
+        private PushDamageWeapon _weapon;
+        private AttackRequestComponent _attackRequestComponent;
+        private ForceComponent _forceComponent;
+        private TargetComponent _targetComponent;
         private MoveRequestComponent _moveRequestComponent;
         private MoveRigidbodyComponent _moveComponent;
-        private AttackRequestComponent _attackRequestComponent;
-        private LookComponent _lookComponent;
+        private FlipComponent _flipComponent;
         private HealthComponent _healthComponent;
-        private AttackCooldownComponent _attackCooldownComponent;
         private ReachSensorComponent _reachSensorComponent;
-        private PhysicsComponent _physicsComponent;
         private GroundedComponent _groundedComponent;
 
         private void Awake()
         {
-            _pushDamageAttack = GetComponent<PushDamageAttack>();
-            _targetSensorComponent = GetComponent<TargetSensorComponent>();
+            _forceComponent = GetComponent<ForceComponent>();
+            _weapon = GetComponent<PushDamageWeapon>();
+            _attackRequestComponent = GetComponent<AttackRequestComponent>();
+            _targetComponent = GetComponent<TargetComponent>();
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
             _moveComponent = GetComponent<MoveRigidbodyComponent>();
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
-            _lookComponent = GetComponent<LookComponent>();
+            _flipComponent = GetComponent<FlipComponent>();
             _healthComponent = GetComponent<HealthComponent>();
-            _attackCooldownComponent = GetComponent<AttackCooldownComponent>();
             _reachSensorComponent = GetComponent<ReachSensorComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
-            
+
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
-            
-            _attackRequestComponent.SetAction(_pushDamageAttack.Attack);
-            _attackRequestComponent.SetCondition(() => _healthComponent.IsAlive && !_attackCooldownComponent.IsAttacking && _groundedComponent.IsGrounded);
+
+            _forceComponent.SetCondition(this);
+
+            _attackRequestComponent.SetAction(_weapon);
+            _attackRequestComponent.SetCondition(this);
         }
-
-        void MoveRequestComponent.IAction.Invoke(Vector2 direction)
-        {
-            _moveComponent.Move(direction);
-            _lookComponent.Look(direction.x);
-        }
-
-        bool MoveRequestComponent.ICondition.Evaluate() => 
-            _healthComponent.IsAlive && 
-            _targetSensorComponent.HasTarget && 
-            !_attackCooldownComponent.IsAttacking && 
-            _groundedComponent.IsGrounded;
-
-        private void OnDied() => _physicsComponent.Disable();
-
-        private void Attack() => _attackRequestComponent.Attack();
-
+        
         private void OnEnable()
         {
             _reachSensorComponent.TargetReached += Attack;
@@ -65,5 +52,31 @@ namespace Game
             _reachSensorComponent.TargetReached -= Attack;
             _healthComponent.OnDied -= OnDied;
         }
+        
+        private void OnDied() => GetComponent<Rigidbody2D>().simulated = false;
+
+        private void Attack() => _attackRequestComponent.Attack();
+
+        void MoveRequestComponent.IAction.Invoke(Vector2 direction)
+        {
+            _moveComponent.Move(direction);
+            _flipComponent.Flip(direction.x);
+        }
+
+        bool MoveRequestComponent.ICondition.Evaluate() =>
+            _healthComponent.IsAlive &&
+            _targetComponent.HasTarget &&
+            _forceComponent.IsReady &&
+            _groundedComponent.IsGrounded;
+
+        bool AttackRequestComponent.ICondition.Evaluate() =>
+            _healthComponent.IsAlive &&
+            _targetComponent.HasTarget &&
+            _forceComponent.IsReady &&
+            _groundedComponent.IsGrounded;
+
+        bool ForceComponent.ICondition.Evaluate() => _healthComponent.IsAlive &&
+                                                     _forceComponent.CanForce &&
+                                                     _groundedComponent.IsGrounded;
     }
 }

@@ -2,16 +2,16 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(PushComponent))]
+    [RequireComponent(typeof(ForceComponent))]
     public sealed class Trampoline : MonoBehaviour
     {
         private TriggerComponent _triggerComponent;
-        private PushComponent _pushComponent;
+        private ForceComponent _pushComponent;
 
         private void Awake()
         {
             _triggerComponent = GetComponent<TriggerComponent>();
-            _pushComponent = GetComponent<PushComponent>();
+            _pushComponent = GetComponent<ForceComponent>();
         }
 
         private void OnEnable()
@@ -27,7 +27,7 @@ namespace Game
         private void OnEntered(Collider2D other)
         {
             if (other.TryGetComponent(out Rigidbody2D target)) 
-                _pushComponent.Push(target);
+                _pushComponent.ForceAtTarget(target);
         }
     }
 }

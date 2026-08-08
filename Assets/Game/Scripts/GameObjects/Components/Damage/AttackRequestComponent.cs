@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class JumpComponent : MonoBehaviour
+    public sealed class AttackRequestComponent : MonoBehaviour
     {
-        [SerializeField] private float _jumpForce = 12f;
-        private Rigidbody2D _rigidbody2D;
-        
-        public event Action OnJump;
+        public event Action OnAttack;
 
         public interface IAction
         {
@@ -29,20 +26,14 @@ namespace Game
         
         public void SetCondition(ICondition condition) => _condition = condition;
         
-        public void Jump() => _required = true;
-
-        private void Awake()
-        {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-        }
-
+        public void Attack() => _required = true;
+        
         private void FixedUpdate()
         {
             if (_required && (_condition == null || _condition.Evaluate()))
             {
                 _action?.Invoke();
-                _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-                OnJump?.Invoke();
+                OnAttack?.Invoke();
             }
             
             _required = false;

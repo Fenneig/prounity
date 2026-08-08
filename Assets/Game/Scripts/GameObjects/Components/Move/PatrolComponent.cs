@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PatrolComponent : MonoBehaviour
+    public sealed class PatrolComponent : MonoBehaviour
     {
         [SerializeField] private Transform[] _points;
         [SerializeField] private float _threshold = 0.01f;

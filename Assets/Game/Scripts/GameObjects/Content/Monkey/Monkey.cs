@@ -2,38 +2,38 @@
 
 namespace Game
 {
-    public class Monkey : MonoBehaviour, TouchRequestComponent.ICondition, TouchRequestComponent.IAction
+    public sealed class Monkey : MonoBehaviour,
+        TouchRequestComponent.IAction,
+        TouchRequestComponent.ICondition,
+        JumpComponent.IAction,
+        JumpComponent.ICondition
     {
+        [SerializeField] private float _jumpDelay;
+        private ForceComponent _forceComponent;
         private JumpComponent _jumpComponent;
-        private JumpRequestComponent _jumpRequestComponent;
         private GroundedComponent _groundedComponent;
         private HealthComponent _healthComponent;
-        private PushComponent _pushComponent;
-        private AreaDetectorComponent _areaDetectorComponent;
-        private TargetSensorComponent _targetSensorComponent;
-        private TargetTrackerComponent _targetTrackerComponent;
-        private CooldownComponent _cooldownComponent;
+        private TargetComponent _targetComponent;
+        private LookAtTargetComponent _lookAtTargetComponent;
         private CollisionComponent _collisionComponent;
         private TouchRequestComponent _touchRequestComponent;
-        private TouchDamage _touchDamage;
+        private DealDamageComponent _dealDamageComponent;
+        private float _jumpStartTime;
 
         private void Awake()
         {
             _jumpComponent = GetComponent<JumpComponent>();
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
             _healthComponent = GetComponent<HealthComponent>();
-            _pushComponent = GetComponent<PushComponent>();
-            _areaDetectorComponent = GetComponent<AreaDetectorComponent>();
-            _targetSensorComponent = GetComponent<TargetSensorComponent>();
-            _targetTrackerComponent = GetComponent<TargetTrackerComponent>();
-            _cooldownComponent = GetComponent<CooldownComponent>();
+            _targetComponent = GetComponent<TargetComponent>();
+            _lookAtTargetComponent = GetComponent<LookAtTargetComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
             _touchRequestComponent = GetComponent<TouchRequestComponent>();
-            _touchDamage = GetComponent<TouchDamage>();
+            _dealDamageComponent = GetComponent<DealDamageComponent>();
+            _forceComponent = GetComponent<ForceComponent>();
 
-            _jumpRequestComponent.SetAction(Jump);
-            _jumpRequestComponent.SetCondition(CanJump);
+            _jumpComponent.SetAction(this);
+            _jumpComponent.SetCondition(this);
 
             _touchRequestComponent.SetAction(this);
             _touchRequestComponent.SetCondition(this);
@@ -42,67 +42,48 @@ namespace Game
         private void OnEnable()
         {
             _groundedComponent.OnGrounded += Shockwave;
-            _targetSensorComponent.OnFoundTarget += SetTarget;
-            _targetSensorComponent.OnLostTarget += UnsetTarget;
+            _targetComponent.OnFoundTarget += SetTarget;
+            _targetComponent.OnLostTarget += UnsetTarget;
             _collisionComponent.OnEntered += TouchRequest;
         }
 
         private void OnDisable()
         {
             _groundedComponent.OnGrounded -= Shockwave;
-            _targetSensorComponent.OnFoundTarget -= SetTarget;
-            _targetSensorComponent.OnLostTarget -= UnsetTarget;
+            _targetComponent.OnFoundTarget -= SetTarget;
+            _targetComponent.OnLostTarget -= UnsetTarget;
             _collisionComponent.OnEntered -= TouchRequest;
         }
-        
-        private void SetTarget(Collider2D target) => _targetTrackerComponent.SetTarget(target.transform);
 
-        private void UnsetTarget(Collider2D _) => _targetTrackerComponent.UnsetTarget();
-        
+        private void SetTarget(Collider2D target) => _lookAtTargetComponent.SetTarget(target.transform);
+
+        private void UnsetTarget() => _lookAtTargetComponent.UnsetTarget();
+
         private void TouchRequest(Collision2D target) => _touchRequestComponent.Touch(target);
 
         private void Shockwave(bool isLanded)
         {
             if (!isLanded)
                 return;
-            
-            var targets = _areaDetectorComponent.Detect();
 
-            foreach (var target in targets)
-            {
-                if (target.transform.root == transform.root)
-                    continue;
-                
-                Rigidbody2D rb = target.GetComponentInParent<Rigidbody2D>();
-                
-                if (rb == null)
-                    throw new MissingComponentException($"No Rigidbody2D on {target.name}");
-                
-                _pushComponent.Push(rb);
-            }
+            _forceComponent.ForceAtZone();
             
-            _cooldownComponent.Reset();
+            _jumpStartTime = Time.time;
         }
 
-
-        private void Jump() => _jumpComponent.Jump();
-        private bool CanJump() => _healthComponent.IsAlive &&
-                                  _groundedComponent.IsGrounded &&
-                                  _cooldownComponent.IsExpired;
-
-
-        void TouchRequestComponent.IAction.Invoke(GameObject target)
-        {
-            if (!target.gameObject.TryGetComponent(out HealthComponent healthComponent))
-                return;
-            
-            _touchDamage.Damage(healthComponent);
-        }
+        void TouchRequestComponent.IAction.Invoke(GameObject target) => 
+            _dealDamageComponent.TryDealDamage(target);
 
         bool TouchRequestComponent.ICondition.Evaluate() =>
             _healthComponent.IsAlive;
 
-        private void Update() => 
-            _jumpRequestComponent.Jump();
+        private void Update() =>
+            _jumpComponent.Jump();
+
+        void JumpComponent.IAction.Invoke() => _jumpComponent.Jump();
+
+        bool JumpComponent.ICondition.Evaluate() => _healthComponent.IsAlive &&
+                                                    _groundedComponent.IsGrounded &&
+                                                    Time.time - _jumpStartTime >= _jumpDelay;
     }
 }

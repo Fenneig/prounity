@@ -2,37 +2,38 @@
 
 namespace Game
 {
-    public class Spider : MonoBehaviour,
+    public sealed class Spider : MonoBehaviour,
         MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
         TouchRequestComponent.IAction,
         TouchRequestComponent.ICondition
     {
+        [SerializeField] private float _touchDelay;
         private MoveRequestComponent _moveRequestComponent;
-        private IMoveComponent _moveComponent;
+        private MoveRigidbodyComponent _moveComponent;
         private PatrolComponent _patrolComponent;
-        private LookComponent _lookComponent;
+        private FlipComponent _flipComponent;
         private CollisionComponent _collisionComponent;
         private TouchRequestComponent _touchRequestComponent;
-        private PushTouchDamage _pushTouchDamage;
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
-        private CooldownComponent _cooldownComponent;
-        private PhysicsComponent _physicsComponent;
+        private DealDamageComponent _dealDamageComponent;
+        private ForceComponent _forceComponent;
         
+        private float _touchedTime;
+
         private void Awake()
         {
-            _physicsComponent = GetComponent<PhysicsComponent>();
             _moveRequestComponent = GetComponentInChildren<MoveRequestComponent>();
-            _moveComponent = GetComponentInChildren<IMoveComponent>();
+            _moveComponent = GetComponentInChildren<MoveRigidbodyComponent>();
             _patrolComponent = GetComponentInChildren<PatrolComponent>();
-            _lookComponent = GetComponentInChildren<LookComponent>();
+            _flipComponent = GetComponentInChildren<FlipComponent>();
             _collisionComponent = GetComponentInChildren<CollisionComponent>();
             _touchRequestComponent = GetComponentInChildren<TouchRequestComponent>();
-            _pushTouchDamage = GetComponentInChildren<PushTouchDamage>();
             _healthComponent = GetComponentInChildren<HealthComponent>();
             _groundedComponent = GetComponentInChildren<GroundedComponent>();
-            _cooldownComponent = GetComponentInChildren<CooldownComponent>();
+            _dealDamageComponent = GetComponentInChildren<DealDamageComponent>();
+            _forceComponent = GetComponentInChildren<ForceComponent>();
             
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
@@ -53,13 +54,13 @@ namespace Game
             _collisionComponent.OnEntered -= TouchRequest;
         }
 
-        private void OnDied() => _physicsComponent.Disable();
+        private void OnDied() => GetComponent<Rigidbody2D>().simulated = false;
         
         private void TouchRequest(Collision2D target) => _touchRequestComponent.Touch(target);
 
         void MoveRequestComponent.IAction.Invoke(Vector2 direction)
         {
-            _lookComponent.Look(-direction.x);
+            _flipComponent.Flip(-direction.x);
             _moveComponent.Move(direction);
         }
 
@@ -69,18 +70,17 @@ namespace Game
 
         void TouchRequestComponent.IAction.Invoke(GameObject target)
         {
-            if (!target.gameObject.TryGetComponent(out HealthComponent targetHealthComponent))
-                return;
-            
-            _pushTouchDamage.Damage(targetHealthComponent);
-
-            _cooldownComponent.Reset();
+            if (_dealDamageComponent.TryDealDamage(target))
+            {
+                _forceComponent.ForceAtTarget(target);
+                _touchedTime = Time.time;
+            }
         }
 
         bool TouchRequestComponent.ICondition.Evaluate() => 
-            _cooldownComponent.IsExpired && 
             _healthComponent.IsAlive && 
-            _groundedComponent.IsGrounded;
+            _groundedComponent.IsGrounded && 
+            Time.time - _touchedTime >= _touchDelay;
 
         private void FixedUpdate() => _moveRequestComponent.Move(_patrolComponent.NextPointDirection);
     }

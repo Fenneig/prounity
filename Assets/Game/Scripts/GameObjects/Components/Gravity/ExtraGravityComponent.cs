@@ -2,24 +2,24 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(GroundedComponent), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public sealed class ExtraGravityComponent : MonoBehaviour
     {
+        private const float FALLING_THRESHOLD = -.1f;
+        
         [SerializeField]
         private float _gravity = -7f;
         
-        private GroundedComponent _groundedComponent;
         private Rigidbody2D _rigidbody;
 
         private void Awake()
         {
-            _groundedComponent = this.GetComponent<GroundedComponent>();
-            _rigidbody = this.GetComponent<Rigidbody2D>();
+            _rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void FixedUpdate()
         {
-            if (!_groundedComponent.IsGrounded)
+            if (_rigidbody.linearVelocity.y < FALLING_THRESHOLD)
                 _rigidbody.linearVelocity += new Vector2(0, _gravity * Time.fixedDeltaTime);
         }
     }

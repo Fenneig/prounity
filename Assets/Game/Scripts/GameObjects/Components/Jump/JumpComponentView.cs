@@ -6,18 +6,12 @@ namespace Game
     {
         private static readonly int IsJump = Animator.StringToHash("Jump");
 
-        private JumpRequestComponent _jumpRequestComponent;
-        private Animator _animator;
-
-        private void Awake()
-        {
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
-            _animator = GetComponentInChildren<Animator>();
-        }
+        [SerializeField] private JumpComponent _jumpComponent;
+        [SerializeField] private Animator _animator;
         
-        private void OnEnable() => _jumpRequestComponent.OnJump += Jump;
+        private void OnEnable() => _jumpComponent.OnJump += Jump;
         
-        private void OnDisable() => _jumpRequestComponent.OnJump -= Jump;
+        private void OnDisable() => _jumpComponent.OnJump -= Jump;
         
         private void Jump() => _animator.SetTrigger(IsJump);
     }
