@@ -1,86 +1,121 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using Game.Gameplay.Extensions;
 using Modules.Entities;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class EntitySaveSerializer : ISaveSerializer
+    public sealed class EntitySaveSerializer
     {
         private readonly EntityWorld _entityWorld;
-        private readonly ResolveContext _context;
-        
+        private readonly ISaveSerializer _saveSerializer;
+
         private readonly List<Entity> _loadedEntities = new();
 
-        public EntitySaveSerializer(EntityWorld entityWorld, ResolveContext resolveContext)
+        public EntitySaveSerializer(EntityWorld entityWorld, ISaveSerializer saveSerializer)
         {
             _entityWorld = entityWorld;
-            _context = resolveContext;
+            _saveSerializer = saveSerializer;
         }
 
-        public void Serialize(ref SaveWriter writer)
+        public void Serialize(BinaryWriter writer)
         {
             var entities = _entityWorld.GetAll();
+
             writer.Write(entities.Count);
 
-            foreach (var entity in entities) 
-                SaveEntity(ref writer, entity);
+            foreach (var entity in entities)
+                SaveEntityHeader(writer, entity);
+
+            writer.Write(entities.Count);
+
+            foreach (var entity in entities)
+            {
+                writer.Write(entity.Id);
+                SaveComponents(writer, entity);
+            }
         }
 
-        public void Deserialize(ref SaveReader reader)
+        public void Deserialize(BinaryReader reader)
         {
             _loadedEntities.Clear();
-            int entitiesCount = reader.ReadInt();
-
-            for (int i = 0; i < entitiesCount; i++) 
-                LoadEntity(ref reader);
-
-            foreach (var entity in _loadedEntities)
-                foreach (var resolver in entity.GetComponents<IReferenceResolver>())
-                    resolver.Resolve(_context);
+            LoadEntityWorld(reader);
+            RemoveExtraEntities();
+            LoadEntityData(reader);
         }
 
-        private void SaveEntity(ref SaveWriter writer, Entity entity)
+        private void SaveEntityHeader(BinaryWriter writer, Entity entity)
         {
             writer.Write(entity.Name);
             writer.Write(entity.Id);
-            
+
             Transform entityTransform = entity.transform;
 
             writer.Write(entityTransform.position);
             writer.Write(entityTransform.rotation);
-
-            var serializers = entity.GetComponents<ISaveSerializer>();
-
-            foreach (var serializer in serializers)
-                serializer.Serialize(ref writer);
         }
 
-        private void LoadEntity(ref SaveReader reader)
+        private void SaveComponents(BinaryWriter writer, Entity entity)
         {
-            string name = reader.ReadString();
-            int id = reader.ReadInt();
+            var components = entity.GetComponents<ISerializableComponent>();
 
-            Vector3 position = reader.ReadVector3();
-            Quaternion rotation = reader.ReadQuaternion();
-            
-            if (_entityWorld.TryGet(id, out Entity entity))
-            {
-                entity.transform.position = position;
-                entity.transform.rotation = rotation;
-            }
-            else
-            {
-                entity = _entityWorld.Spawn(name, position, rotation, id);
-            }
-            
-            LoadComponents(ref reader, entity);
-            _loadedEntities.Add(entity);
+            foreach (var component in components)
+                component.Serialize(_saveSerializer, writer);
         }
 
-        private void LoadComponents(ref SaveReader reader, Entity entity)
+        private void LoadEntityWorld(BinaryReader reader)
         {
-            foreach (var serializer in entity.GetComponents<ISaveSerializer>())
-                serializer.Deserialize(ref reader);
+            int entitiesCount = reader.ReadInt32();
+
+            for (int i = 0; i < entitiesCount; i++)
+            {
+                string name = reader.ReadString();
+                int id = reader.ReadInt32();
+
+                Vector3 position = reader.ReadVector3();
+                Quaternion rotation = reader.ReadQuaternion();
+
+                if (_entityWorld.TryGet(id, out Entity entity) && entity.name == name)
+                    entity.transform.SetPositionAndRotation(position, rotation);
+                else
+                    entity = _entityWorld.Spawn(name, position, rotation, id);
+
+                _loadedEntities.Add(entity);
+            }
+        }
+
+        private void RemoveExtraEntities()
+        {
+            List<Entity> entitiesToDestroy = new List<Entity>();
+            foreach (var entity in _entityWorld.GetAll())
+                if (!_loadedEntities.Contains(entity))
+                    entitiesToDestroy.Add(entity);
+
+            foreach (var entity in entitiesToDestroy)
+                _entityWorld.Destroy(entity.Id);
+        }
+
+        private void LoadEntityData(BinaryReader reader)
+        {
+            int entitiesCount = reader.ReadInt32();
+
+            for (int i = 0; i < entitiesCount; i++)
+            {
+                int entityId = reader.ReadInt32();
+
+                if (!_entityWorld.TryGet(entityId, out Entity entity))
+                    throw new InvalidDataException(
+                        $"Cannot load components: entity {entityId} does not exist.");
+
+                LoadComponents(reader, entity);
+            }
+        }
+
+        private void LoadComponents(BinaryReader reader, Entity entity)
+        {
+            foreach (var serializer in entity.GetComponents<ISerializableComponent>())
+                serializer.Deserialize(_saveSerializer, reader);
         }
     }
 }

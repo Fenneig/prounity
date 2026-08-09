@@ -1,15 +1,19 @@
+using System.IO;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class DestinationPoint : MonoBehaviour, ISaveSerializer
+    public sealed class DestinationPoint : MonoBehaviour, ISerializableComponent
     {
         ///Variable
         [field: SerializeField]
         public Vector3 Value { get; set; }
-
-        public void Serialize(ref SaveWriter writer) => writer.Write(Value);
-        public void Deserialize(ref SaveReader reader) => Value = reader.ReadVector3();
+        
+        public void Serialize(ISaveSerializer serializer, BinaryWriter writer) =>
+            serializer.Serialize(this, writer);
+        
+        public void Deserialize(ISaveSerializer serializer, BinaryReader reader) => 
+            serializer.Deserialize(this, reader);
     }
 }

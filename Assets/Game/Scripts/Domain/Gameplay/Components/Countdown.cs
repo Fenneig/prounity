@@ -1,9 +1,10 @@
+using System.IO;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class Countdown : MonoBehaviour, ISaveSerializer
+    public sealed class Countdown : MonoBehaviour, ISerializableComponent
     {
         ///Variable
         [field: SerializeField]
@@ -12,8 +13,11 @@ namespace Game.Gameplay
         ///Const
         [field: SerializeField]
         public float Duration { get; private set; }
-
-        public void Serialize(ref SaveWriter writer) => writer.Write(Current);
-        public void Deserialize(ref SaveReader reader) => Current = reader.ReadFloat();
+        
+        public void Serialize(ISaveSerializer serializer, BinaryWriter writer) =>
+            serializer.Serialize(this, writer);
+        
+        public void Deserialize(ISaveSerializer serializer, BinaryReader reader) => 
+            serializer.Deserialize(this, reader);
     }
 }

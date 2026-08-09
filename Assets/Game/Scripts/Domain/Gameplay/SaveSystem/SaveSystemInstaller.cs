@@ -12,14 +12,23 @@ namespace Game.Gameplay
                 .AsSingle();
 
             Container
-                .Bind<ISaveSerializer>()
-                .To<EntitySaveSerializer>()
-                .AsCached();
-            
-            Container
-                .Bind<ResolveContext>()
+                .Bind<EntitySaveSerializer>()
                 .FromNew()
                 .AsSingle();
+            
+            Container
+                .Bind<IHashProvider>()
+                .To<Sha256Provider>().AsSingle();
+
+            Container
+                .Bind<VersionController>()
+                .FromNew()
+                .AsSingle();
+
+            Container
+                .Bind<ISaveSerializer>()
+                .To<SaveSerializer>()
+                .AsCached();
         }        
     }
 }

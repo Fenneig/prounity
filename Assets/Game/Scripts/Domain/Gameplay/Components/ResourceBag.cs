@@ -1,10 +1,11 @@
+using System.IO;
 using Game.Common;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
     //Can be extended
-    public sealed class ResourceBag : MonoBehaviour, ISaveSerializer
+    public sealed class ResourceBag : MonoBehaviour, ISerializableComponent
     {
         ///Variable
         [field: SerializeField]
@@ -18,16 +19,10 @@ namespace Game.Gameplay
         [field: SerializeField]
         public int Capacity { get; set; }
         
-        public void Serialize(ref SaveWriter writer)
-        {
-            writer.Write((int)Type);
-            writer.Write(Current);
-        }
-
-        public void Deserialize(ref SaveReader reader)
-        {
-            Type = (ResourceType)reader.ReadInt();
-            Current = reader.ReadInt();
-        }
+        public void Serialize(ISaveSerializer serializer, BinaryWriter writer) =>
+            serializer.Serialize(this, writer);
+        
+        public void Deserialize(ISaveSerializer serializer, BinaryReader reader) => 
+            serializer.Deserialize(this, reader);
     }
 }
