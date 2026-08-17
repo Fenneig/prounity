@@ -1,0 +1,84 @@
+﻿namespace: Game.Entities
+className: EntityAPI
+directory: Assets/Game/Scripts/Entities/
+aggressiveInlining: true
+unsafe: false
+entityType: IEntity
+
+imports:
+- Atomic.Entities
+- Atomic.Elements
+- UnityEngine
+- System.Collections.Generic
+- Game.UI
+
+tags:
+
+- Moveable
+- Damageable
+- Interactable
+- Character
+
+values:
+- Position: IVariable<Vector3>
+- Rotation: IVariable<Quaternion>
+
+#Movement
+- MoveRequest: IRequest<Vector3>
+- MoveCommand: ICommand<MoveArgs>
+
+- MoveSpeed: IValue<float>
+- MoveTime: IVariable<float>
+- MoveDuration: IValue<float>
+
+#Rotate
+- RotateRequest: IRequest<Vector3>
+- RotateCommand: ICommand<RotateArgs>
+
+- RotationSpeed: IValue<float>
+
+- MaxHealth: IValue<int>
+- Health: IReactiveVariable<int>
+- TakeDamageAction: IAction<int>
+
+#Fire
+- FireRequest: IRequest
+- FireCommand: ICommand
+
+- Weapon: IVariable<IEntity>
+- FireAnticipation: ICooldown
+- WantsToFire: IReactiveVariable<bool>
+- WeaponCooldown: ICooldown
+- Ammo: IReactiveVariable<int>
+- Lifetime: ICooldown
+- Damage: IValue<int>
+
+#Interactable
+- InteractCommand: ICommand<IEntity>
+
+- Trigger: TriggerEvents
+
+- DestroyAction: IAction
+- RespawnAction: ICompositeAction
+
+- Animator: Animator
+- AudioSource: AudioSource
+- ParticleSystem: ParticleSystem
+- TrailRender: TrailRenderer
+
+- Target: IVariable<IEntity>
+- MoveAudioClips: IValue<List<AudioClip>>
+- PainAudioClips: IValue<List<AudioClip>>
+- DeathAudioClips: IValue<List<AudioClip>>
+- AttackAudioClips: IValue<List<AudioClip>>
+- BodyFallAudioClips: IValue<List<AudioClip>>
+
+#Sound requests
+- MoveSoundRequest: IRequest
+- MoveSoundCommand: ICommand
+- BodyFallSoundRequest: IRequest
+- BodyFallSoundCommand: ICommand
+- FireSoundRequest: IRequest
+- AttackSoundRequest: IRequest
+- AttackSoundCommand: ICommand
+- AttackAnticipationSoundRequest: IRequest

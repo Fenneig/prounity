@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections;
 
-namespace PolygonArsenal
+namespace AssetPacks.Polygon_Arsenal.Scripts
 {
     public class PolygonRotation : MonoBehaviour
     {

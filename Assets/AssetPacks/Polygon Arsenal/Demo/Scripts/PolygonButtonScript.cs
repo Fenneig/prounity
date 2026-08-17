@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
 
-namespace PolygonArsenal
+namespace AssetPacks.Polygon_Arsenal.Demo.Scripts
 {
     public class PolygonButtonScript : MonoBehaviour
     {

@@ -1,0 +1,14 @@
+namespace: Game
+className: GameContextAPI
+directory: Assets/Game/Scripts/GameContext/
+aggressiveInlining: true
+unsafe: false
+entityType: IEntity
+
+imports:
+- Atomic.Entities
+
+tags:
+
+values:
+- BulletPool: SceneEntityPool

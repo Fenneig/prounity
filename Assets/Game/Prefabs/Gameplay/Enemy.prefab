@@ -1340,6 +1340,37 @@ Transform:
   - {fileID: 1886214877813496791}
   m_Father: {fileID: 7146517421647915420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5267011020995275950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4410944339874547077}
+  m_Layer: 10
+  m_Name: <AttackInitPoint>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4410944339874547077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5267011020995275950}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4361596233082998913}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5272559173365203125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +1659,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4361596233082998913}
   - component: {fileID: 8179233504444308434}
+  - component: {fileID: 8403088207822063823}
+  - component: {fileID: 9040316608973050046}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -1654,6 +1687,7 @@ Transform:
   - {fileID: 8719492370163907385}
   - {fileID: 7405375498600190727}
   - {fileID: 4647941805212098408}
+  - {fileID: 4410944339874547077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &8179233504444308434
@@ -1683,6 +1717,66 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &8403088207822063823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355162821186015845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 9040316608973050046}
+  - {fileID: 2644345756265274866}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
+--- !u!114 &9040316608973050046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355162821186015845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c66b6472014e6892e44f59b3ac1b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZombieInstaller
+  _moveInstaller:
+    _moveDuration:
+      value: 0.1
+    _audioSource: {fileID: 0}
+    _audioClips: []
+  _moveDistance:
+    value: 1
+  _attackRange:
+    value: 1.5
+  _moveSpeed:
+    value: 2
+  _rotateSpeed:
+    value: 360
+  _transformInstaller:
+    _transform: {fileID: 4361596233082998913}
+  _healthInstaller:
+    _maxHealth:
+      value: 2
+    _health:
+      value: 2
+  _collider: {fileID: 1842272872912051803}
+  _weapon: {fileID: 5608337869560217858}
 --- !u!1 &6519369982854541961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,6 +2001,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1383350002564321792}
   - component: {fileID: 2415962780172116089}
+  - component: {fileID: 2644345756265274866}
+  - component: {fileID: 3774059612672465589}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Enemy
@@ -1943,7 +2039,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cb7def12ed591468ebdc46c5accc3cdb, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -1952,6 +2048,66 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2644345756265274866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158363685665035492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59b118b10be4e178386c79cb7a6053b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZombieViewInstaller
+  _animator: {fileID: 2415962780172116089}
+  _audioSource: {fileID: 8082205103597057941}
+  _painSounds:
+    value:
+    - {fileID: 8300000, guid: 1b86e0f96a7f64a9db99db12957f9ec0, type: 3}
+    - {fileID: 8300000, guid: 21c9c96d4d627428a9dcde4407ef2f65, type: 3}
+    - {fileID: 8300000, guid: f6497b4d19904476791f7f26cda6c3c8, type: 3}
+    - {fileID: 8300000, guid: 921717733469e4634be368172141b8a6, type: 3}
+    - {fileID: 8300000, guid: 863e660b8f1884718815e93ca1c4388c, type: 3}
+    - {fileID: 8300000, guid: 4b012e6346f104ea89574a53f5c86a01, type: 3}
+    - {fileID: 8300000, guid: 4044f8a39d5dd45699d84d9115f2da32, type: 3}
+    - {fileID: 8300000, guid: 4b631362087cd435eb2b674b1d18ca74, type: 3}
+    - {fileID: 8300000, guid: a6fcfda30e3504adf9f568f9b4ec4b4f, type: 3}
+    - {fileID: 8300000, guid: 8989e145fc9da4d1d8a997aaeb9ddd9d, type: 3}
+  _deathSounds:
+    value:
+    - {fileID: 8300000, guid: b77095a6699d84b9eac62258d6b383d6, type: 3}
+    - {fileID: 8300000, guid: 9cde2908b6fbc4823b588eed07b3088c, type: 3}
+    - {fileID: 8300000, guid: c79e892702a394c8e9737be6f97d23c7, type: 3}
+    - {fileID: 8300000, guid: f80ebef4cba544ebeb1bc3c7f3724d71, type: 3}
+    - {fileID: 8300000, guid: 786c8d9858cd04f2d9a2e444d4302f96, type: 3}
+    - {fileID: 8300000, guid: e1f88923a6c2849a69f5bf0774ed47c2, type: 3}
+  _attackSounds:
+    value:
+    - {fileID: 8300000, guid: 02cdb67c7396c44beb54e44fb1519751, type: 3}
+    - {fileID: 8300000, guid: 88355b2555076420bb57ed334e93fbb7, type: 3}
+    - {fileID: 8300000, guid: 4d1eacb11fd684ab694580c45d2e76c9, type: 3}
+    - {fileID: 8300000, guid: e48126a6fb7c04e3aa8d386db67db486, type: 3}
+    - {fileID: 8300000, guid: 334c4d0608efc42aa88667693c9b7e90, type: 3}
+    - {fileID: 8300000, guid: 8ce8dafae325b4173abb2a9756d41d43, type: 3}
+    - {fileID: 8300000, guid: e1da5f6fdea4749e6ba86cdad0602f73, type: 3}
+  _bodyFallSounds:
+    value:
+    - {fileID: 8300000, guid: 3352ade033aba4780b3044e404093b9a, type: 3}
+    - {fileID: 8300000, guid: 62cbe99b1eb804549a609de6169d9df4, type: 3}
+--- !u!114 &3774059612672465589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158363685665035492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413768b9f1224b1cb17a8ba2b286184f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Systems.AnimationEventReceiver
+  _mainEntity: {fileID: 8403088207822063823}
 --- !u!1 &7369059967829061964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,13 +2804,75 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5608337869560217858}
+    - targetCorrespondingSourceObject: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 865529274724727569}
   m_SourcePrefab: {fileID: 100100000, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
 --- !u!4 &2845756347370805700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
   m_PrefabInstance: {fileID: 3807615246241092946}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5830116405270930420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+  m_PrefabInstance: {fileID: 3807615246241092946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5608337869560217858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830116405270930420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 865529274724727569}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
+--- !u!114 &865529274724727569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830116405270930420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e6a44bad4b46cc9bac3b3e2c92ca91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.MeleeWeaponInstaller
+  _cooldown:
+    _duration: 1
+    _time: 0
+  _anticipation:
+    _duration: 1.0333333
+    _time: 0
+  _attackRange:
+    value: 0.2
+  _initPoint: {fileID: 4410944339874547077}
+  _damage:
+    value: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &4012628793975234114
 PrefabInstance:
   m_ObjectHideFlags: 0

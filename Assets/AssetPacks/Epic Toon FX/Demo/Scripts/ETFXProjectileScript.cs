@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+namespace AssetPacks.Epic_Toon_FX.Demo.Scripts
+{
     public class ETFXProjectileScript : MonoBehaviour
     {
         public GameObject impactParticle; // Effect spawned when projectile hits a collider
@@ -24,10 +25,10 @@ using System.Collections;
 		
         void FixedUpdate()
         {	
-			if (GetComponent<Rigidbody>().linearVelocity.magnitude != 0)
-			{
-			    transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().linearVelocity); // Sets rotation to look at direction of movement
-			}
+            if (GetComponent<Rigidbody>().linearVelocity.magnitude != 0)
+            {
+                transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().linearVelocity); // Sets rotation to look at direction of movement
+            }
 			
             RaycastHit hit;
 			
@@ -69,3 +70,4 @@ using System.Collections;
             }
         }
     }
+}

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-namespace EpicToonFX
+namespace AssetPacks.Epic_Toon_FX.Demo.Scripts
 {
 
 public class ETFXMouseOrbit : MonoBehaviour

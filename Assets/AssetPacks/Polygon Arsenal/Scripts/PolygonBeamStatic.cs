@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace PolygonArsenal
+namespace AssetPacks.Polygon_Arsenal.Scripts
 {
 
 public class PolygonBeamStatic : MonoBehaviour

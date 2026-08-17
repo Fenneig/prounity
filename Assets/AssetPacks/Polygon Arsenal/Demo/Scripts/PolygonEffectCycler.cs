@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace PolygonArsenal
+namespace AssetPacks.Polygon_Arsenal.Demo.Scripts
 {
     public class PolygonEffectCycler : MonoBehaviour
     {

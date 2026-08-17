@@ -1,0 +1,21 @@
+﻿namespace: Game.UI
+className: GameUIAPI
+directory: Assets/Game/Scripts/UI/Game/
+aggressiveInlining: true
+unsafe: false
+entityType: IGameUI
+
+imports:
+- Atomic.Entities
+- Atomic.Elements
+- Game.UI
+- TMPro
+
+tags:
+
+
+values:
+- HealthView: ValueKey<IGameUI, TMP_Text>
+- AmmoView: ValueKey<IGameUI, TMP_Text>
+- AttackJoystick: IValue<Joystick>
+- MoveJoystick: IValue<Joystick>
