@@ -8,10 +8,12 @@ namespace Game
         [SerializeField] private Transform[] _points;
         [SerializeField] private float _threshold = 0.01f;
         
-        private int _index;
-        private List<Vector3> _bakedPoints = new();
+        private MoveRequestComponent _moveRequestComponent;
+
+        private readonly List<Vector3> _bakedPoints = new();
         
-        public Vector2 NextPointDirection { get; private set; }
+        private int _index;
+        private Vector2 _nextPointDirection;
 
         private void Awake()
         {
@@ -19,30 +21,40 @@ namespace Game
                 _bakedPoints.Add(point.position);
             
             UpdateDirection();
+            _moveRequestComponent = GetComponent<MoveRequestComponent>();
         }
         
         private void UpdateDirection()
         {
             Vector2 direction = _bakedPoints[_index] - transform.position;
-            NextPointDirection = direction.normalized;
+            _nextPointDirection = direction.normalized;
         }
 
         private void FixedUpdate()
         {
-            Vector3 toTarget = transform.position - _bakedPoints[_index];
-            if (toTarget.sqrMagnitude <= _threshold)
-            {
-                _index++;
-                if (_index > _bakedPoints.Count - 1)
-                    _index = 0;
-                
+            Vector2 targetPosition = GetTargetPosition();
+
+            if (ReachedTarget(targetPosition))
+                SelectNextPoint();
+            else if (PassedTarget(targetPosition))
                 UpdateDirection();
-            }
-            
-            if (Vector2.Dot(toTarget, NextPointDirection) < 0f)
-            {
-                UpdateDirection();
-            }
+
+            _moveRequestComponent.Move(_nextPointDirection);
+        }
+
+        private Vector2 GetTargetPosition() =>
+            _bakedPoints[_index] - transform.position;
+
+        private bool ReachedTarget(Vector2 toTarget) =>
+            toTarget.sqrMagnitude <= _threshold;
+
+        private bool PassedTarget(Vector2 toTarget) =>
+            Vector2.Dot(toTarget, _nextPointDirection) < 0f;
+
+        private void SelectNextPoint()
+        {
+            _index = (_index + 1) % _bakedPoints.Count;
+            UpdateDirection();
         }
     }
 }

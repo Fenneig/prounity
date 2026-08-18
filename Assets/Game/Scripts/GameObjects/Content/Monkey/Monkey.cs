@@ -55,7 +55,7 @@ namespace Game
             _collisionComponent.OnEntered -= TouchRequest;
         }
 
-        private void SetTarget(Collider2D target) => _lookAtTargetComponent.SetTarget(target.transform);
+        private void SetTarget(GameObject target) => _lookAtTargetComponent.SetTarget(target.transform);
 
         private void UnsetTarget() => _lookAtTargetComponent.UnsetTarget();
 

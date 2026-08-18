@@ -1,35 +1,28 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(AttackRequestComponent))]
-    public abstract class WeaponBaseComponent : MonoBehaviour, AttackRequestComponent.IAction
+    public abstract class WeaponBaseComponent : MonoBehaviour, AttackRequestComponent.IAction, AttackRequestComponent.ICondition
     {
-        [SerializeField] private float _anticipationTime;
         [SerializeField] private float _cooldown;
-
+        
         private float _startAttackTime;
-        public bool IsAttacking => Time.time - (_startAttackTime + _anticipationTime) <= _cooldown;
-
+        
+        public bool CanAttack => Time.time - _startAttackTime > _cooldown;
+        
         protected virtual void Awake()
         {
             _startAttackTime = Time.time;
+            AttackRequestComponent attackRequestComponent = GetComponent<AttackRequestComponent>();
+            
+            attackRequestComponent.SetAction(this);
+            attackRequestComponent.SetCondition(this);
         }
+        
+        public virtual void Attack() => _startAttackTime = Time.time;
 
-        public void Invoke()
-        {
-            _startAttackTime = Time.time;
-            StartCoroutine(PrepareAttack());
-        }
+        void AttackRequestComponent.IAction.Invoke() => Attack();
 
-        private IEnumerator PrepareAttack()
-        {
-            yield return new WaitForSeconds(_anticipationTime);
-
-            PerformAttack();
-        }
-
-        protected abstract void PerformAttack();
+        bool AttackRequestComponent.ICondition.Evaluate() => CanAttack;
     }
 }

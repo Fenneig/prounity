@@ -11,9 +11,6 @@ namespace Game
         [SerializeField] private LayerMask _activateMask;
         [SerializeField] private float _radius = .2f;
         [SerializeField] private Collider2D _selfCollider;
-        [SerializeField] private float _cooldown;
-        
-        private float _startTime;
         
         public interface ICondition
         {
@@ -24,16 +21,13 @@ namespace Game
         
         public void SetCondition(ICondition condition) => _condition = condition;
 
-        public bool IsReady => Time.time - _startTime >= _cooldown;
-        public bool CanForce => IsReady && (_condition == null || _condition.Evaluate());
+        public bool CanForce => _condition == null || _condition.Evaluate();
         
         public void ForceAtTarget(GameObject target)
         {
             if (target == null)
                 throw new NullReferenceException($"Object {name} trying force at target with null target");
             
-            _startTime = Time.time;
-
             ApplyForce(target);
         }
         
@@ -42,15 +36,11 @@ namespace Game
             if (target == null)
                 throw new NullReferenceException($"Object {name} trying force at target with null target");
             
-            _startTime = Time.time;
-
             ApplyForce(target);
         }
 
         public void ForceAtZone()
         {
-            _startTime = Time.time;
-            
             var hits = Physics2D.OverlapCircleAll(_forceInitPoint.position, _radius, _activateMask);
             foreach (var hit in hits)
             {

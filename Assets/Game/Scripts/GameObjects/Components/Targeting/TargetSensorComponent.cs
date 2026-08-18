@@ -30,7 +30,7 @@ namespace Game
         private void OnEntered(Collider2D checkCollider)
         {
             if (IsTarget(checkCollider)) 
-                _targetComponent.SetTarget(checkCollider);
+                _targetComponent.SetTarget(checkCollider.gameObject);
         }
 
         private void OnExited(Collider2D checkCollider)

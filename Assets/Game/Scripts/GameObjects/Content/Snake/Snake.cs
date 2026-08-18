@@ -6,7 +6,8 @@ namespace Game
         MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
         ForceComponent.ICondition,
-        AttackRequestComponent.ICondition
+        AttackRequestComponent.ICondition,
+        AttackRequestComponent.IAction
     {
         private PushDamageWeapon _weapon;
         private AttackRequestComponent _attackRequestComponent;
@@ -37,7 +38,7 @@ namespace Game
 
             _forceComponent.SetCondition(this);
 
-            _attackRequestComponent.SetAction(_weapon);
+            _attackRequestComponent.SetAction(this);
             _attackRequestComponent.SetCondition(this);
         }
         
@@ -66,17 +67,20 @@ namespace Game
         bool MoveRequestComponent.ICondition.Evaluate() =>
             _healthComponent.IsAlive &&
             _targetComponent.HasTarget &&
-            _forceComponent.IsReady &&
+            _weapon.CanAttack &&
             _groundedComponent.IsGrounded;
 
         bool AttackRequestComponent.ICondition.Evaluate() =>
             _healthComponent.IsAlive &&
             _targetComponent.HasTarget &&
-            _forceComponent.IsReady &&
+            _weapon.CanAttack &&
             _groundedComponent.IsGrounded;
 
         bool ForceComponent.ICondition.Evaluate() => _healthComponent.IsAlive &&
                                                      _forceComponent.CanForce &&
                                                      _groundedComponent.IsGrounded;
+
+        void AttackRequestComponent.IAction.Invoke() => 
+            _weapon.Attack();
     }
 }

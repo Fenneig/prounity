@@ -5,12 +5,21 @@ namespace Game
 {
     public sealed class InputReader : MonoBehaviour
     {
-        [SerializeField] private Character _character;
+        [SerializeField] private GameObject _controllableObject;
         private PlayerInput _playerInput;
-
+        
+        private MoveRequestComponent _moveRequestComponent;
+        private JumpComponent _jumpComponent;
+        private IPushComponent _pushComponent;
+        private ITossComponent _tossComponent;
+        
         private void Awake()
         {
             _playerInput = new PlayerInput();
+            _moveRequestComponent = _controllableObject.GetComponent<MoveRequestComponent>();
+            _jumpComponent = _controllableObject.GetComponent<JumpComponent>();
+            _pushComponent = _controllableObject.GetComponent<IPushComponent>();
+            _tossComponent = _controllableObject.GetComponent<ITossComponent>();
         }
 
         private void OnEnable()
@@ -33,18 +42,14 @@ namespace Game
             _playerInput.Disable();
         }
         
-        //private void Update() => _character.Move(_playerInput.Ground.Move.ReadValue<Vector2>());
         private void Update()
         {
-            Debug.Assert(_character != null, "_character is null", this);
-            Debug.Assert(_playerInput != null, "_playerInput is null", this);
-            Debug.Assert(_playerInput.Ground.Move != null, "Move action is null", this);
-
             Vector2 direction = _playerInput.Ground.Move.ReadValue<Vector2>();
-            _character.Move(direction);
+            _moveRequestComponent.Move(direction);
         }
-        private void Push(InputAction.CallbackContext _) => _character.Push();
-        private void Toss(InputAction.CallbackContext _) => _character.Toss();
-        private void Jump(InputAction.CallbackContext _) => _character.Jump();
+        
+        private void Push(InputAction.CallbackContext _) => _pushComponent.Push();
+        private void Toss(InputAction.CallbackContext _) => _tossComponent.Toss();
+        private void Jump(InputAction.CallbackContext _) => _jumpComponent.Jump();
     }
 }

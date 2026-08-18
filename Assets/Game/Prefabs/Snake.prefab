@@ -409,9 +409,8 @@ MonoBehaviour:
   _activateMask:
     serializedVersion: 2
     m_Bits: 512
-  _radius: 0.4
+  _radius: 0.6
   _selfCollider: {fileID: 5141366192756041615}
-  _cooldown: 0.3
 --- !u!114 &3392344510495454970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,13 +448,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7fb1aaa5bc46f5841bb0ef9554ac0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PushDamageWeapon
-  _anticipationTime: 0.15
   _cooldown: 0.3
   _attackPoint: {fileID: 4613351096555768162}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 512
-  _radius: 0.4
+  _radius: 0.6
 --- !u!1 &7657161599582532624
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +466,7 @@ GameObject:
   - component: {fileID: 630110330272591730}
   - component: {fileID: 8573443808402779642}
   - component: {fileID: 3817749827470611319}
+  - component: {fileID: 1723845158819081639}
   m_Layer: 0
   m_Name: <View>
   m_TagString: Untagged
@@ -547,6 +546,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.MoveComponentView
   _moveRequestComponent: {fileID: 4525865627155480056}
+  _animator: {fileID: 3241670944889348004}
+--- !u!114 &1723845158819081639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657161599582532624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 677d6c22b71b4c7dae9282994be17e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GravityComponentView
+  _groundedComponent: {fileID: 7813729211210155111}
+  _rigidbody: {fileID: 1963976196817166939}
   _animator: {fileID: 3241670944889348004}
 --- !u!1001 &7455896218475742918
 PrefabInstance:

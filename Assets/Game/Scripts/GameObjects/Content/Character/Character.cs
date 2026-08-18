@@ -6,17 +6,21 @@ namespace Game
         MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
         JumpComponent.IAction,
-        JumpComponent.ICondition
+        JumpComponent.ICondition,
+        IPushComponent,
+        ITossComponent
     {
-        private DualWeaponComponent _dualWeaponComponent;
+        [SerializeField] private GameObject _pushWeapon;
+        [SerializeField] private GameObject _tossWeapon;
+
         private HealthComponent _health;
-        
+
         private MoveRequestComponent _moveRequestComponent;
         private MoveRigidbodyComponent _moveComponent;
-        
+
         private JumpComponent _jumpComponent;
         private GroundedComponent _groundedComponent;
-        
+
         private FlipComponent _flipComponent;
 
         private void Awake()
@@ -24,17 +28,16 @@ namespace Game
             _health = GetComponent<HealthComponent>();
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
             _moveComponent = GetComponent<MoveRigidbodyComponent>();
-            
+
             _groundedComponent = GetComponent<GroundedComponent>();
-            
+
             _jumpComponent = GetComponent<JumpComponent>();
-                            
+
             _flipComponent = GetComponent<FlipComponent>();
-            _dualWeaponComponent = GetComponent<DualWeaponComponent>();
 
             _jumpComponent.SetAction(this);
             _jumpComponent.SetCondition(this);
-            
+
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
         }
@@ -43,13 +46,29 @@ namespace Game
 
         private void OnDisable() => _health.OnDied -= OnDied;
 
-        public void Move(Vector2 readValue) => _moveRequestComponent.Move(readValue);
+        public void Push()
+        {
+            if (!CanAttack())
+                return;
 
-        public void Jump() => _jumpComponent.Jump();
+            StartCoroutine(_pushWeapon.GetComponent<AttackComponentView>().Attack(() =>
+                _pushWeapon.GetComponent<AttackRequestComponent>().Attack()));
+        }
 
-        public void Push() => _dualWeaponComponent.Push();
+        public void Toss()
+        {
+            if (!CanAttack())
+                return;
 
-        public void Toss() => _dualWeaponComponent.Toss();
+            StartCoroutine(_tossWeapon.GetComponent<AttackComponentView>().Attack(() => 
+                _tossWeapon.GetComponent<AttackRequestComponent>().Attack()));
+        }
+
+        private bool CanAttack() => _health.IsAlive &&
+                                  !_pushWeapon.GetComponent<AttackComponentView>().IsPlaying &&
+                                  !_tossWeapon.GetComponent<AttackComponentView>().IsPlaying &&
+                                  _pushWeapon.GetComponent<WeaponBaseComponent>().CanAttack &&
+                                  _tossWeapon.GetComponent<WeaponBaseComponent>().CanAttack;
 
         private void OnDied() => GetComponent<Rigidbody2D>().simulated = false;
 
@@ -62,7 +81,7 @@ namespace Game
         bool MoveRequestComponent.ICondition.Evaluate() => _health.IsAlive;
 
         void JumpComponent.IAction.Invoke() => _jumpComponent.Jump();
-        
+
         bool JumpComponent.ICondition.Evaluate() => _groundedComponent.IsGrounded && _health.IsAlive;
     }
 }

@@ -11,7 +11,6 @@ namespace Game
         [SerializeField] private float _touchDelay;
         private MoveRequestComponent _moveRequestComponent;
         private MoveRigidbodyComponent _moveComponent;
-        private PatrolComponent _patrolComponent;
         private FlipComponent _flipComponent;
         private CollisionComponent _collisionComponent;
         private TouchRequestComponent _touchRequestComponent;
@@ -26,7 +25,6 @@ namespace Game
         {
             _moveRequestComponent = GetComponentInChildren<MoveRequestComponent>();
             _moveComponent = GetComponentInChildren<MoveRigidbodyComponent>();
-            _patrolComponent = GetComponentInChildren<PatrolComponent>();
             _flipComponent = GetComponentInChildren<FlipComponent>();
             _collisionComponent = GetComponentInChildren<CollisionComponent>();
             _touchRequestComponent = GetComponentInChildren<TouchRequestComponent>();
@@ -81,7 +79,5 @@ namespace Game
             _healthComponent.IsAlive && 
             _groundedComponent.IsGrounded && 
             Time.time - _touchedTime >= _touchDelay;
-
-        private void FixedUpdate() => _moveRequestComponent.Move(_patrolComponent.NextPointDirection);
     }
 }

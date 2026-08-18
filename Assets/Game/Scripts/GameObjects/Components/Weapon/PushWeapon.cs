@@ -10,11 +10,14 @@ namespace Game
         protected override void Awake()
         {
             base.Awake();
+            
             _forceComponent = GetComponent<ForceComponent>();
         }
 
-        protected override void PerformAttack()
+        public override void Attack()
         {
+            base.Attack();
+            
             _forceComponent.ForceAtZone();
         }
     }

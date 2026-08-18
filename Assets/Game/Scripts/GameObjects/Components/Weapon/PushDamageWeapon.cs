@@ -20,8 +20,10 @@ namespace Game
             _dealDamageComponent = GetComponent<DealDamageComponent>();
         }
 
-        protected override void PerformAttack()
+        public override void Attack()
         {
+            base.Attack();
+            
             var hits = Physics2D.OverlapCircleAll(_attackPoint.position, _radius, _enemyMask);
             foreach (var hit in hits)
             {

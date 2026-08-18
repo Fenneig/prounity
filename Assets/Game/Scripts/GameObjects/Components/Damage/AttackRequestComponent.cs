@@ -23,9 +23,7 @@ namespace Game
         private bool _required;
 
         public void SetAction(IAction action) => _action = action;
-        
         public void SetCondition(ICondition condition) => _condition = condition;
-        
         public void Attack() => _required = true;
         
         private void FixedUpdate()
