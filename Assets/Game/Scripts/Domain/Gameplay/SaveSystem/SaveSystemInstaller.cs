@@ -4,6 +4,10 @@ namespace Game.Gameplay
 {
     public class SaveSystemInstaller : MonoInstaller
     {
+        //Для онлайн проекта ключ лучше хранить на сервере, но для локального и так достаточно 
+        private const string SAVE_HMAC_KEY =
+            "3vY8KqL2nW7xR5mJ9cF1uH6pT0aZ4sD8eG2bN7wQ5kI=";
+        
         public override void InstallBindings()
         {
             Container
@@ -18,10 +22,12 @@ namespace Game.Gameplay
             
             Container
                 .Bind<IHashProvider>()
-                .To<Sha256Provider>().AsSingle();
+                .To<HmacSha256Provider>()
+                .AsSingle()
+                .WithArguments(SAVE_HMAC_KEY);
 
             Container
-                .Bind<VersionController>()
+                .BindInterfacesAndSelfTo<VersionProvider>()
                 .FromNew()
                 .AsSingle();
 

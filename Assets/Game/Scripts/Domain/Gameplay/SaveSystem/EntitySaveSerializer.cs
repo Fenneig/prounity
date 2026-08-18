@@ -3,6 +3,7 @@ using System.IO;
 using Game.Gameplay.Extensions;
 using Modules.Entities;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Game.Gameplay
 {
@@ -10,8 +11,6 @@ namespace Game.Gameplay
     {
         private readonly EntityWorld _entityWorld;
         private readonly ISaveSerializer _saveSerializer;
-
-        private readonly List<Entity> _loadedEntities = new();
 
         public EntitySaveSerializer(EntityWorld entityWorld, ISaveSerializer saveSerializer)
         {
@@ -39,10 +38,11 @@ namespace Game.Gameplay
 
         public void Deserialize(BinaryReader reader)
         {
-            _loadedEntities.Clear();
-            LoadEntityWorld(reader);
-            RemoveExtraEntities();
+            List<Entity> loadedEntities = ListPool<Entity>.Get();
+            LoadEntityWorld(reader, loadedEntities);
+            RemoveExtraEntities(loadedEntities);
             LoadEntityData(reader);
+            ListPool<Entity>.Release(loadedEntities);
         }
 
         private void SaveEntityHeader(BinaryWriter writer, Entity entity)
@@ -64,7 +64,7 @@ namespace Game.Gameplay
                 component.Serialize(_saveSerializer, writer);
         }
 
-        private void LoadEntityWorld(BinaryReader reader)
+        private void LoadEntityWorld(BinaryReader reader, List<Entity> loadedEntities)
         {
             int entitiesCount = reader.ReadInt32();
 
@@ -81,15 +81,15 @@ namespace Game.Gameplay
                 else
                     entity = _entityWorld.Spawn(name, position, rotation, id);
 
-                _loadedEntities.Add(entity);
+                loadedEntities.Add(entity);
             }
         }
 
-        private void RemoveExtraEntities()
+        private void RemoveExtraEntities(List<Entity> loadedEntities)
         {
             List<Entity> entitiesToDestroy = new List<Entity>();
             foreach (var entity in _entityWorld.GetAll())
-                if (!_loadedEntities.Contains(entity))
+                if (!loadedEntities.Contains(entity))
                     entitiesToDestroy.Add(entity);
 
             foreach (var entity in entitiesToDestroy)

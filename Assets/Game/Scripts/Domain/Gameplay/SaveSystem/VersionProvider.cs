@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Game.Gameplay
 {
-    public sealed class VersionController
+    public sealed class VersionProvider : IInitializable
     {
         private const string SAVE_VERSION_PREFS_KEY = "Version";
 
-        private int _currentVersion = PlayerPrefs.GetInt(SAVE_VERSION_PREFS_KEY, 0);
+        private int _currentVersion;
 
         public int Current => _currentVersion;
 
@@ -18,5 +19,8 @@ namespace Game.Gameplay
             PlayerPrefs.SetInt(SAVE_VERSION_PREFS_KEY, version);
             PlayerPrefs.Save();
         }
+
+        public void Initialize() => 
+            _currentVersion = PlayerPrefs.GetInt(SAVE_VERSION_PREFS_KEY, 0);
     }
 }

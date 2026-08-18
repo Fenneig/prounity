@@ -12,32 +12,30 @@ namespace Game.Gameplay
         private readonly EntitySaveSerializer _entitySaveSerializer;
         private readonly IGameRepository _gameRepository;
         private readonly IHashProvider _hashProvider;
-        private readonly VersionController _versionController;
-        private readonly MemoryStream _stream;
-        private readonly BinaryWriter _writer;
-        private BinaryReader _reader;
+        private readonly VersionProvider _versionProvider;
 
         private const int DEFAULT_CAPACITY = 4096;
         private const int HASH_SIZE = 32;
         
-        public SaveManager(EntitySaveSerializer entitySaveSerializer, IGameRepository gameRepository, IHashProvider hashProvider, VersionController versionController)
+        public SaveManager(EntitySaveSerializer entitySaveSerializer, IGameRepository gameRepository, IHashProvider hashProvider, VersionProvider versionProvider)
         {
             _entitySaveSerializer = entitySaveSerializer;
             _gameRepository = gameRepository;
             _hashProvider = hashProvider;
-            _versionController = versionController;
-            _stream = new MemoryStream(DEFAULT_CAPACITY);
-            _writer = new BinaryWriter(_stream, Encoding.UTF8, true);
+            _versionProvider = versionProvider;
         }   
 
         public async UniTask<(bool, int)> Save(CancellationToken ct = default)
         {
-            _stream.Position = 0;
-            _stream.SetLength(0);
+            using var stream = new MemoryStream(DEFAULT_CAPACITY);
+            await using var writer = new BinaryWriter(stream, Encoding.UTF8, true);
+                
+            stream.Position = 0;
+            stream.SetLength(0);
             
-            _entitySaveSerializer.Serialize(_writer);
+            _entitySaveSerializer.Serialize(writer);
 
-            byte[] data = _stream.ToArray();
+            byte[] data = stream.ToArray();
 
             byte[] hash = _hashProvider.Compute(data);
 
@@ -46,12 +44,12 @@ namespace Game.Gameplay
             Buffer.BlockCopy(data, 0, fileData, 0, data.Length);
             Buffer.BlockCopy(hash, 0, fileData, data.Length, HASH_SIZE);
 
-            int version = _versionController.Next;
+            int version = _versionProvider.Next;
             
             (bool success, int savedVersion) = await _gameRepository.Save(fileData, version, ct);
 
             if (success) 
-                _versionController.SetCurrent(savedVersion);
+                _versionProvider.SetCurrent(savedVersion);
             
             return (success, savedVersion);
         }
@@ -61,13 +59,9 @@ namespace Game.Gameplay
             int actualVersion;
 
             if (string.IsNullOrWhiteSpace(version))
-            {
-                actualVersion = _versionController.Current;
-            }
+                actualVersion = _versionProvider.Current;
             else if (!int.TryParse(version, out actualVersion))
-            {
                 return (false, -1);
-            }
 
             (bool success, byte[] bytes) =
                 await _gameRepository.Load(actualVersion, ct);
