@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7fb1aaa5bc46f5841bb0ef9554ac0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PushDamageWeapon
-  _cooldown: 0.3
+  _cooldown: 1
   _attackPoint: {fileID: 4613351096555768162}
   _enemyMask:
     serializedVersion: 2

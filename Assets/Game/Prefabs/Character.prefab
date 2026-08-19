@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Attack.AttackComponentView
   _animator: {fileID: 5219259647563851570}
   _animatorKey: BlowUp
-  _animationAnticipation: 0.22
   _vfx: {fileID: 7825429286214371121}
   _audioSource: {fileID: 8589338179893557342}
   _audioClip: {fileID: 8300000, guid: a2fb8d4706a16468592a6e50aa24de65, type: 3}
@@ -259,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d400bfcab4a4b8ca5ef63c637d39119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameObjects.Content.Character.CharacterController
+  _attackAnticipation: 0.22
   _pushWeapon: {fileID: 6638340939541105720}
   _tossWeapon: {fileID: 2860556422706071794}
 --- !u!114 &8483445791109950397
@@ -637,7 +637,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Attack.AttackComponentView
   _animator: {fileID: 5219259647563851570}
   _animatorKey: BlowForward
-  _animationAnticipation: 0.22
   _vfx: {fileID: 6138593199860099477}
   _audioSource: {fileID: 8589338179893557342}
   _audioClip: {fileID: 8300000, guid: 3dbd84c2bfae847229cd1013f68c0da7, type: 3}

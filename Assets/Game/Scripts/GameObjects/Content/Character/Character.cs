@@ -10,6 +10,7 @@ namespace Game
         IPushComponent,
         ITossComponent
     {
+        [SerializeField] private float _attackAnticipation;
         [SerializeField] private GameObject _pushWeapon;
         [SerializeField] private GameObject _tossWeapon;
 
@@ -51,8 +52,8 @@ namespace Game
             if (!CanAttack())
                 return;
 
-            StartCoroutine(_pushWeapon.GetComponent<AttackComponentView>().Attack(() =>
-                _pushWeapon.GetComponent<AttackRequestComponent>().Attack()));
+            StartCoroutine(_pushWeapon.GetComponent<AttackComponentView>().Attack(_attackAnticipation,
+                () => _pushWeapon.GetComponent<AttackRequestComponent>().Attack()));
         }
 
         public void Toss()
@@ -60,8 +61,8 @@ namespace Game
             if (!CanAttack())
                 return;
 
-            StartCoroutine(_tossWeapon.GetComponent<AttackComponentView>().Attack(() => 
-                _tossWeapon.GetComponent<AttackRequestComponent>().Attack()));
+            StartCoroutine(_tossWeapon.GetComponent<AttackComponentView>().Attack(_attackAnticipation,
+                () => _tossWeapon.GetComponent<AttackRequestComponent>().Attack()));
         }
 
         private bool CanAttack() => _health.IsAlive &&
