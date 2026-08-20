@@ -9,9 +9,11 @@ namespace Game.Entities
         private TriggerEvents _triggerEvents;
         private IValue<int> _damage;
         private IAction _destroyAction;
+        private IVariable<IEntity> _owner;
 
         public void Init(IEntity entity)
         {
+            _owner = entity.GetOwner();
             _triggerEvents = entity.GetTrigger();
             _damage = entity.GetDamage();
             _destroyAction = entity.GetDestroyAction();
@@ -26,8 +28,9 @@ namespace Game.Entities
 
         private void OnTriggerEnter(Collider other)
         {
-            if (CombatUseCase.DealDamage(other, _damage.Value)) 
-                _destroyAction?.Invoke();
+            CombatUseCase.DealDamage(other, _damage.Value, _owner.Value);
+            
+            _destroyAction?.Invoke();
         }
     }
 }

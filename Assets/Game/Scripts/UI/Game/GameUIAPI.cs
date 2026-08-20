@@ -20,10 +20,11 @@ namespace Game.UI
 	public static class GameUIAPI
 	{
 		///Values
-		public static readonly int HealthView; // ValueKey<IGameUI,TMP_Text>
-		public static readonly int AmmoView; // ValueKey<IGameUI,TMP_Text>
+		public static readonly int HealthView; // StatView
+		public static readonly int AmmoView; // StatView
 		public static readonly int AttackJoystick; // IValue<Joystick>
 		public static readonly int MoveJoystick; // IValue<Joystick>
+		public static readonly int ScoreView; // ScoreView
 
 		static GameUIAPI()
 		{
@@ -32,6 +33,7 @@ namespace Game.UI
 			AmmoView = NameToId(nameof(AmmoView));
 			AttackJoystick = NameToId(nameof(AttackJoystick));
 			MoveJoystick = NameToId(nameof(MoveJoystick));
+			ScoreView = NameToId(nameof(ScoreView));
 		}
 
 
@@ -40,13 +42,13 @@ namespace Game.UI
 		#region HealthView
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static ValueKey<IGameUI,TMP_Text> GetHealthView(this IGameUI entity) => entity.GetValue<ValueKey<IGameUI,TMP_Text>>(HealthView);
+		public static StatView GetHealthView(this IGameUI entity) => entity.GetValue<StatView>(HealthView);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetHealthView(this IGameUI entity, out ValueKey<IGameUI,TMP_Text> value) => entity.TryGetValue(HealthView, out value);
+		public static bool TryGetHealthView(this IGameUI entity, out StatView value) => entity.TryGetValue(HealthView, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddHealthView(this IGameUI entity, ValueKey<IGameUI,TMP_Text> value) => entity.AddValue(HealthView, value);
+		public static void AddHealthView(this IGameUI entity, StatView value) => entity.AddValue(HealthView, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasHealthView(this IGameUI entity) => entity.HasValue(HealthView);
@@ -55,20 +57,20 @@ namespace Game.UI
 		public static bool DelHealthView(this IGameUI entity) => entity.DelValue(HealthView);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetHealthView(this IGameUI entity, ValueKey<IGameUI,TMP_Text> value) => entity.SetValue(HealthView, value);
+		public static void SetHealthView(this IGameUI entity, StatView value) => entity.SetValue(HealthView, value);
 
 		#endregion
 
 		#region AmmoView
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static ValueKey<IGameUI,TMP_Text> GetAmmoView(this IGameUI entity) => entity.GetValue<ValueKey<IGameUI,TMP_Text>>(AmmoView);
+		public static StatView GetAmmoView(this IGameUI entity) => entity.GetValue<StatView>(AmmoView);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetAmmoView(this IGameUI entity, out ValueKey<IGameUI,TMP_Text> value) => entity.TryGetValue(AmmoView, out value);
+		public static bool TryGetAmmoView(this IGameUI entity, out StatView value) => entity.TryGetValue(AmmoView, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddAmmoView(this IGameUI entity, ValueKey<IGameUI,TMP_Text> value) => entity.AddValue(AmmoView, value);
+		public static void AddAmmoView(this IGameUI entity, StatView value) => entity.AddValue(AmmoView, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasAmmoView(this IGameUI entity) => entity.HasValue(AmmoView);
@@ -77,7 +79,7 @@ namespace Game.UI
 		public static bool DelAmmoView(this IGameUI entity) => entity.DelValue(AmmoView);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetAmmoView(this IGameUI entity, ValueKey<IGameUI,TMP_Text> value) => entity.SetValue(AmmoView, value);
+		public static void SetAmmoView(this IGameUI entity, StatView value) => entity.SetValue(AmmoView, value);
 
 		#endregion
 
@@ -122,6 +124,28 @@ namespace Game.UI
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetMoveJoystick(this IGameUI entity, IValue<Joystick> value) => entity.SetValue(MoveJoystick, value);
+
+		#endregion
+
+		#region ScoreView
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static ScoreView GetScoreView(this IGameUI entity) => entity.GetValue<ScoreView>(ScoreView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetScoreView(this IGameUI entity, out ScoreView value) => entity.TryGetValue(ScoreView, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddScoreView(this IGameUI entity, ScoreView value) => entity.AddValue(ScoreView, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasScoreView(this IGameUI entity) => entity.HasValue(ScoreView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelScoreView(this IGameUI entity) => entity.DelValue(ScoreView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetScoreView(this IGameUI entity, ScoreView value) => entity.SetValue(ScoreView, value);
 
 		#endregion
     }

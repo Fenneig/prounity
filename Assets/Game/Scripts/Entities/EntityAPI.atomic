@@ -61,12 +61,18 @@ values:
 - DestroyAction: IAction
 - RespawnAction: ICompositeAction
 
+- AnimationEvents: IValue<AnimationEvents>
 - Animator: Animator
 - AudioSource: AudioSource
 - ParticleSystem: ParticleSystem
 - TrailRender: TrailRenderer
 
 - Target: IVariable<IEntity>
+- Owner: IVariable<IEntity>
+- Score: IReactiveVariable<int>
+- BloodParticle: ParticleSystem
+- DeadParticle: ParticleSystem
+
 - MoveAudioClips: IValue<List<AudioClip>>
 - PainAudioClips: IValue<List<AudioClip>>
 - DeathAudioClips: IValue<List<AudioClip>>
@@ -81,4 +87,6 @@ values:
 - FireSoundRequest: IRequest
 - AttackSoundRequest: IRequest
 - AttackSoundCommand: ICommand
+- ShoutSoundRequest: IRequest
+- ShoutSoundCommand: ICommand
 - AttackAnticipationSoundRequest: IRequest

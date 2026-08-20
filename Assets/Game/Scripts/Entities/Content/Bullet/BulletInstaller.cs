@@ -11,8 +11,6 @@ namespace Game.Entities
         [SerializeField] private TriggerEvents _triggerEvents;
         [SerializeField] private LifetimeInstaller _lifetimeInstaller;
         [SerializeField] private Const<int> _damage;
-        [SerializeField] private Const<float> _moveSpeed;
-        
         
         public override void Install(IEntity entity)
         {
@@ -20,10 +18,11 @@ namespace Game.Entities
             _moveInstaller.Install(entity);
             _lifetimeInstaller.Install(entity);
             
+            entity.AddOwner(new Variable<IEntity>(null));
+            
             entity.AddTrigger(_triggerEvents);
             entity.AddDamage(_damage);
             entity.WhenFixedTick(deltaTime => entity.MoveStep(entity.GetRotation().Value * Vector3.forward, deltaTime));
-            entity.AddMoveSpeed(_moveSpeed);
             entity.AddDestroyAction(new InlineAction(() => GameContext.Instance.DespawnBullet(entity)));
             entity.AddRespawnAction(new CompositeAction());
             entity.GetRespawnAction().Add(() => entity.GetLifetime().ResetTime());

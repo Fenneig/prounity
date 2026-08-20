@@ -19,9 +19,16 @@ namespace Game.Entities
             return direction.normalized;
         }
         
-        public static bool IsMoving(this IEntity entity) => Time.time - entity.GetMoveTime().Value < entity.GetMoveDuration().Value;
+        public static bool IsMoving(this IEntity entity) => 
+            Time.time - entity.GetMoveTime().Value < entity.GetMoveDuration().Value;
         
-        public static bool IsReachTarget(this IEntity entity, float distance) =>
-            (entity.GetPosition().Value - entity.GetTarget().Value.GetPosition().Value).magnitude < distance;
+        public static bool IsReachTarget(this IEntity entity, float range)
+        {
+            if (entity.GetTarget().Value == null)
+                return false;
+
+            var distanceToTarget = (entity.GetPosition().Value - entity.GetTarget().Value.GetPosition().Value).magnitude;
+            return distanceToTarget < range;
+        }
     }
 }

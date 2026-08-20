@@ -27431,6 +27431,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
+--- !u!114 &2928555308454414447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3537857364712962824, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
+  m_PrefabInstance: {fileID: 2928555308454414446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3a0f7307c54ea892c246e2b33e6096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.ScoreView
 --- !u!114 &3368907948363335244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27830,6 +27841,10 @@ MonoBehaviour:
       value: {fileID: 7919524849257179007}
     _moveJoystick:
       value: {fileID: 757640612756630601}
+  _playerStatsInstaller:
+    _ammoView: {fileID: 7160444056652517395}
+    _healthView: {fileID: 7160444056652517396}
+  _scoreView: {fileID: 2928555308454414447}
 --- !u!114 &5764159610076527036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27852,8 +27867,8 @@ MonoBehaviour:
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
+  initialTagCapacity: 0
+  initialValueCapacity: 2
   initialBehaviourCapacity: 0
   dontDestroyOnLoad: 0
 --- !u!1001 &7160444056652517393

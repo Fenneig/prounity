@@ -681,7 +681,7 @@ MonoBehaviour:
     _duration: 0.2
     _time: 0
   _ammo:
-    value: 10
+    value: 8
   _firePoint: {fileID: 2679439196154746750}
   _bulletPrefab: {fileID: 2192448848155908159, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
 --- !u!1 &3618244528254723884
@@ -1047,9 +1047,12 @@ MonoBehaviour:
   _audioSource:
     active: 1
     value: {fileID: 2458806991490565756}
+  _minPitch: 0.9
+  _maxPitch: 1.1
   _particleSystem:
     active: 1
     value: {fileID: 5064070444613506116}
+  _hasAmmo: 1
 --- !u!1 &5598587692611257690
 GameObject:
   m_ObjectHideFlags: 0

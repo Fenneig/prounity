@@ -15,7 +15,8 @@ tags:
 
 
 values:
-- HealthView: ValueKey<IGameUI, TMP_Text>
-- AmmoView: ValueKey<IGameUI, TMP_Text>
+- HealthView: StatView
+- AmmoView: StatView
 - AttackJoystick: IValue<Joystick>
 - MoveJoystick: IValue<Joystick>
+- ScoreView: ScoreView

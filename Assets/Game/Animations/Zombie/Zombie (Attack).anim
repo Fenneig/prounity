@@ -80788,15 +80788,15 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.06666667
-    functionName: ReceiveAttackAnticipationEvent
-    data: 
+    functionName: ReceiveEvent
+    data: StartAttack
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.0333333
-    functionName: ReceiveAttackEvent
-    data: 
+    functionName: ReceiveEvent
+    data: Attack
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

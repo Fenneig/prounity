@@ -30,5 +30,6 @@ namespace Game.Entities
             target.GetHealth().Value < target.GetMaxHealth().Value;
 
         public static bool IsHealthExists(this IEntity entity) => entity.GetHealth().Value > 0;
+        public static bool IsDead(this IEntity entity) => entity.GetHealth().Value <= 0;
     }
 }

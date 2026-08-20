@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
@@ -10,9 +9,7 @@ namespace Game.Entities
     public sealed class MoveInstaller : IEntityInstaller
     {
         [SerializeField] private Const<float> _moveDuration;
-        
-        [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private List<AudioClip> _audioClips;
+        [SerializeField] private Const<float> _moveSpeed;
         
         public void Install(IEntity entity)
         {
@@ -24,6 +21,8 @@ namespace Game.Entities
             entity.AddMoveTime(new Variable<float>(-_moveDuration));
             
             entity.AddBehaviour(new MoveBehaviour());
+            
+            entity.AddMoveSpeed(_moveSpeed);
         }
     }
 }

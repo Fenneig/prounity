@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4331357746939670410}
+  - component: {fileID: 4943991533263059297}
   m_Layer: 11
   m_Name: <Visual>
   m_TagString: Untagged
@@ -32,6 +33,24 @@ Transform:
   - {fileID: 8957502909252199004}
   m_Father: {fileID: 6979400397003836636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4943991533263059297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2349997754461001400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951ae1b3e14f4db4a65c663168aa6da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.PickUpViewInstaller
+  _particleSystem:
+    active: 1
+    value: {fileID: 4254272687195834861}
+  _audioSource:
+    active: 1
+    value: {fileID: 411501554367385950}
 --- !u!1 &2868507734451175874
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +257,7 @@ MonoBehaviour:
   scriptableInstallers: []
   sceneInstallers:
   - {fileID: 7748228302230561538}
+  - {fileID: 4943991533263059297}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
@@ -256,6 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b921941c76d749cb9c6555c9fe06b37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.AmmoPickUpInstaller
+  _visual: {fileID: 2349997754461001400}
+  _collider: {fileID: 3332313712654455240}
   _transformInstaller:
     _transform: {fileID: 6979400397003836636}
   _amount: 10
@@ -360,6 +382,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65cb20f8c841b431b82ba08ed45644e1, type: 3}
+--- !u!198 &4254272687195834861 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6591815806074881312, guid: 65cb20f8c841b431b82ba08ed45644e1, type: 3}
+  m_PrefabInstance: {fileID: 6949304866171931853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4740266423122820531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2429741230345695614, guid: 65cb20f8c841b431b82ba08ed45644e1, type: 3}

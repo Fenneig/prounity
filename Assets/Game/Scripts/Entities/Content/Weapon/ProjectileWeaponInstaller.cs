@@ -13,10 +13,11 @@ namespace Game.Entities
         public override void Install(IEntity entity)
         {
             base.Install(entity);
-            
+
             entity.GetFireCommand()
                 .AddCondition(() => entity.GetAmmo().Value > 0)
-                .AddAction(() => GameContext.Instance.SpawnBullet(_firePoint.position, _firePoint.rotation));
+                .AddAction(() => GameContext.Instance.SpawnBullet(_firePoint.position, _firePoint.rotation, entity.GetOwner().Value))
+                .AddAction(() => entity.GetAmmo().Value--);
                 
             entity.AddAmmo(_ammo);
         }

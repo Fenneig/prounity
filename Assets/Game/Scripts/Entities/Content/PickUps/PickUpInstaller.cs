@@ -5,6 +5,9 @@ namespace Game.Entities
 {
     public class PickUpInstaller : SceneEntityInstaller
     {
+        [SerializeField] private GameObject _visual;
+        [SerializeField] private GameObject _collider;
+        
         [SerializeField] private TransformInstaller _transformInstaller;
         [SerializeField] private InteractableInstaller _interactableInstaller;
         
@@ -12,6 +15,10 @@ namespace Game.Entities
         {
             _transformInstaller.Install(entity);
             _interactableInstaller.Install(entity);
+            
+            entity.GetInteractCommand()
+                .AddAction(_ => _collider.GetComponent<Collider>().enabled = false)
+                .AddAction(_ => _visual.SetActive(false));
         }
     }
 }

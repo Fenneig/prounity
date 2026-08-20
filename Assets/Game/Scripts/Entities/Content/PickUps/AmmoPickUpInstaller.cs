@@ -13,11 +13,7 @@ namespace Game.Entities
             base.Install(entity);
             entity.GetInteractCommand()
                 .AddCondition(target => target.HasCharacterTag())
-                .AddAction(target =>
-            {
-                target.CollectAmmo(_amount);
-                Destroy(gameObject);
-            });
+                .AddAction(target => target.CollectAmmo(_amount));
         }
     }
 }

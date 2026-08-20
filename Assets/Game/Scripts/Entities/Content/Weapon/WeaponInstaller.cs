@@ -13,6 +13,7 @@ namespace Game.Entities
         public override void Install(IEntity entity)
         {
             _fireInstaller.Install(entity);
+            entity.AddOwner(new Variable<IEntity>(null));
 
             entity.GetFireCommand()
                 .AddCondition(() => entity.GetFireAnticipation().IsCompleted())

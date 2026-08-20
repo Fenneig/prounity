@@ -54,11 +54,16 @@ namespace Game.Entities
 		public static readonly int Trigger; // TriggerEvents
 		public static readonly int DestroyAction; // IAction
 		public static readonly int RespawnAction; // ICompositeAction
+		public static readonly int AnimationEvents; // IValue<AnimationEvents>
 		public static readonly int Animator; // Animator
 		public static readonly int AudioSource; // AudioSource
 		public static readonly int ParticleSystem; // ParticleSystem
 		public static readonly int TrailRender; // TrailRenderer
 		public static readonly int Target; // IVariable<IEntity>
+		public static readonly int Owner; // IVariable<IEntity>
+		public static readonly int Score; // IReactiveVariable<int>
+		public static readonly int BloodParticle; // ParticleSystem
+		public static readonly int DeadParticle; // ParticleSystem
 		public static readonly int MoveAudioClips; // IValue<List<AudioClip>>
 		public static readonly int PainAudioClips; // IValue<List<AudioClip>>
 		public static readonly int DeathAudioClips; // IValue<List<AudioClip>>
@@ -71,6 +76,8 @@ namespace Game.Entities
 		public static readonly int FireSoundRequest; // IRequest
 		public static readonly int AttackSoundRequest; // IRequest
 		public static readonly int AttackSoundCommand; // ICommand
+		public static readonly int ShoutSoundRequest; // IRequest
+		public static readonly int ShoutSoundCommand; // ICommand
 		public static readonly int AttackAnticipationSoundRequest; // IRequest
 
 		static EntityAPI()
@@ -108,11 +115,16 @@ namespace Game.Entities
 			Trigger = NameToId(nameof(Trigger));
 			DestroyAction = NameToId(nameof(DestroyAction));
 			RespawnAction = NameToId(nameof(RespawnAction));
+			AnimationEvents = NameToId(nameof(AnimationEvents));
 			Animator = NameToId(nameof(Animator));
 			AudioSource = NameToId(nameof(AudioSource));
 			ParticleSystem = NameToId(nameof(ParticleSystem));
 			TrailRender = NameToId(nameof(TrailRender));
 			Target = NameToId(nameof(Target));
+			Owner = NameToId(nameof(Owner));
+			Score = NameToId(nameof(Score));
+			BloodParticle = NameToId(nameof(BloodParticle));
+			DeadParticle = NameToId(nameof(DeadParticle));
 			MoveAudioClips = NameToId(nameof(MoveAudioClips));
 			PainAudioClips = NameToId(nameof(PainAudioClips));
 			DeathAudioClips = NameToId(nameof(DeathAudioClips));
@@ -125,6 +137,8 @@ namespace Game.Entities
 			FireSoundRequest = NameToId(nameof(FireSoundRequest));
 			AttackSoundRequest = NameToId(nameof(AttackSoundRequest));
 			AttackSoundCommand = NameToId(nameof(AttackSoundCommand));
+			ShoutSoundRequest = NameToId(nameof(ShoutSoundRequest));
+			ShoutSoundCommand = NameToId(nameof(ShoutSoundCommand));
 			AttackAnticipationSoundRequest = NameToId(nameof(AttackAnticipationSoundRequest));
 		}
 
@@ -758,6 +772,28 @@ namespace Game.Entities
 
 		#endregion
 
+		#region AnimationEvents
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IValue<AnimationEvents> GetAnimationEvents(this IEntity entity) => entity.GetValue<IValue<AnimationEvents>>(AnimationEvents);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetAnimationEvents(this IEntity entity, out IValue<AnimationEvents> value) => entity.TryGetValue(AnimationEvents, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddAnimationEvents(this IEntity entity, IValue<AnimationEvents> value) => entity.AddValue(AnimationEvents, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasAnimationEvents(this IEntity entity) => entity.HasValue(AnimationEvents);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelAnimationEvents(this IEntity entity) => entity.DelValue(AnimationEvents);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetAnimationEvents(this IEntity entity, IValue<AnimationEvents> value) => entity.SetValue(AnimationEvents, value);
+
+		#endregion
+
 		#region Animator
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -865,6 +901,94 @@ namespace Game.Entities
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetTarget(this IEntity entity, IVariable<IEntity> value) => entity.SetValue(Target, value);
+
+		#endregion
+
+		#region Owner
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IVariable<IEntity> GetOwner(this IEntity entity) => entity.GetValue<IVariable<IEntity>>(Owner);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetOwner(this IEntity entity, out IVariable<IEntity> value) => entity.TryGetValue(Owner, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddOwner(this IEntity entity, IVariable<IEntity> value) => entity.AddValue(Owner, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasOwner(this IEntity entity) => entity.HasValue(Owner);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelOwner(this IEntity entity) => entity.DelValue(Owner);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetOwner(this IEntity entity, IVariable<IEntity> value) => entity.SetValue(Owner, value);
+
+		#endregion
+
+		#region Score
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IReactiveVariable<int> GetScore(this IEntity entity) => entity.GetValue<IReactiveVariable<int>>(Score);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetScore(this IEntity entity, out IReactiveVariable<int> value) => entity.TryGetValue(Score, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddScore(this IEntity entity, IReactiveVariable<int> value) => entity.AddValue(Score, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasScore(this IEntity entity) => entity.HasValue(Score);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelScore(this IEntity entity) => entity.DelValue(Score);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetScore(this IEntity entity, IReactiveVariable<int> value) => entity.SetValue(Score, value);
+
+		#endregion
+
+		#region BloodParticle
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static ParticleSystem GetBloodParticle(this IEntity entity) => entity.GetValue<ParticleSystem>(BloodParticle);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetBloodParticle(this IEntity entity, out ParticleSystem value) => entity.TryGetValue(BloodParticle, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddBloodParticle(this IEntity entity, ParticleSystem value) => entity.AddValue(BloodParticle, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasBloodParticle(this IEntity entity) => entity.HasValue(BloodParticle);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelBloodParticle(this IEntity entity) => entity.DelValue(BloodParticle);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetBloodParticle(this IEntity entity, ParticleSystem value) => entity.SetValue(BloodParticle, value);
+
+		#endregion
+
+		#region DeadParticle
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static ParticleSystem GetDeadParticle(this IEntity entity) => entity.GetValue<ParticleSystem>(DeadParticle);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetDeadParticle(this IEntity entity, out ParticleSystem value) => entity.TryGetValue(DeadParticle, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddDeadParticle(this IEntity entity, ParticleSystem value) => entity.AddValue(DeadParticle, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasDeadParticle(this IEntity entity) => entity.HasValue(DeadParticle);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelDeadParticle(this IEntity entity) => entity.DelValue(DeadParticle);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetDeadParticle(this IEntity entity, ParticleSystem value) => entity.SetValue(DeadParticle, value);
 
 		#endregion
 
@@ -1129,6 +1253,50 @@ namespace Game.Entities
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetAttackSoundCommand(this IEntity entity, ICommand value) => entity.SetValue(AttackSoundCommand, value);
+
+		#endregion
+
+		#region ShoutSoundRequest
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IRequest GetShoutSoundRequest(this IEntity entity) => entity.GetValue<IRequest>(ShoutSoundRequest);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetShoutSoundRequest(this IEntity entity, out IRequest value) => entity.TryGetValue(ShoutSoundRequest, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddShoutSoundRequest(this IEntity entity, IRequest value) => entity.AddValue(ShoutSoundRequest, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasShoutSoundRequest(this IEntity entity) => entity.HasValue(ShoutSoundRequest);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelShoutSoundRequest(this IEntity entity) => entity.DelValue(ShoutSoundRequest);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetShoutSoundRequest(this IEntity entity, IRequest value) => entity.SetValue(ShoutSoundRequest, value);
+
+		#endregion
+
+		#region ShoutSoundCommand
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static ICommand GetShoutSoundCommand(this IEntity entity) => entity.GetValue<ICommand>(ShoutSoundCommand);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetShoutSoundCommand(this IEntity entity, out ICommand value) => entity.TryGetValue(ShoutSoundCommand, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddShoutSoundCommand(this IEntity entity, ICommand value) => entity.AddValue(ShoutSoundCommand, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasShoutSoundCommand(this IEntity entity) => entity.HasValue(ShoutSoundCommand);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelShoutSoundCommand(this IEntity entity) => entity.DelValue(ShoutSoundCommand);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetShoutSoundCommand(this IEntity entity, ICommand value) => entity.SetValue(ShoutSoundCommand, value);
 
 		#endregion
 

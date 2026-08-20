@@ -1758,16 +1758,13 @@ MonoBehaviour:
   _moveInstaller:
     _moveDuration:
       value: 0.1
-    _audioSource: {fileID: 0}
-    _audioClips: []
-  _moveDistance:
-    value: 1
-  _attackRange:
-    value: 1.5
-  _moveSpeed:
-    value: 2
-  _rotateSpeed:
-    value: 360
+    _moveSpeed:
+      value: 1
+  _reachDistance:
+    value: 0.75
+  _rotateInstaller:
+    _rotateSpeed:
+      value: 720
   _transformInstaller:
     _transform: {fileID: 4361596233082998913}
   _healthInstaller:
@@ -1777,6 +1774,8 @@ MonoBehaviour:
       value: 2
   _collider: {fileID: 1842272872912051803}
   _weapon: {fileID: 5608337869560217858}
+  _animationEvents:
+    value: {fileID: 4057052806594214817}
 --- !u!1 &6519369982854541961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,7 +2001,7 @@ GameObject:
   - component: {fileID: 1383350002564321792}
   - component: {fileID: 2415962780172116089}
   - component: {fileID: 2644345756265274866}
-  - component: {fileID: 3774059612672465589}
+  - component: {fileID: 4057052806594214817}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Enemy
@@ -2060,6 +2059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59b118b10be4e178386c79cb7a6053b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZombieViewInstaller
+  _healthViewInstaller:
+    _bloodParticle: {fileID: 7867977103327073178}
+    _deadParticle: {fileID: 3634830046846425720}
   _animator: {fileID: 2415962780172116089}
   _audioSource: {fileID: 8082205103597057941}
   _painSounds:
@@ -2084,6 +2086,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: e1f88923a6c2849a69f5bf0774ed47c2, type: 3}
   _attackSounds:
     value:
+    - {fileID: 8300000, guid: 27c68b20ba4a5423fbf39c3f0eb4db38, type: 3}
+  _shoutSounds:
+    value:
     - {fileID: 8300000, guid: 02cdb67c7396c44beb54e44fb1519751, type: 3}
     - {fileID: 8300000, guid: 88355b2555076420bb57ed334e93fbb7, type: 3}
     - {fileID: 8300000, guid: 4d1eacb11fd684ab694580c45d2e76c9, type: 3}
@@ -2095,7 +2100,7 @@ MonoBehaviour:
     value:
     - {fileID: 8300000, guid: 3352ade033aba4780b3044e404093b9a, type: 3}
     - {fileID: 8300000, guid: 62cbe99b1eb804549a609de6169d9df4, type: 3}
---- !u!114 &3774059612672465589
+--- !u!114 &4057052806594214817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2104,10 +2109,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7158363685665035492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 413768b9f1224b1cb17a8ba2b286184f, type: 3}
+  m_Script: {fileID: 11500000, guid: cbd08fcd85174a90b79e3f101ac134d4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Systems.AnimationEventReceiver
-  _mainEntity: {fileID: 8403088207822063823}
+  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.AnimationEvents
 --- !u!1 &7369059967829061964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2584,6 +2588,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
+--- !u!198 &3634830046846425720 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4469893772459249764, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
+  m_PrefabInstance: {fileID: 898963041085327900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5659927560983144487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
@@ -2789,6 +2798,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4095363804935024195, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: _initPoint
+      value: 
+      objectReference: {fileID: 4410944339874547077}
     - target: {fileID: 5379566684066028272, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
       propertyPath: _firePoint
       value: 
@@ -2801,78 +2814,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hand
       objectReference: {fileID: 0}
+    - target: {fileID: 8719967748094809168, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: 'sceneInstallers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 865529274724727569}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5608337869560217858}
-    - targetCorrespondingSourceObject: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 865529274724727569}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
---- !u!4 &2845756347370805700 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+--- !u!114 &865529274724727569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4095363804935024195, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
   m_PrefabInstance: {fileID: 3807615246241092946}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5830116405270930420 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-  m_PrefabInstance: {fileID: 3807615246241092946}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5608337869560217858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5830116405270930420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 865529274724727569}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
---- !u!114 &865529274724727569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5830116405270930420}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2e6a44bad4b46cc9bac3b3e2c92ca91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.MeleeWeaponInstaller
-  _cooldown:
-    _duration: 1
-    _time: 0
-  _anticipation:
-    _duration: 1.0333333
-    _time: 0
-  _attackRange:
-    value: 0.2
-  _initPoint: {fileID: 4410944339874547077}
-  _damage:
-    value: 1
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 512
+--- !u!4 &2845756347370805700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+  m_PrefabInstance: {fileID: 3807615246241092946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5608337869560217858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8719967748094809168, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+  m_PrefabInstance: {fileID: 3807615246241092946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &4012628793975234114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3068,6 +3045,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ed798bfb0514c4185b9ea81a814309, type: 3}
+--- !u!198 &7867977103327073178 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19818896, guid: c1ed798bfb0514c4185b9ea81a814309, type: 3}
+  m_PrefabInstance: {fileID: 7867977103341910538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7867977103342241086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 458548, guid: c1ed798bfb0514c4185b9ea81a814309, type: 3}

@@ -13,11 +13,7 @@ namespace Game.Entities
             
             entity.GetInteractCommand()
                 .AddCondition(target => target.CanHealTarget())
-                .AddAction(target =>
-            {
-                target.Heal(_amount);
-                Destroy(gameObject);
-            });
+                .AddAction(target => target.Heal(_amount));
         }
 
     }

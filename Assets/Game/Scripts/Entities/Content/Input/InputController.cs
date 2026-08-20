@@ -7,6 +7,8 @@ namespace Game.Entities
 {
     public class InputController : IEntityInit, IEntityTick
     {
+        private readonly IGameUI _ui;
+        
         private Joystick _attackJoystick;
         private Joystick _moveJoystick;
         private IRequest<Vector3> _moveRequest;
@@ -16,8 +18,7 @@ namespace Game.Entities
 
         public InputController(IGameUI ui)
         {
-            _attackJoystick = ui.GetAttackJoystick().Value;
-            _moveJoystick = ui.GetMoveJoystick().Value;
+            _ui = ui;
         }
         
         public void Init(IEntity entity)
@@ -26,6 +27,9 @@ namespace Game.Entities
             _rotateRequest = entity.GetRotateRequest();
             _fireRequest = entity.GetFireRequest();
             _wantToFire = entity.GetWeapon().Value.GetWantsToFire();
+            
+            _attackJoystick = _ui.GetAttackJoystick().Value;
+            _moveJoystick = _ui.GetMoveJoystick().Value;
         }
 
         public void Tick(IEntity entity, float deltaTime)

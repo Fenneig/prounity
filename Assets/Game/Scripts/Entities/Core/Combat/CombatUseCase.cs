@@ -9,16 +9,19 @@ namespace Game.Entities
         {
             Collider[] colliders = Physics.OverlapSphere(initPoint.position, attackRadius, layerMask);
             foreach (Collider collider in colliders) 
-                DealDamage(collider, damage);
-                
+                DealDamage(collider, damage, entity);
         }
 
-        public static bool DealDamage(Collider collider, int amount)
+        public static bool DealDamage(Collider collider, int amount, IEntity attacker)
         {
             IEntity entity = collider.GetComponentInParent<IEntity>();
             if (entity != null && entity.HasDamageableTag())
             {
                 entity.GetTakeDamageAction().Invoke(amount);
+                
+                if (entity.IsDead())
+                    attacker.ProcessKill();
+                
                 return true;
             }
 
