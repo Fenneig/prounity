@@ -82,7 +82,8 @@ namespace Game.Entities
         private void InstallHealth(IEntity entity)
         {
             _healthInstaller.Install(entity);
-            entity.AddTakeDamageAction(new InlineAction<int>(entity.TakeDamage));
+            entity.AddTakeDamageAction(new CompositeAction<int>(entity.TakeDamage));
+            entity.GetTakeDamageAction().Add(amount => GameUI.Instance.GetHealthScreenView().TakeDamage(amount));
         }
     }
 }

@@ -6,12 +6,14 @@ namespace Game.Entities
     public class ZombieAiAttackBehaviour : IEntityInit, IEntityTick, IEntityDispose
     {
         private IEntity _self;
+        private IRequest _fireRequest;
         private ICommand _fireCommand;
         private IValue<AnimationEvents> _animationEvents;
 
         public void Init(IEntity entity)
         {
             _self = entity;
+            _fireRequest = entity.GetFireRequest();
             _fireCommand = entity.GetFireCommand();
             _animationEvents = entity.GetAnimationEvents();
 
@@ -22,7 +24,7 @@ namespace Game.Entities
         {
             if (animationName == "Attack")
             {
-                _fireCommand.Invoke();
+                _fireRequest.Invoke();
                 _self.GetWantsToFire().Value = false;
             }
         }

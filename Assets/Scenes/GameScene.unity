@@ -27845,6 +27845,7 @@ MonoBehaviour:
     _ammoView: {fileID: 7160444056652517395}
     _healthView: {fileID: 7160444056652517396}
   _scoreView: {fileID: 2928555308454414447}
+  _healthScreenView: {fileID: 548561269895222117}
 --- !u!114 &5764159610076527036
 MonoBehaviour:
   m_ObjectHideFlags: 0

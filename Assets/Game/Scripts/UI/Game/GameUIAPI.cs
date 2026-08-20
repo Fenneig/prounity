@@ -25,6 +25,7 @@ namespace Game.UI
 		public static readonly int AttackJoystick; // IValue<Joystick>
 		public static readonly int MoveJoystick; // IValue<Joystick>
 		public static readonly int ScoreView; // ScoreView
+		public static readonly int HealthScreenView; // HealthScreenView
 
 		static GameUIAPI()
 		{
@@ -34,6 +35,7 @@ namespace Game.UI
 			AttackJoystick = NameToId(nameof(AttackJoystick));
 			MoveJoystick = NameToId(nameof(MoveJoystick));
 			ScoreView = NameToId(nameof(ScoreView));
+			HealthScreenView = NameToId(nameof(HealthScreenView));
 		}
 
 
@@ -146,6 +148,28 @@ namespace Game.UI
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void SetScoreView(this IGameUI entity, ScoreView value) => entity.SetValue(ScoreView, value);
+
+		#endregion
+
+		#region HealthScreenView
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static HealthScreenView GetHealthScreenView(this IGameUI entity) => entity.GetValue<HealthScreenView>(HealthScreenView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool TryGetHealthScreenView(this IGameUI entity, out HealthScreenView value) => entity.TryGetValue(HealthScreenView, out value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AddHealthScreenView(this IGameUI entity, HealthScreenView value) => entity.AddValue(HealthScreenView, value);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool HasHealthScreenView(this IGameUI entity) => entity.HasValue(HealthScreenView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool DelHealthScreenView(this IGameUI entity) => entity.DelValue(HealthScreenView);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void SetHealthScreenView(this IGameUI entity, HealthScreenView value) => entity.SetValue(HealthScreenView, value);
 
 		#endregion
     }

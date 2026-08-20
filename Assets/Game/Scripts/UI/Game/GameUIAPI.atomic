@@ -20,3 +20,4 @@ values:
 - AttackJoystick: IValue<Joystick>
 - MoveJoystick: IValue<Joystick>
 - ScoreView: ScoreView
+- HealthScreenView: HealthScreenView

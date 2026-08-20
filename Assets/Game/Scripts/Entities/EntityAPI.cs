@@ -40,7 +40,7 @@ namespace Game.Entities
 		public static readonly int RotationSpeed; // IValue<float>
 		public static readonly int MaxHealth; // IValue<int>
 		public static readonly int Health; // IReactiveVariable<int>
-		public static readonly int TakeDamageAction; // IAction<int>
+		public static readonly int TakeDamageAction; // ICompositeAction<int>
 		public static readonly int FireRequest; // IRequest
 		public static readonly int FireCommand; // ICommand
 		public static readonly int Weapon; // IVariable<IEntity>
@@ -467,13 +467,13 @@ namespace Game.Entities
 		#region TakeDamageAction
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static IAction<int> GetTakeDamageAction(this IEntity entity) => entity.GetValue<IAction<int>>(TakeDamageAction);
+		public static ICompositeAction<int> GetTakeDamageAction(this IEntity entity) => entity.GetValue<ICompositeAction<int>>(TakeDamageAction);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool TryGetTakeDamageAction(this IEntity entity, out IAction<int> value) => entity.TryGetValue(TakeDamageAction, out value);
+		public static bool TryGetTakeDamageAction(this IEntity entity, out ICompositeAction<int> value) => entity.TryGetValue(TakeDamageAction, out value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void AddTakeDamageAction(this IEntity entity, IAction<int> value) => entity.AddValue(TakeDamageAction, value);
+		public static void AddTakeDamageAction(this IEntity entity, ICompositeAction<int> value) => entity.AddValue(TakeDamageAction, value);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool HasTakeDamageAction(this IEntity entity) => entity.HasValue(TakeDamageAction);
@@ -482,7 +482,7 @@ namespace Game.Entities
 		public static bool DelTakeDamageAction(this IEntity entity) => entity.DelValue(TakeDamageAction);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static void SetTakeDamageAction(this IEntity entity, IAction<int> value) => entity.SetValue(TakeDamageAction, value);
+		public static void SetTakeDamageAction(this IEntity entity, ICompositeAction<int> value) => entity.SetValue(TakeDamageAction, value);
 
 		#endregion
 

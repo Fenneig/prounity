@@ -39,7 +39,7 @@ values:
 
 - MaxHealth: IValue<int>
 - Health: IReactiveVariable<int>
-- TakeDamageAction: IAction<int>
+- TakeDamageAction: ICompositeAction<int>
 
 #Fire
 - FireRequest: IRequest

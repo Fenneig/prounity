@@ -8,10 +8,11 @@ namespace Game.Entities
     {
         private readonly IGameUI _ui;
 
-        private IValue<int> _maxHealth;
+        private IEntity _self;
         private IReactiveVariable<int> _health;
         private StatView _healthView;
         private Subscription<int> _subscription;
+        private HealthScreenView _healthScreenView;
 
         public HealthViewPresenter(IGameUI ui)
         {
@@ -20,10 +21,11 @@ namespace Game.Entities
 
         public void Init(IEntity entity)
         {
-            _maxHealth = entity.GetMaxHealth();
+            _self = entity;
             _health = entity.GetHealth();
             _healthView = _ui.GetHealthView();
-
+            _healthScreenView = _ui.GetHealthScreenView();
+            
             _subscription = _health.Observe(UpdateHealth);
         }
 
@@ -35,8 +37,10 @@ namespace Game.Entities
         private void UpdateHealth(int newValue)
         {
             _healthView.SetText(newValue.ToString());
-            _healthView.SetProgress((float)newValue / _maxHealth.Value);
+            _healthView.SetProgress(_self.GetHealthPercent());
             _healthView.SetVisible(newValue > 0);
+            
+            _healthScreenView.ChangePercent(_self.GetHealthPercent());
         }
     }
 }
