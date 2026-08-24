@@ -1,4 +1,4 @@
-namespace SampleGame
+namespace Game.Gameplay
 {
     public static class GameObjectTags
     {

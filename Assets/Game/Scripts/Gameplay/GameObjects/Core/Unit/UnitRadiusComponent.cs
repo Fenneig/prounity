@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay.Core
 {
     public sealed class UnitRadiusComponent : MonoBehaviour
     {

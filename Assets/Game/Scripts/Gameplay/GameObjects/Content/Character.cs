@@ -1,6 +1,8 @@
+using Game.Gameplay.Core;
+using Game.Gameplay.Core.Attack;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay
 {
     public class Character : MonoBehaviour,
         MoveComponent.ICondition,
@@ -50,7 +52,7 @@ namespace SampleGame
         {
             _healthComponent.OnDeath += this.OnDeath;
         }
-
+    
         private void OnDeath()
         {
             Destroy(this.gameObject, _deathDelay);

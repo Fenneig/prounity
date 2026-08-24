@@ -1,14 +1,11 @@
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay
 {
     public sealed class HoldPositionHandler : InputHandler
     {
         [SerializeField]
         private KeyCode _keyCode = KeyCode.H;
-
-        [SerializeField]
-        private GameObject _character;
 
         [SerializeField]
         private InputHandler _next;

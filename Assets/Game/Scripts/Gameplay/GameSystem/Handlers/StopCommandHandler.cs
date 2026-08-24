@@ -1,14 +1,11 @@
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay
 {
     public sealed class StopCommandHandler : InputHandler
     {
         [SerializeField]
         private KeyCode _keyCode = KeyCode.S;
-        
-        [SerializeField]
-        private GameObject _character;
         
         [SerializeField]
         private InputHandler _next;

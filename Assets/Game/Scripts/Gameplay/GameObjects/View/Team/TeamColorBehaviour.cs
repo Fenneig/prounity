@@ -1,6 +1,7 @@
+using Game.Gameplay.Core;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay.View
 {
     [ExecuteAlways]
     public sealed class TeamColorBehaviour : MonoBehaviour

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay.Core
 {
     [RequireComponent(typeof(HealthComponent))]
     public sealed class TakeDamageComponent : MonoBehaviour

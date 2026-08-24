@@ -1,6 +1,7 @@
+using Game.Gameplay.Core;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay
 {
     public sealed class ProjectileWeapon : Weapon
     {
@@ -15,7 +16,7 @@ namespace SampleGame
         
         [SerializeField]
         private float _cooldown;
-        
+
         private float _timestamp;
 
         private void Awake()
@@ -23,10 +24,8 @@ namespace SampleGame
             _timestamp = Time.time - _cooldown;
         }
 
-        public override bool CanFire(GameObject target)
-        {
-            return _timestamp < Time.time;
-        }
+        public override bool CanFire(GameObject target) => 
+            _timestamp < Time.time;
 
         protected override void ProcessFire(GameObject target)
         {

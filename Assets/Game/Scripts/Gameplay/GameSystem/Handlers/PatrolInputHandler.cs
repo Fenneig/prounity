@@ -1,15 +1,13 @@
+using Modules.AI;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay
 {
     public sealed class PatrolInputHandler : InputHandler
     {
         [SerializeField]
         private KeyCode _keyCode = KeyCode.P;
         
-        [SerializeField]
-        private GameObject _character;
-
         [SerializeField]
         private InputHandler _next;
 
@@ -22,7 +20,7 @@ namespace SampleGame
                 {
                     // TODO: Point destination
                 }
-                else if (context.target != null && context.target != _character)
+                else if (context.target != null && context.target != Blackboard.GetValue(BlackboardAPI.Character))
                 {
                     // TODO: Target destination
                 }

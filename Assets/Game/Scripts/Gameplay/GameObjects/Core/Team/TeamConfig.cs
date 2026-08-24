@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace SampleGame
+namespace Game.Gameplay.Core
 {
     [CreateAssetMenu(
         fileName = "TeamConfig",

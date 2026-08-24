@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Gameplay
 {
     public abstract class Weapon : MonoBehaviour
     {
+        [field: SerializeField] public float Range { get; private set; }
+        
         public event Action OnFire;
         
         public abstract bool CanFire(GameObject target);

@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63314556ca2d4bbaa5f03d2c738a5d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.FollowInputHandler
-  _keyCode: 102
   _character: {fileID: 1179872082}
+  _keyCode: 102
   _next: {fileID: 418524742}
 --- !u!1001 &459566252
 PrefabInstance:
@@ -407,8 +407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b8a0169ebe4d8c999dd66e1771deab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.PatrolInputHandler
-  _keyCode: 112
   _character: {fileID: 1179872082}
+  _keyCode: 112
   _next: {fileID: 513256918}
 --- !u!1 &513256916
 GameObject:
@@ -454,8 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fd2bd9980646a3be529411e23c22f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.AttackInputHandler
-  _keyCode: 97
   _character: {fileID: 1179872082}
+  _keyCode: 97
   _next: {fileID: 452763495}
 --- !u!1 &547416707
 GameObject:
@@ -660,6 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e87a1ef654548bfbf1b74e63edcad4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.EnqueueCommandHandler
+  _character: {fileID: 1179872082}
   _next: {fileID: 2024489237}
 --- !u!1 &906546670
 GameObject:
@@ -864,6 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238761620b0b47ec825b39d18e2cd39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.RaycastInputHandler
+  _character: {fileID: 1179872082}
   _camera: {fileID: 385911208}
   _next: {fileID: 781432834}
 --- !u!1 &1179872082 stripped
@@ -1168,8 +1170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b54eb97d69d647f79a265a2725df8c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.HoldPositionHandler
-  _keyCode: 104
   _character: {fileID: 1179872082}
+  _keyCode: 104
   _next: {fileID: 504420566}
 --- !u!1 &2024489235
 GameObject:
@@ -1215,8 +1217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7e0ae5e7d64a3b9a2f835e92b99ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.StopCommandHandler
-  _keyCode: 115
   _character: {fileID: 1179872082}
+  _keyCode: 115
   _next: {fileID: 1820899027}
 --- !u!1001 &2044366344
 PrefabInstance:
@@ -1364,7 +1366,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a826033052214a0196fb4b9dc1da5806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.MouseInputHandler
+  _character: {fileID: 1179872082}
   _next: {fileID: 1146950749}
+--- !u!1 &2108456140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2108456142}
+  - component: {fileID: 2108456141}
+  m_Layer: 0
+  m_Name: '[Blackboard]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2108456141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108456140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0275c6d507364cc5941abfcdcd6998ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.Blackboard::Modules.AI.Blackboard
+  installOnAwake: 1
+  installers: []
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  references:
+    version: 2
+    RefIds: []
+--- !u!4 &2108456142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108456140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1141581192752668296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4473757027215454236, guid: f82db08d1eee94b9791aca8b635c4482, type: 3}
@@ -1456,3 +1511,4 @@ SceneRoots:
   - {fileID: 711934099}
   - {fileID: 1777495386}
   - {fileID: 925255623}
+  - {fileID: 2108456142}

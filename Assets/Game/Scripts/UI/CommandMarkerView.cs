@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.UI
 {
     public sealed class CommandMarkerView : MonoBehaviour
     {
