@@ -21,9 +21,9 @@ namespace Game.Gameplay
             Attack
         }
         
-        [SerializeReference] private ICondition _chaseCondition;
+        [SerializeReference] private ICondition _preferredRangeCondition;
         [SerializeReference] private ICondition _rotateCondition;
-        [SerializeReference] private ICondition _inRangeCondition;
+        [SerializeReference] private ICondition _inWeaponRangeCondition;
 
         private State _state;
 
@@ -31,6 +31,7 @@ namespace Game.Gameplay
         private GameObject _target;
         private AttackComponent _attackComponent;
         private MoveComponent _moveComponent;
+        private RotateTransformComponent _rotateComponent;
 
         public override void Initialize(ICommandArgs commandArgs)
         {
@@ -42,21 +43,22 @@ namespace Game.Gameplay
             
             _attackComponent = _attacker.GetComponent<AttackComponent>();
             _moveComponent = _attacker.GetComponent<MoveComponent>();
+            _rotateComponent = _attackComponent.GetComponent<RotateTransformComponent>();
+
+            _state = UpdateState();
         }
 
         protected override void OnFixedTick()
         {
             _state = UpdateState();
-            _state = _inRangeCondition.Invoke() ? State.Attack : State.Chase;
-
+            
             switch (_state)
             {
                 case State.Chase:
-                    var direction = _target.transform.position - _attacker.transform.position;
-                    MoveToTarget(direction.normalized);
+                    ChaseTarget();
                     break;
                 case State.Rotate:
-                    
+                    RotateToTarget();
                     break;
                 case State.Attack:
                     AttackTarget();
@@ -66,15 +68,18 @@ namespace Game.Gameplay
             }
         }
 
-        private State UpdateState()
+        private void ChaseTarget()
         {
-            return State.Attack;
+            var direction = _target.transform.position - _attacker.transform.position;
+            direction.Normalize();  
+            
+            if (_moveComponent.CanMove(direction))
+                _moveComponent.MoveStep(direction, Time.fixedDeltaTime);
         }
 
-        protected override void CommandComplete()
+        private void RotateToTarget()
         {
-            Blackboard.DelValue(BlackboardAPI.Target);
-            base.CommandComplete();
+            _rotateComponent.RotateTowards(_target, Time.fixedDeltaTime);
         }
 
         private void AttackTarget()
@@ -83,10 +88,24 @@ namespace Game.Gameplay
                 _attackComponent.Attack(_target);
         }
 
-        private void MoveToTarget(Vector3 normalizedDirection)
+        private State UpdateState()
         {
-            if (_moveComponent.CanMove(normalizedDirection))
-                _moveComponent.MoveStep(normalizedDirection, Time.fixedDeltaTime);
+            if (_state == State.Chase && !_preferredRangeCondition.Invoke())
+                return State.Chase;
+
+            if (_state != State.Chase && !_inWeaponRangeCondition.Invoke())
+                return State.Chase;
+
+            if (_rotateCondition.Invoke())
+                return State.Rotate;
+
+            return State.Attack;
+        }
+
+        protected override void CommandComplete()
+        {
+            Blackboard.DelValue(BlackboardAPI.Target);
+            base.CommandComplete();
         }
 
         public override string ToString() => 

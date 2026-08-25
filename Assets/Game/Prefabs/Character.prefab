@@ -47,17 +47,15 @@ MonoBehaviour:
   Blackboard: {fileID: 1951238873194311800}
   _completeCondition:
     rid: 1174970562321842404
-  _chaseCondition:
-    rid: -2
+  _preferredRangeCondition:
+    rid: 1174970587578368088
   _rotateCondition:
-    rid: -2
-  _inRangeCondition:
+    rid: 1174970587578368089
+  _inWeaponRangeCondition:
     rid: 1174970562321842406
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 1174970562321842404
       type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
@@ -72,6 +70,19 @@ MonoBehaviour:
       type: {class: IsInWeaponRange, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 1951238873194311800}
+    - rid: 1174970587578368088
+      type: {class: IsInPreferredAttackRange, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+        _rangeOffsetKey: AttackPreferredPositionOffset
+    - rid: 1174970587578368089
+      type: {class: TargetAngleCondition, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+        _selfKey: Character
+        _targetKey: Target
+        _angleKey: TargetStoppingAngle
+        _comparison: 4
 --- !u!1 &878468366025136267
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +975,8 @@ MonoBehaviour:
   - rid: 1174970562321842253
   - rid: 1174970562321842254
   - rid: 1174970562321842401
+  - rid: 1174970587578368065
+  - rid: 1174970587578368085
   autoCompile: 0
   initialTagCapacity: 1
   initialValueCapacity: 1
@@ -994,6 +1007,16 @@ MonoBehaviour:
       type: {class: WeaponInstaller, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _weapon: {fileID: 557665593064458262}
+    - rid: 1174970587578368065
+      type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: TargetStoppingAngle
+        value: 0.5
+    - rid: 1174970587578368085
+      type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
+      data:
+        key: AttackPreferredPositionOffset
+        value: 2
 --- !u!1 &8840056475498315311
 GameObject:
   m_ObjectHideFlags: 0
