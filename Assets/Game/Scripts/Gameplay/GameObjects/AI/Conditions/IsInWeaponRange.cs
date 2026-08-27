@@ -5,14 +5,14 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     [Serializable]
-    public class IsInWeaponRange : ICondition
+    public sealed class IsInWeaponRange : ICondition
     {
         [SerializeField] private Blackboard _blackboard;
         
         public bool Invoke()  
         {
             if (!_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
-                !_blackboard.TryGetValue(BlackboardAPI.Target, out GameObject target) ||
+                !_blackboard.TryGetValue(BlackboardAPI.FireTarget, out GameObject target) ||
                 character == null ||
                 target == null)
             {

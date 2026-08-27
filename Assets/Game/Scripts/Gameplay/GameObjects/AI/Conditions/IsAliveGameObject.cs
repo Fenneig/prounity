@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     [Serializable]
-    public class IsAliveGameObject : ICondition
+    public sealed class IsAliveGameObject : ICondition
     {
         [SerializeField] private Blackboard _blackboard;
         

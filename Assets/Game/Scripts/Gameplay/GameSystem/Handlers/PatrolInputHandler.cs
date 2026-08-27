@@ -15,24 +15,26 @@ namespace Game.Gameplay
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
-              
+                ICommandArgs command = null;
                 if (context.point != null)
                 {
-                    // TODO: Point destination
+                    command = new PatrolCommand.PatrolCommandArgs
+                    {
+                        CommandType = typeof(PatrolCommand),
+                        Target = new PositionPatrolTarget(context.point.Value)
+                    };
                 }
                 else if (context.target != null && context.target != Blackboard.GetValue(BlackboardAPI.Character))
                 {
-                    // TODO: Target destination
+                    command = new PatrolCommand.PatrolCommandArgs
+                    {
+                        CommandType = typeof(PatrolCommand),
+                        Target = new GameObjectPatrolTarget(context.target)
+                    };
                 }
 
-                if (context.enqueueCommand)
-                {
-                    // TODO: If current command is patrol the add waypoint else enqueue command
-                }
-                else
-                {
-                    // TODO: Switch to patrol
-                }
+                if (context.enqueueCommand) CommandComponent.Enqueue(command);
+                else CommandComponent.Add(command);
             }
             else if (_next)
                 _next.Handle(ref context);

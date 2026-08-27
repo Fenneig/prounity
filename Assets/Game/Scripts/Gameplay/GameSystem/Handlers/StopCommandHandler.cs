@@ -14,7 +14,7 @@ namespace Game.Gameplay
         {
             if (Input.GetKeyDown(_keyCode))
             {
-                // TODO: Stop
+                CommandComponent.ClearInternal();
             }
             else if (_next)
                 _next.Handle(ref context);

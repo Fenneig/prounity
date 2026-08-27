@@ -45,14 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.AttackTargetCommand
   Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
   _completeCondition:
     rid: 1174970562321842404
-  _preferredRangeCondition:
-    rid: 1174970587578368088
-  _rotateCondition:
-    rid: 1174970587578368089
-  _inWeaponRangeCondition:
-    rid: 1174970562321842406
+  _combatBehaviour:
+    _stateMachine: {fileID: 4035664390601820025}
+    _preferredRangeCondition:
+      rid: 1174970642161467470
+    _rotateCondition:
+      rid: 1174970642161467471
+    _inWeaponRangeCondition:
+      rid: 1174970642161467473
   references:
     version: 2
     RefIds:
@@ -65,24 +68,98 @@ MonoBehaviour:
       type: {class: IsAliveGameObject, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 1951238873194311800}
-        _key: Target
-    - rid: 1174970562321842406
-      type: {class: IsInWeaponRange, ns: Game.Gameplay, asm: Assembly-CSharp}
-      data:
-        _blackboard: {fileID: 1951238873194311800}
-    - rid: 1174970587578368088
+        _key: FireTarget
+    - rid: 1174970642161467470
       type: {class: IsInPreferredAttackRange, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 1951238873194311800}
         _rangeOffsetKey: AttackPreferredPositionOffset
-    - rid: 1174970587578368089
+    - rid: 1174970642161467471
       type: {class: TargetAngleCondition, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 1951238873194311800}
         _selfKey: Character
-        _targetKey: Target
+        _targetKey: FireTarget
         _angleKey: TargetStoppingAngle
-        _comparison: 4
+        _comparison: 1
+    - rid: 1174970642161467473
+      type: {class: IsInWeaponRange, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+--- !u!1 &335605355890127055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833973645641413171}
+  - component: {fileID: 8280608850760138170}
+  m_Layer: 0
+  m_Name: AutoCombatBehaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &833973645641413171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335605355890127055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5600232179795162803}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8280608850760138170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335605355890127055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b281299058c946f09700075ec98f3330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.AutoCombatBehaviour
+  _blackboard: {fileID: 1951238873194311800}
+  _enemySensor: {fileID: 6428309854176349944}
+  _combatBehaviour:
+    _stateMachine: {fileID: 4035664390601820025}
+    _preferredRangeCondition:
+      rid: 1174970630657278089
+    _rotateCondition:
+      rid: 1174970630657278090
+    _inWeaponRangeCondition:
+      rid: 1174970630657278091
+  references:
+    version: 2
+    RefIds:
+    - rid: 1174970630657278089
+      type: {class: IsInPreferredAttackRange, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+        _rangeOffsetKey: AttackPreferredPositionOffset
+    - rid: 1174970630657278090
+      type: {class: TargetAngleCondition, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+        _selfKey: Character
+        _targetKey: FireTarget
+        _angleKey: TargetStoppingAngle
+        _comparison: 1
+    - rid: 1174970630657278091
+      type: {class: IsInWeaponRange, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
 --- !u!1 &878468366025136267
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +370,105 @@ MonoBehaviour:
   _teamConfig: {fileID: 11400000, guid: 2a25c920b71554345892bc87c758c68d, type: 2}
   _takeDamageComponent: {fileID: 8686341370957588940}
   _teamComponent: {fileID: 5312956498513726121}
+--- !u!1 &2327047918214064049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7498220413515351344}
+  - component: {fileID: 6428309854176349944}
+  - component: {fileID: 7237791615983753051}
+  m_Layer: 2
+  m_Name: <EnemySensor>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7498220413515351344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327047918214064049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4473757027215454236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6428309854176349944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327047918214064049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525905b2e0f94888a015e058f5883a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.Sensors.EnemySensor
+  _character: {fileID: 7896759888454424343}
+--- !u!135 &7237791615983753051
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327047918214064049}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 63
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4365688494973557192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5600232179795162803}
+  m_Layer: 0
+  m_Name: <Behaviours>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5600232179795162803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4365688494973557192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 833973645641413171}
+  m_Father: {fileID: 4473757027215454236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4499981180665602720
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,13 +514,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.AttackPositionCommand
   Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
   _completeCondition:
-    rid: -2
+    rid: 1174970642161467486
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 1174970642161467486
+      type: {class: IsReachPosition, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
 --- !u!1 &4656303723494667352
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +600,132 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.WaitCommand
   Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
+  _completeCondition:
+    rid: -2
+  _reachPositionCondition:
+    rid: 1174970630657278058
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1174970630657278058
+      type: {class: IsReachPosition, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+--- !u!1 &4900830887259485787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6429284159427906787}
+  - component: {fileID: 5736468799133130684}
+  m_Layer: 0
+  m_Name: PatrolCommand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6429284159427906787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900830887259485787}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4400347181604577631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5736468799133130684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900830887259485787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7599d54709224ec496ca9c8b14e18002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.PatrolCommand
+  Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
+  _completeCondition:
+    rid: -2
+  _reachPositionCondition:
+    rid: 1174970587578368114
+  _reachTargetCondition:
+    rid: 1174970587578368115
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1174970587578368114
+      type: {class: IsReachPosition, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+    - rid: 1174970587578368115
+      type: {class: IsReachTarget, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 1951238873194311800}
+        _stoppingDistanceKey: MoveToTargetStoppingDistance
+--- !u!1 &5170186964883273064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8288694503254805961}
+  - component: {fileID: 8662399732929998706}
+  m_Layer: 0
+  m_Name: HoldCommand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8288694503254805961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170186964883273064}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4400347181604577631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8662399732929998706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170186964883273064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1153d859ffa4f289341e4f09ae005f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.HoldCommand
+  Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
   _completeCondition:
     rid: -2
   references:
@@ -566,6 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.MoveCommand
   Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
   _completeCondition:
     rid: 1174970562321842412
   references:
@@ -610,6 +916,8 @@ Transform:
   - {fileID: 4374791389015474804}
   - {fileID: 172203373363898144}
   - {fileID: 2428773330553390398}
+  - {fileID: 6429284159427906787}
+  - {fileID: 8288694503254805961}
   m_Father: {fileID: 4473757027215454236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7896759888454424343
@@ -633,6 +941,7 @@ GameObject:
   - component: {fileID: 5312956498513726121}
   - component: {fileID: 6430962818730356955}
   - component: {fileID: 2014769738359506812}
+  - component: {fileID: 4035664390601820025}
   m_Layer: 0
   m_Name: Character
   m_TagString: Entity
@@ -659,6 +968,8 @@ Transform:
   - {fileID: 2121879629171288639}
   - {fileID: 5072450361659069235}
   - {fileID: 4400347181604577631}
+  - {fileID: 7498220413515351344}
+  - {fileID: 5600232179795162803}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7508520775225795682
@@ -853,6 +1164,21 @@ MonoBehaviour:
   - {fileID: 6001242894260833142}
   - {fileID: 7968074055746973157}
   - {fileID: 6679679662683842172}
+  - {fileID: 5736468799133130684}
+  - {fileID: 8662399732929998706}
+--- !u!114 &4035664390601820025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896759888454424343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47d044b1167405081738903327e3ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterStateMachine
+  _blackboard: {fileID: 1951238873194311800}
 --- !u!1 &8007875356848561565
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +1224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.MoveToTargetCommand
   Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
   _completeCondition:
     rid: 1174970562321842424
   references:
@@ -923,7 +1250,7 @@ MonoBehaviour:
       type: {class: IsAliveGameObject, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 1951238873194311800}
-        _key: Target
+        _key: MoveTarget
 --- !u!1 &8443872093964717959
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,12 +1298,13 @@ MonoBehaviour:
   installOnAwake: 1
   installers:
   - rid: 1174970562321842263
+  - rid: 1174970562321842401
   - rid: 1174970562321842252
   - rid: 1174970562321842253
   - rid: 1174970562321842254
-  - rid: 1174970562321842401
   - rid: 1174970587578368065
   - rid: 1174970587578368085
+  - rid: 1174970642161467457
   autoCompile: 0
   initialTagCapacity: 1
   initialValueCapacity: 1
@@ -992,7 +1320,7 @@ MonoBehaviour:
       type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
       data:
         key: MoveStoppingDistance
-        value: 0.3
+        value: 0.1
     - rid: 1174970562321842254
       type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
       data:
@@ -1016,7 +1344,11 @@ MonoBehaviour:
       type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
       data:
         key: AttackPreferredPositionOffset
-        value: 2
+        value: 1.5
+    - rid: 1174970642161467457
+      type: {class: BehavioursInstaller, ns: Game.Gameplay, asm: Assembly-CSharp}
+      data:
+        _autoCombatBehaviour: {fileID: 8280608850760138170}
 --- !u!1 &8840056475498315311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.FollowTargetCommand
   Blackboard: {fileID: 1951238873194311800}
+  CharacterStateMachine: {fileID: 4035664390601820025}
   _completeCondition:
     rid: 1174970562321842422
   _followCondition:
@@ -1088,7 +1421,7 @@ MonoBehaviour:
       type: {class: IsAliveGameObject, ns: Game.Gameplay, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 1951238873194311800}
-        _key: Target
+        _key: MoveTarget
 --- !u!1001 &2273241628681058216
 PrefabInstance:
   m_ObjectHideFlags: 0

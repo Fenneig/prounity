@@ -8,5 +8,6 @@ namespace Game.Gameplay
         void Initialize(ICommandArgs args);
         void Stop();
         void FixedTick();
+        EnqueueResult HandleEnqueue(ICommandArgs commandArgs);
     }
 }

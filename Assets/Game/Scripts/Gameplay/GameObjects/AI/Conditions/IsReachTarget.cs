@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     [Serializable]
-    public class IsReachTarget: ICondition
+    public sealed class IsReachTarget : ICondition
     {
         [SerializeField] private Blackboard _blackboard;
         
@@ -13,9 +13,16 @@ namespace Game.Gameplay
         [BlackboardValueKey(typeof(float))]
         private string _stoppingDistanceKey;
         
-        public bool Invoke() =>
-            _blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) &&
-            _blackboard.TryGetValue(BlackboardAPI.Target, out GameObject target) &&
-            Vector3.Distance(character.transform.position, target.transform.position) < _blackboard.GetValue<float>(_stoppingDistanceKey);
+        public bool Invoke()
+        {
+            _blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character);
+            _blackboard.TryGetValue(BlackboardAPI.MoveTarget, out GameObject target);
+            
+            if (character == null || target == null) return false;
+            
+            float sqrStoppingDistance = _blackboard.GetValue<float>(_stoppingDistanceKey) * _blackboard.GetValue<float>(_stoppingDistanceKey);
+            
+            return (character.transform.position - target.transform.position).sqrMagnitude < sqrStoppingDistance;
+        }
     }
 }

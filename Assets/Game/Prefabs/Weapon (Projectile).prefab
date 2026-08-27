@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bd54e6206c4c11a3d580c7fb70e049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.ProjectileWeapon
-  <Range>k__BackingField: 10
+  <Range>k__BackingField: 6
   _owner: {fileID: 0}
   _firePoint: {fileID: 141701125346755904}
   _bulletPrefab: {fileID: 2714759441127867601, guid: 44d7f33a7783a417cad58172de548646, type: 3}

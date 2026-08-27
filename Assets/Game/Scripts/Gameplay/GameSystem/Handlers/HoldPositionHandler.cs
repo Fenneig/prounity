@@ -14,7 +14,13 @@ namespace Game.Gameplay
         {
             if (Input.GetKeyDown(_keyCode))
             {
-                // TODO: Hold Position
+                ICommandArgs command = new HoldCommand.HoldCommandArgs
+                {
+                    CommandType = typeof(HoldCommand)
+                };
+
+                if (context.enqueueCommand) CommandComponent.Enqueue(command);
+                else CommandComponent.Add(command);
 
             }
             else if (_next) 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class CommandComponent : MonoBehaviour
+    public sealed class CommandComponent : MonoBehaviour
     {
         [SerializeField] private Blackboard _blackboard;
         [SerializeField] private BaseCommand[] _commands;
@@ -14,19 +14,32 @@ namespace Game.Gameplay
         
         private ICommand _currentCommand;
 
-        public void Add(ICommandArgs command)
+        public void Add(ICommandArgs commandArgs)
         {
             Clear();
          
-            PlayCommand(command);
+            PlayCommand(commandArgs);
         }
-        
-        public void Enqueue(ICommandArgs command)
+
+        public void Enqueue(ICommandArgs commandArgs)
         {
-            if (_currentCommand is WaitCommand)
-                Add(command);
-            else
-                _queue.Enqueue(command);
+            switch (_currentCommand.HandleEnqueue(commandArgs))
+            {
+                case EnqueueResult.Handled:
+                    return;
+                case EnqueueResult.Replace:
+                    Add(commandArgs);
+                    return;
+                case EnqueueResult.Enqueue:
+                    _queue.Enqueue(commandArgs);
+                    return;
+            }
+        }
+
+        public void ClearInternal()
+        {
+            Clear();
+            PlayDefaultCommand();
         }
 
         private void Clear()
@@ -43,7 +56,7 @@ namespace Game.Gameplay
 
         private void OnCommandComplete()
         {
-            Debug.Log($"<color=yellow>Complete</color>: {_currentCommand}");
+            _currentCommand.Stop();
             _currentCommand.OnComplete -= OnCommandComplete;
             
             if (_queue.Count == 0)
@@ -68,18 +81,16 @@ namespace Game.Gameplay
                 _currentCommand = command;
                 _currentCommand.Initialize(commandArgs);
                 _currentCommand.OnComplete += OnCommandComplete;
-            
-                Debug.Log($"<color=green>Start</color>: {command}");
-                    
+                
                 return;
             }
 
             throw new Exception($"Command component {gameObject.name} does not have command {commandArgs.CommandType}");
-        }
+        } 
 
         private void Start() => 
             PlayDefaultCommand();
-
+        
         private void FixedUpdate() => 
             _currentCommand?.FixedTick();
     }

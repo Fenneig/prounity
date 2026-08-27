@@ -14,6 +14,7 @@ namespace Game.Gameplay
         public event Action OnComplete;
 
         [SerializeField] protected Blackboard Blackboard;
+        [SerializeField] protected CharacterStateMachine CharacterStateMachine;
         [SerializeReference] private ICondition _completeCondition;
         
         public virtual void Initialize(ICommandArgs args)
@@ -24,22 +25,17 @@ namespace Game.Gameplay
         public void FixedTick()
         {
             if (CheckConditions())
-            {
-                CommandComplete();
-                return;
-            }
-            
-            OnFixedTick();
+                OnComplete?.Invoke();
+            else
+                OnFixedTick();
         }
+
+        public virtual EnqueueResult HandleEnqueue(ICommandArgs commandArgs) => EnqueueResult.Enqueue;
 
         private bool CheckConditions() => 
             _completeCondition != null && _completeCondition.Invoke();
 
         protected virtual void OnFixedTick()
         { }
-
-        protected virtual void CommandComplete() => OnComplete?.Invoke();
-
-        public override string ToString() => $"{GetType().Name}:";
     }
 }

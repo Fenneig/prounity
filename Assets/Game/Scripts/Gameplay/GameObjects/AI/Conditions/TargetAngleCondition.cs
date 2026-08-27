@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.Gameplay
 {
     [Serializable]
-    public class TargetAngleCondition : ICondition
+    public sealed class TargetAngleCondition : ICondition
     {
         public enum Comparison
         {
