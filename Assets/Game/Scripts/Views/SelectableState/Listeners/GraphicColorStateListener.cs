@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SampleGame
+namespace Game.Views
 {
     public sealed class GraphicColorStateListener : SelectableStateListener<Color32>
     {

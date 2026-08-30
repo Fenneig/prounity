@@ -1,7 +1,8 @@
-﻿using TMPro;
+﻿using _3rdParty.PS_ProgressBar.Scripts;
+using TMPro;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Views
 {
     public sealed class HealthView : MonoBehaviour
     {

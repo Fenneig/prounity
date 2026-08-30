@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Views
 {
     [ExecuteAlways]
     [HideMonoScript]

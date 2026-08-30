@@ -1,4 +1,4 @@
-namespace SampleGame
+namespace Game.Common
 {
     public enum TeamType
     {

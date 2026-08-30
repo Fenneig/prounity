@@ -1,9 +1,10 @@
-﻿using TMPro;
+﻿using _3rdParty.PS_ProgressBar.Scripts;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace SampleGame
+namespace Game.Views
 {
     public sealed class UnitCardView : MonoBehaviour
     {

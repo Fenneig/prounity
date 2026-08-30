@@ -2,7 +2,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game.Views
 {
     public sealed class ScaleStateListener : SelectableStateListener<Vector3>
     {
