@@ -1,5 +1,4 @@
-﻿using _3rdParty.PS_ProgressBar.Scripts;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
