@@ -1,20 +1,19 @@
 using Atomic.Elements;
-using Atomic.Entities;
 
 namespace Game.Entities
 {
-    public sealed class LifetimeBehaviour : IEntityInit, IEntityTick
+    public sealed class LifetimeBehaviour : IGameEntityInit, IGameEntityTick
     {
         private ICooldown _cooldown;
         private IAction _action;
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _cooldown = entity.GetLifetime();
             _action = entity.GetDestroyAction();
         }
 
-        public void Tick(IEntity entity, float deltaTime)
+        public void Tick(IGameEntity entity, float deltaTime)
         {
             _cooldown.Tick(deltaTime);
             

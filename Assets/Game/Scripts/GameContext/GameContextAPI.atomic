@@ -3,12 +3,16 @@ className: GameContextAPI
 directory: Assets/Game/Scripts/GameContext/
 aggressiveInlining: true
 unsafe: false
-entityType: IEntity
+entityType: IGameContext
 
 imports:
 - Atomic.Entities
+- Atomic.Elements
+- Game.Entities
 
 tags:
 
 values:
-- BulletPool: SceneEntityPool
+- BulletPool: GameEntityPool
+- Character: GameEntity
+- Score: IReactiveVariable<int>

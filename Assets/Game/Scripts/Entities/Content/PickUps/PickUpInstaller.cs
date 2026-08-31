@@ -1,9 +1,8 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities
 {
-    public class PickUpInstaller : SceneEntityInstaller
+    public class PickUpInstaller : GameEntityInstaller
     {
         [SerializeField] private GameObject _visual;
         [SerializeField] private GameObject _collider;
@@ -11,7 +10,7 @@ namespace Game.Entities
         [SerializeField] private TransformInstaller _transformInstaller;
         [SerializeField] private InteractableInstaller _interactableInstaller;
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             _transformInstaller.Install(entity);
             _interactableInstaller.Install(entity);

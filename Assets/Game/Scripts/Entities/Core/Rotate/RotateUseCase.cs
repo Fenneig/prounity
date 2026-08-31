@@ -1,11 +1,10 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities
 {
     public static class RotateUseCase
     {
-        public static void RotateStep(this IEntity entity, Vector3 direction, float deltaTime)
+        public static void RotateStep(this IGameEntity entity, Vector3 direction, float deltaTime)
         {
             var rotation = entity.GetRotation();
             var speed = entity.GetRotationSpeed();

@@ -1,5 +1,4 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities
 {
@@ -7,7 +6,7 @@ namespace Game.Entities
     {
         [SerializeField] private int _amount;
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             base.Install(entity);
             

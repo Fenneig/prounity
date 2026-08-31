@@ -189,8 +189,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6979400397003836636}
+  - component: {fileID: 7420980495863886014}
   - component: {fileID: 4267398721809954443}
-  - component: {fileID: 4443992804415155843}
   - component: {fileID: 7748228302230561538}
   m_Layer: 11
   m_Name: AmmoItem
@@ -217,28 +217,7 @@ Transform:
   - {fileID: 7576797372639347018}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4267398721809954443
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3332313712654455240}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.48086452, y: 0.5, z: 0.6702087}
-  m_Center: {x: -0.035928726, y: 0.25, z: 0.053168178}
---- !u!114 &4443992804415155843
+--- !u!114 &7420980495863886014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,9 +226,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3332313712654455240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -264,6 +243,27 @@ MonoBehaviour:
   initialTagCapacity: 1
   initialValueCapacity: 1
   initialBehaviourCapacity: 0
+--- !u!65 &4267398721809954443
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332313712654455240}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.48086452, y: 0.5, z: 0.6702087}
+  m_Center: {x: -0.035928726, y: 0.25, z: 0.053168178}
 --- !u!114 &7748228302230561538
 MonoBehaviour:
   m_ObjectHideFlags: 0

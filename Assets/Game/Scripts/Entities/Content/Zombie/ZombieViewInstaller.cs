@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public class ZombieViewInstaller : SceneEntityInstaller
+    public class ZombieViewInstaller : GameEntityInstaller
     {
-        [SerializeField] private HealthViewInstaller _healthViewInstaller;
         [SerializeField] private Animator _animator;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private Const<List<AudioClip>> _painSounds;
@@ -16,10 +14,8 @@ namespace Game.Entities
         [SerializeField] private Const<List<AudioClip>> _shoutSounds;
         [SerializeField] private Const<List<AudioClip>> _bodyFallSounds;
         
-        
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
-            _healthViewInstaller.Install(entity);
             entity.AddAnimator(_animator);
 
             entity.AddBehaviour(new MoveAnimBehaviour());
@@ -35,7 +31,7 @@ namespace Game.Entities
             ShoutSoundInstall(entity);
         }
 
-        private void BodyFallSoundInstall(IEntity entity)
+        private void BodyFallSoundInstall(IGameEntity entity)
         {
             entity.AddBodyFallSoundRequest(new Request());
             entity.AddBodyFallSoundCommand(new Command()
@@ -43,13 +39,13 @@ namespace Game.Entities
             entity.AddBehaviour(new BodyFallSoundBehaviour());
         }
 
-        private void HealthSoundInstall(IEntity entity)
+        private void HealthSoundInstall(IGameEntity entity)
         {
             entity.AddPainAudioClips(_painSounds);
             entity.AddDeathAudioClips(_deathSounds);
         }
 
-        private void AttackSoundInstall(IEntity entity)
+        private void AttackSoundInstall(IGameEntity entity)
         {
             entity.AddAttackSoundRequest(new Request());
             entity.AddAttackSoundCommand(new Command()
@@ -57,7 +53,7 @@ namespace Game.Entities
             entity.AddBehaviour(new AttackSoundBehaviour());
         }
 
-        private void ShoutSoundInstall(IEntity entity)
+        private void ShoutSoundInstall(IGameEntity entity)
         {
             entity.AddShoutSoundRequest(new Request());
             entity.AddShoutSoundCommand(new Command()

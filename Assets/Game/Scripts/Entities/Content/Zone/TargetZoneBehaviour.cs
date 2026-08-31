@@ -1,24 +1,23 @@
 using System.Collections.Generic;
 using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public sealed class TargetZoneBehaviour : IEntityInit, IEntityDispose
+    public sealed class TargetZoneBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private TriggerEvents _events;
-        private readonly List<IEntity> _occupiedEntities;
+        private readonly List<IGameEntity> _occupiedEntities;
         
-        public TargetZoneBehaviour(List<SceneEntity> occupiedEntities)
+        public TargetZoneBehaviour(List<GameEntity> occupiedEntities)
         {
-            _occupiedEntities = new List<IEntity>();
+            _occupiedEntities = new List<IGameEntity>();
             
             foreach (var entity in occupiedEntities) 
                 _occupiedEntities.Add(entity);
         }
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _events = entity.GetTrigger();
 
@@ -26,7 +25,7 @@ namespace Game.Entities
             _events.OnExited += OnUnsetTarget;
         }
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             _events.OnEntered -= OnSetTarget;
             _events.OnExited -= OnUnsetTarget;
@@ -34,7 +33,7 @@ namespace Game.Entities
 
         private void OnSetTarget(Collider other)
         {
-            var target = other.GetComponentInParent<IEntity>();
+            var target = other.GetComponentInParent<IGameEntity>();
             if (target == null)
                 return;
             
@@ -50,7 +49,7 @@ namespace Game.Entities
             if (other == null)
                 return;
             
-            var target = other.GetComponentInParent<IEntity>();
+            var target = other.GetComponentInParent<IGameEntity>();
             if (target == null)
                 return;
 

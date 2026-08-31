@@ -207,9 +207,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6795422085097260040}
+  - component: {fileID: 354225530098304147}
   - component: {fileID: 2293162354956507346}
   - component: {fileID: 2852948263122311593}
-  - component: {fileID: 2192448848155908159}
   - component: {fileID: 2506568133447773863}
   - component: {fileID: 2902983452281979079}
   m_Layer: 12
@@ -235,6 +235,32 @@ Transform:
   - {fileID: 2727797068301087175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &354225530098304147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829669804357326195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 2506568133447773863}
+  - {fileID: 7246309036385649184}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
 --- !u!54 &2293162354956507346
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -283,32 +309,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2192448848155908159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8829669804357326195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 2506568133447773863}
-  - {fileID: 7246309036385649184}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 0
-  initialBehaviourCapacity: 0
 --- !u!114 &2506568133447773863
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,15 +2,12 @@
 * Code generation. Don't modify! 
 **/
 
-using Atomic.Entities;
 using static Atomic.Entities.EntityNames;
 using System.Runtime.CompilerServices;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using Atomic.Elements;
-using Game.UI;
-using TMPro;
 
 namespace Game.UI
 {

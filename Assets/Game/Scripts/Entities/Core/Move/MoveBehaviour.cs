@@ -1,23 +1,22 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public sealed class MoveBehaviour : IEntityInit, IEntityFixedTick
+    public sealed class MoveBehaviour : IGameEntityInit, IGameEntityFixedTick
     {
         private IRequest<Vector3> _moveRequest;
         private ICommand<MoveArgs> _moveCommand;
         private IVariable<float> _moveTime;
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _moveRequest = entity.GetMoveRequest();
             _moveCommand = entity.GetMoveCommand();
             _moveTime = entity.GetMoveTime();
         }
 
-        public void FixedTick(IEntity entity, float deltaTime)
+        public void FixedTick(IGameEntity entity, float deltaTime)
         {
             if (_moveRequest.Consume(out Vector3 moveDirection) && 
                 moveDirection != Vector3.zero && 

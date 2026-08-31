@@ -1351,10 +1351,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6992041410405490774}
+  - component: {fileID: 995834338206341496}
   - component: {fileID: 956588022611877713}
-  - component: {fileID: 1782319989470583647}
   - component: {fileID: 3680775045690281538}
-  - component: {fileID: 1990519103340746681}
+  - component: {fileID: 937772417483011801}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -1384,6 +1384,32 @@ Transform:
   - {fileID: 9208576506648425579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &995834338206341496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578180279390331970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 3680775045690281538}
+  - {fileID: 440409179722637127}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
 --- !u!54 &956588022611877713
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1411,32 +1437,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &1782319989470583647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3578180279390331970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 3680775045690281538}
-  - {fileID: 440409179722637127}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 3
-  initialBehaviourCapacity: 0
 --- !u!114 &3680775045690281538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,7 +1453,7 @@ MonoBehaviour:
     _moveDuration:
       value: 0.1
     _moveSpeed:
-      value: 3
+      value: 5
   _rotateInstaller:
     _rotateSpeed:
       value: 720
@@ -1464,11 +1464,14 @@ MonoBehaviour:
       value: 10
     _health:
       value: 10
-  _weapon: {fileID: 7458825506823885218}
-  _triggerEvents: {fileID: 1990519103340746681}
+    _healthParticlesInstaller:
+      _bloodParticle: {fileID: 9071718681963068158}
+      _deadParticle: {fileID: 2393186179124088127}
+  _weapon: {fileID: 4208355492561594772}
+  _triggerEvents: {fileID: 937772417483011801}
   _animationEvents:
     value: {fileID: 8329381106495865444}
---- !u!114 &1990519103340746681
+--- !u!114 &937772417483011801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2351,9 +2354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51994eee31d041378eb14def7b460453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.CharacterViewInstaller
-  _characterHealthViewInstaller:
-    _bloodParticle: {fileID: 9071718681963068158}
-    _deadParticle: {fileID: 2393186179124088127}
   _animator: {fileID: 676053041413999030}
   _audioSource: {fileID: 1996927140430359114}
   _moveClips:
@@ -2401,7 +2401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9208576506648425579}
   - component: {fileID: 5299795795510340087}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: <PickupColloder>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2882,26 +2882,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -169.003
       objectReference: {fileID: 0}
-    - target: {fileID: 4820794094801717973, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
-      propertyPath: _owner
-      value: 
-      objectReference: {fileID: 1782319989470583647}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
---- !u!114 &7458825506823885218 stripped
+--- !u!114 &4208355492561594772 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2756921805524830862, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8909961228759659192, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
   m_PrefabInstance: {fileID: 4738243663061736236}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!4 &7708566380249203598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3115307619230652578, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}

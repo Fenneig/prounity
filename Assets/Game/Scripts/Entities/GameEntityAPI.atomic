@@ -1,0 +1,92 @@
+﻿namespace: Game.Entities
+className: GameEntityAPI
+directory: Assets/Game/Scripts/Entities/
+aggressiveInlining: true
+unsafe: false
+entityType: IGameEntity
+
+imports:
+- Game.Entities
+- Atomic.Entities
+- Atomic.Elements
+- UnityEngine
+- System.Collections.Generic
+
+tags:
+
+- Moveable
+- Damageable
+- Interactable
+- Character
+- Scorable
+
+values:
+- Position: IVariable<Vector3>
+- Rotation: IVariable<Quaternion>
+
+#Movement
+- MoveRequest: IRequest<Vector3>
+- MoveCommand: ICommand<MoveArgs>
+
+- MoveSpeed: IValue<float>
+- MoveTime: IVariable<float>
+- MoveDuration: IValue<float>
+
+#Rotate
+- RotateRequest: IRequest<Vector3>
+- RotateCommand: ICommand<RotateArgs>
+
+- RotationSpeed: IValue<float>
+
+- MaxHealth: IValue<int>
+- Health: IReactiveVariable<int>
+- TakeDamageAction: ICompositeAction<int>
+
+#Fire
+- FireRequest: IRequest
+- FireCommand: ICommand
+
+- Weapon: IVariable<IGameEntity>
+- FireAnticipation: ICooldown
+- WantsToFire: IReactiveVariable<bool>
+- WeaponCooldown: ICooldown
+- Ammo: IReactiveVariable<int>
+- Lifetime: ICooldown
+- Damage: IValue<int>
+
+#Interactable
+- InteractCommand: ICommand<IGameEntity>
+
+- Trigger: TriggerEvents
+
+- DestroyAction: IAction
+- RespawnAction: ICompositeAction
+
+- AnimationEvents: IValue<AnimationEvents>
+- Animator: Animator
+- AudioSource: AudioSource
+- ParticleSystem: ParticleSystem
+- TrailRender: TrailRenderer
+
+- Target: IVariable<IGameEntity>
+- Owner: IVariable<IGameEntity>
+- BloodParticle: ParticleSystem
+- DeadParticle: ParticleSystem
+
+- MoveAudioClips: IValue<List<AudioClip>>
+- PainAudioClips: IValue<List<AudioClip>>
+- DeathAudioClips: IValue<List<AudioClip>>
+- AttackAudioClips: IValue<List<AudioClip>>
+- BodyFallAudioClips: IValue<List<AudioClip>>
+
+#Sound requests
+- MoveSoundRequest: IRequest
+- MoveSoundCommand: ICommand
+- BodyFallSoundRequest: IRequest
+- BodyFallSoundCommand: ICommand
+- FireSoundRequest: IRequest
+- AttackSoundRequest: IRequest
+- AttackSoundCommand: ICommand
+- ShoutSoundRequest: IRequest
+- ShoutSoundCommand: ICommand
+- AttackAnticipationSoundRequest: IRequest

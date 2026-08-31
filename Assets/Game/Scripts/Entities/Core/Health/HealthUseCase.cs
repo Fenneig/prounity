@@ -1,11 +1,10 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities
 {
     public static class HealthUseCase
     {
-        public static void TakeDamage(this IEntity entity, int damage)
+        public static void TakeDamage(this IGameEntity entity, int damage)
         {
             if (IsHealthExists(entity))
             {
@@ -14,7 +13,7 @@ namespace Game.Entities
             }
         }
 
-        public static void Heal(this IEntity entity, int amount)
+        public static void Heal(this IGameEntity entity, int amount)
         {
             if (IsHealthExists(entity))
             {
@@ -24,15 +23,15 @@ namespace Game.Entities
             }
         }
         
-        public static bool CanHealTarget(this IEntity target) =>
+        public static bool CanHealTarget(this IGameEntity target) =>
             target.HasCharacterTag() && 
             target.IsHealthExists() &&
             target.GetHealth().Value < target.GetMaxHealth().Value;
 
-        public static bool IsHealthExists(this IEntity entity) => entity.GetHealth().Value > 0;
-        public static bool IsDead(this IEntity entity) => entity.GetHealth().Value <= 0;
+        public static bool IsHealthExists(this IGameEntity entity) => entity.GetHealth().Value > 0;
+        public static bool IsDead(this IGameEntity entity) => entity.GetHealth().Value <= 0;
         
-        public static float GetHealthPercent(this IEntity entity) => 
+        public static float GetHealthPercent(this IGameEntity entity) => 
             (float)entity.GetHealth().Value / entity.GetMaxHealth().Value;
     }
 }

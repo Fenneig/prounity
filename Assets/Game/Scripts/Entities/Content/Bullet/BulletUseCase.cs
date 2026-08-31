@@ -1,23 +1,22 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities
 {
     public static class BulletUseCase
     {
-        public static void SpawnBullet(this GameContext gameContext, Vector3 position, Quaternion rotation, IEntity owner)
+        public static void SpawnBullet(this IGameContext gameContext, Vector3 position, Quaternion rotation, IGameEntity owner)
         {
-            SceneEntityPool pool = gameContext.GetBulletPool();
-            IEntity bullet = pool.Rent();
+            var pool = gameContext.GetBulletPool();
+            IGameEntity bullet = pool.Rent();
             bullet.GetPosition().Value = position;
             bullet.GetRotation().Value = rotation; 
             bullet.GetRespawnAction().Invoke();
             bullet.GetOwner().Value = owner;
         }
         
-        public static void DespawnBullet(this GameContext gameContext, IEntity bullet)
+        public static void DespawnBullet(this IGameContext gameContext, IGameEntity bullet)
         {
-            SceneEntityPool pool = gameContext.GetBulletPool();
+            var pool = gameContext.GetBulletPool();
             pool.Return(bullet);
         }
     }

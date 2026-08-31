@@ -1,15 +1,14 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public class InteractBehaviour : IEntityInit, IEntityDispose
+    public class InteractBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private TriggerEvents _triggerEvents;
-        private IEntity _self;
+        private IGameEntity _self;
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _triggerEvents = entity.GetTrigger();
             _self = entity;
@@ -17,14 +16,14 @@ namespace Game.Entities
             _triggerEvents.OnEntered += OnInteract;
         }
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             _triggerEvents.OnEntered -= OnInteract;
         }
 
         private void OnInteract(Collider other)
         {
-            if (other.TryGetComponent(out IEntity entity)) 
+            if (other.TryGetComponent(out IGameEntity entity)) 
                 _self.InteractWith(entity);
         }
     }

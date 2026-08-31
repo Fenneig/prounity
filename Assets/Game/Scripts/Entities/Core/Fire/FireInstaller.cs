@@ -1,13 +1,12 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Entities;
 
 namespace Game.Entities
 {
     [Serializable]
-    public sealed class FireInstaller : IEntityInstaller
+    public sealed class FireInstaller : IGameEntityInstaller
     {
-        public void Install(IEntity entity)
+        public void Install(IGameEntity entity)
         {
             entity.AddFireRequest(new Request());
             entity.AddFireCommand(new Command());

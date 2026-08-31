@@ -1,14 +1,13 @@
-﻿using Atomic.Entities;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Entities
 {
-    public class MeleeAnimBehaviour : IEntityInit, IEntityDispose
+    public class MeleeAnimBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private static readonly int Attack = Animator.StringToHash("Attack");
         private Animator _animator;
 
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _animator = entity.GetAnimator();
             
@@ -21,7 +20,7 @@ namespace Game.Entities
                 _animator.SetTrigger(Attack);
         }
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             entity.GetWantsToFire().OnEvent -= HandleWantsToFire;
         }

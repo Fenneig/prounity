@@ -610,7 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3115307619230652578}
-  - component: {fileID: 2756921805524830862}
+  - component: {fileID: 8909961228759659192}
   - component: {fileID: 4820794094801717973}
   m_Layer: 0
   m_Name: Pistol
@@ -636,7 +636,7 @@ Transform:
   - {fileID: 7507861899232452065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -263.307, y: -350.16, z: -169.003}
---- !u!114 &2756921805524830862
+--- !u!114 &8909961228759659192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -645,9 +645,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2555051196878869353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -659,9 +659,9 @@ MonoBehaviour:
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 8
-  initialBehaviourCapacity: 1
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
 --- !u!114 &4820794094801717973
 MonoBehaviour:
   m_ObjectHideFlags: 0

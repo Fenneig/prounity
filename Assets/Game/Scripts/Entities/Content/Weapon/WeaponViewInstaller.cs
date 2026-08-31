@@ -1,25 +1,22 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Entities;
-using Game.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Game.Entities
 {
     [Serializable]
-    public sealed class WeaponViewInstaller : SceneEntityInstaller
+    public sealed class WeaponViewInstaller : GameEntityInstaller
     {
         [SerializeField] private Optional<AudioSource> _audioSource;
         [SerializeField] private float _minPitch;
         [SerializeField] private float _maxPitch;
         
         [SerializeField] private Optional<ParticleSystem> _particleSystem;
-        [SerializeField] private bool _hasAmmo;
 
         private readonly DisposableComposite _disposableComposite = new();
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             if (_audioSource)
             {
@@ -37,14 +34,9 @@ namespace Game.Entities
                 entity.AddParticleSystem(_particleSystem);
                 entity.GetFireCommand().Subscribe(entity.GetParticleSystem().Play).AddTo(_disposableComposite);
             }
-
-            if (_hasAmmo)
-            {
-                entity.AddBehaviour(new AmmoViewPresenter(GameUI.Instance));
-            }
         }
 
-        public override void Uninstall(IEntity entity)
+        public override void Uninstall(IGameEntity entity)
         {
             _disposableComposite.Dispose();
         }

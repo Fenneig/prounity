@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Game.Entities
 {
-    public abstract class WeaponInstaller : SceneEntityInstaller
+    public abstract class WeaponInstaller : GameEntityInstaller
     {
         [SerializeField] private FireInstaller _fireInstaller;
         [SerializeField] private Cooldown _cooldown;
         [SerializeField] private Cooldown _anticipation;
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             _fireInstaller.Install(entity);
-            entity.AddOwner(new Variable<IEntity>(null));
+            entity.AddOwner(new Variable<IGameEntity>(null));
 
             entity.GetFireCommand()
                 .AddCondition(() => entity.GetFireAnticipation().IsCompleted())
@@ -24,13 +24,13 @@ namespace Game.Entities
             InstallAnticipation(entity);
         }
 
-        private void InstallCooldown(IEntity entity)
+        private void InstallCooldown(IGameEntity entity)
         {
             entity.AddWeaponCooldown(_cooldown);
             entity.WhenFixedTick(_cooldown.Tick);
         }
 
-        private void InstallAnticipation(IEntity entity)
+        private void InstallAnticipation(IGameEntity entity)
         {
             entity.AddFireAnticipation(_anticipation);
             entity.AddWantsToFire(new ReactiveVariable<bool>(false));

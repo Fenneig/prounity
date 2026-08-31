@@ -1,16 +1,15 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Entities;
 
 namespace Game.Entities
 {
     [Serializable]
-    public class InteractableInstaller : IEntityInstaller
+    public class InteractableInstaller : IGameEntityInstaller
     {
-        public void Install(IEntity entity)
+        public void Install(IGameEntity entity)
         {
             entity.AddInteractableTag();
-            entity.AddInteractCommand(new Command<IEntity>());
+            entity.AddInteractCommand(new Command<IGameEntity>());
         }
     }
 }

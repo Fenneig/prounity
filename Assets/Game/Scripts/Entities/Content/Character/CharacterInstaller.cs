@@ -1,23 +1,22 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using Game.Entities.Animations;
 using Game.UI;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public sealed class CharacterInstaller : SceneEntityInstaller
+    public sealed class CharacterInstaller : GameEntityInstaller
     {
         [SerializeField] private MoveInstaller _moveInstaller;
         [SerializeField] private RotateInstaller _rotateInstaller;
         [SerializeField] private TransformInstaller _transformInstaller;
         [SerializeField] private HealthInstaller _healthInstaller;
         [SerializeField] private FireInstaller _fireInstaller;
-        [SerializeField] private SceneEntity _weapon;
+        [SerializeField] private GameEntity _weapon;
         [SerializeField] private TriggerEvents _triggerEvents;
         [SerializeField] private Const<AnimationEvents> _animationEvents;
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             entity.AddCharacterTag();
             
@@ -32,23 +31,15 @@ namespace Game.Entities
             InstallAnimationEvents(entity);
 
             entity.AddBehaviour(new InteractBehaviour());
-            InstallInput(entity);
-            
-            entity.AddScore(new ReactiveVariable<int>(0));
         }
 
-        private void InstallAnimationEvents(IEntity entity)
+        private void InstallAnimationEvents(IGameEntity entity)
         {
             entity.AddAnimationEvents(_animationEvents);
             entity.AddBehaviour(new AnimationEventBehaviour());
         }
 
-        private void InstallInput(IEntity entity)
-        {
-            entity.AddBehaviour(new InputController(GameUI.Instance));
-        }
-
-        private void InstallMovement(IEntity entity)
+        private void InstallMovement(IGameEntity entity)
         {
             _moveInstaller.Install(entity);
             
@@ -58,7 +49,7 @@ namespace Game.Entities
                 .AddAction(args => entity.RotateStep(args.Direction, args.DeltaTime));
         }
 
-        private void InstallRotation(IEntity entity)
+        private void InstallRotation(IGameEntity entity)
         {
             _rotateInstaller.Install(entity);
             
@@ -67,10 +58,10 @@ namespace Game.Entities
                 .AddAction(args => entity.RotateStep(args.Direction, args.DeltaTime));
         }
 
-        private void InstallWeapon(IEntity entity)
+        private void InstallWeapon(IGameEntity entity)
         {
             _fireInstaller.Install(entity);
-            entity.AddWeapon(new Variable<IEntity>(_weapon));
+            entity.AddWeapon(new Variable<IGameEntity>(_weapon));
             entity.GetFireCommand()
                 .AddCondition(entity.IsHealthExists)
                 .AddCondition(() => _weapon.GetFireCommand().CanInvoke())
@@ -79,7 +70,7 @@ namespace Game.Entities
             _weapon.GetOwner().Value = entity;
         }
 
-        private void InstallHealth(IEntity entity)
+        private void InstallHealth(IGameEntity entity)
         {
             _healthInstaller.Install(entity);
             entity.AddTakeDamageAction(new CompositeAction<int>(entity.TakeDamage));

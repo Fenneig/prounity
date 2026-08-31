@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public class MoveSoundBehaviour : IEntityInit, IEntityTick
+    public class MoveSoundBehaviour : IGameEntityInit, IGameEntityTick
     {
         private AudioSource _audioSource;
         private IValue<List<AudioClip>> _moveClips;
@@ -13,7 +12,7 @@ namespace Game.Entities
         
         private Queue<AudioClip> _clipQueue;
 
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _audioSource = entity.GetAudioSource();
             _moveClips = entity.GetMoveAudioClips();
@@ -42,7 +41,7 @@ namespace Game.Entities
             }
         }
 
-        public void Tick(IEntity entity, float deltaTime)
+        public void Tick(IGameEntity entity, float deltaTime)
         {
             if (!_request.Consume()) 
                 return;

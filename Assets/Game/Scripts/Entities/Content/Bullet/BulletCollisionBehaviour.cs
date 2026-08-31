@@ -1,17 +1,16 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public sealed class BulletCollisionBehaviour : IEntityInit, IEntityDispose
+    public sealed class BulletCollisionBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private TriggerEvents _triggerEvents;
         private IValue<int> _damage;
         private IAction _destroyAction;
-        private IVariable<IEntity> _owner;
+        private IVariable<IGameEntity> _owner;
 
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _owner = entity.GetOwner();
             _triggerEvents = entity.GetTrigger();
@@ -21,7 +20,7 @@ namespace Game.Entities
             _triggerEvents.OnEntered += OnTriggerEnter;
         }
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             _triggerEvents.OnEntered -= OnTriggerEnter;
         }

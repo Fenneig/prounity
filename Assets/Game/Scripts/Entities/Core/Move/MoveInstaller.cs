@@ -1,17 +1,16 @@
 ﻿using System;
 using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
     [Serializable]
-    public sealed class MoveInstaller : IEntityInstaller
+    public sealed class MoveInstaller : IGameEntityInstaller
     {
         [SerializeField] private Const<float> _moveDuration;
         [SerializeField] private Const<float> _moveSpeed;
         
-        public void Install(IEntity entity)
+        public void Install(IGameEntity entity)
         {
             entity.AddMoveableTag();
 

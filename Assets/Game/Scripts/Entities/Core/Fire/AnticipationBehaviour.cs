@@ -1,14 +1,13 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 
 namespace Game.Entities
 {
-    public class AnticipationBehaviour : IEntityInit, IEntityDispose
+    public class AnticipationBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private ICooldown _anticipationCooldown;
         private IReactiveVariable<bool> _wantsToFire;
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _anticipationCooldown = entity.GetFireAnticipation();
             _wantsToFire = entity.GetWantsToFire();
@@ -16,7 +15,7 @@ namespace Game.Entities
             _wantsToFire.OnEvent += OnWantToFireChanged;
         }
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             _wantsToFire.OnEvent -= OnWantToFireChanged;
         }

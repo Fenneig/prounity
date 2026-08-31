@@ -1281,8 +1281,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 76841824}
-  - component: {fileID: 76841826}
   - component: {fileID: 76841829}
+  - component: {fileID: 76841826}
   - component: {fileID: 76841828}
   - component: {fileID: 76841827}
   m_Layer: 0
@@ -1353,11 +1353,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
   _occupiedEntities:
-  - {fileID: 2066641331}
-  - {fileID: 1660857323}
-  - {fileID: 2039888613}
-  - {fileID: 1581571837}
-  - {fileID: 379820526}
+  - {fileID: 1293016463}
+  - {fileID: 1905960601}
+  - {fileID: 2028300185}
+  - {fileID: 2093790473}
+  - {fileID: 256725176}
   _triggerEvents: {fileID: 76841827}
 --- !u!114 &76841829
 MonoBehaviour:
@@ -1368,9 +1368,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 76841823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -2029,8 +2029,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 137928204}
-  - component: {fileID: 137928206}
   - component: {fileID: 137928209}
+  - component: {fileID: 137928206}
   - component: {fileID: 137928208}
   - component: {fileID: 137928207}
   m_Layer: 0
@@ -2101,8 +2101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
   _occupiedEntities:
-  - {fileID: 2074083453}
-  - {fileID: 691415262}
+  - {fileID: 2145657932}
+  - {fileID: 950908919}
   _triggerEvents: {fileID: 137928207}
 --- !u!114 &137928209
 MonoBehaviour:
@@ -2113,9 +2113,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 137928203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -2126,9 +2126,9 @@ MonoBehaviour:
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
-  initialTagCapacity: 0
+  initialTagCapacity: 1
   initialValueCapacity: 1
-  initialBehaviourCapacity: 1
+  initialBehaviourCapacity: 0
 --- !u!1001 &143138435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3583,6 +3583,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
   m_PrefabInstance: {fileID: 256725171}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &256725176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 256725171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1 &261950139
 GameObject:
   m_ObjectHideFlags: 0
@@ -5201,17 +5212,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2256463399437065293, guid: 8787bbdb5db9a45228c107cf0c94bcf5, type: 3}
   m_PrefabInstance: {fileID: 377622917}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &379820526 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 256725171}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &381518052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9918,8 +9918,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680947262}
-  - component: {fileID: 680947264}
   - component: {fileID: 680947267}
+  - component: {fileID: 680947264}
   - component: {fileID: 680947266}
   - component: {fileID: 680947265}
   m_Layer: 0
@@ -9990,8 +9990,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
   _occupiedEntities:
-  - {fileID: 912174565}
-  - {fileID: 2068869761}
+  - {fileID: 974138739}
+  - {fileID: 1987146905}
   _triggerEvents: {fileID: 680947265}
 --- !u!114 &680947267
 MonoBehaviour:
@@ -10002,9 +10002,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 680947261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -10150,17 +10150,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
   m_PrefabInstance: {fileID: 691415258}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &691415262 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 691415258}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1 &693230073
 GameObject:
   m_ObjectHideFlags: 0
@@ -11088,15 +11077,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &761039294 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
   m_PrefabInstance: {fileID: 761039289}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &764238427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12261,13 +12250,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 880559222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f59bba20ce44401a5b73f5debed8d89, type: 3}
+  m_Script: {fileID: 11500000, guid: 0842130bbf6528f4a90179d16154f140, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntityPool
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntityPool
   _initOnAwake: 1
   _acceptExternalReturns: 1
-  _initialCount: 5
-  _prefab: {fileID: 2192448848155908159, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
+  _initialCount: 0
+  _prefab: {fileID: 354225530098304147, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
   _container: {fileID: 880559223}
   _dontDestroyOnLoad: 0
 --- !u!1 &882859607
@@ -12555,17 +12544,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
   m_PrefabInstance: {fileID: 912174561}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &912174565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 912174561}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &913457089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12802,6 +12780,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.82827514, y: 0.818296, z: 0.82839644}
   m_Center: {x: 0, y: 0.409148, z: 0}
+--- !u!114 &950908919 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 691415258}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &952959743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13544,6 +13533,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2256463399437065293, guid: 8787bbdb5db9a45228c107cf0c94bcf5, type: 3}
   m_PrefabInstance: {fileID: 972414027}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &974138739 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 912174561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &977501693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15293,6 +15293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameContext.GameContextInstaller
   _bulletPool: {fileID: 880559224}
+  _character: {fileID: 1630209712}
 --- !u!114 &1183695319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15302,9 +15303,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1183695315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15d8deb2b3a44d3c94367bbbc6dde662, type: 3}
+  m_Script: {fileID: 11500000, guid: e5444e5dc1f9c1040b5b8add6035fc53, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameContext
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameContextEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -17698,6 +17699,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
   m_PrefabInstance: {fileID: 1293016458}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1293016463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 1293016458}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &1293755590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20928,17 +20940,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2499998, y: 1.5, z: 0}
---- !u!114 &1581571837 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 131314610}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &1583420660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21448,6 +21449,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 1629235911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1630209712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 995834338206341496, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &1641018258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21881,17 +21893,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2256463399437065293, guid: 8787bbdb5db9a45228c107cf0c94bcf5, type: 3}
   m_PrefabInstance: {fileID: 1653176037}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1660857323 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 683460838}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1 &1676091982
 GameObject:
   m_ObjectHideFlags: 0
@@ -23829,6 +23830,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 1904829137}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1905960601 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 683460838}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &1907416774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24892,6 +24904,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 1979574443}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1987146905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 1295137804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &1993309828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25351,6 +25374,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 2019938600}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2028300185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 1293755590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &2030074244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25409,17 +25443,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 2030074244}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2039888613 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 1293755590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &2041473618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25586,28 +25609,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5426925789724831932, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
   m_PrefabInstance: {fileID: 2928555308454414446}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2066641331 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 1293016458}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
---- !u!114 &2068869761 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 1295137804}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &2074083449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25674,17 +25675,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
   m_PrefabInstance: {fileID: 2074083449}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2074083453 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8403088207822063823, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-  m_PrefabInstance: {fileID: 2074083449}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
 --- !u!1001 &2088375297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25867,6 +25857,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2500002, y: 1.5, z: 0}
+--- !u!114 &2093790473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 131314610}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &2096633112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26296,8 +26297,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2117813608}
-  - component: {fileID: 2117813610}
   - component: {fileID: 2117813613}
+  - component: {fileID: 2117813610}
   - component: {fileID: 2117813612}
   - component: {fileID: 2117813611}
   m_Layer: 0
@@ -26379,9 +26380,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117813607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
   useUnityLifecycle: 1
   disposeValues: 1
   installOnAwake: 1
@@ -26814,6 +26815,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2500002, y: 1.5, z: 0}
+--- !u!114 &2145657932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6656415674514062441, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 2074083449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
 --- !u!1001 &137296473139595338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26909,10 +26921,6 @@ PrefabInstance:
     - target: {fileID: 1662961120376883892, guid: ec84880a8eeb045f781ce1bd97daf080, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1662961120376883892, guid: ec84880a8eeb045f781ce1bd97daf080, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1662961120376883892, guid: ec84880a8eeb045f781ce1bd97daf080, type: 3}
       propertyPath: m_AnchorMax.x
@@ -27844,7 +27852,7 @@ MonoBehaviour:
   _playerStatsInstaller:
     _ammoView: {fileID: 7160444056652517395}
     _healthView: {fileID: 7160444056652517396}
-  _scoreView: {fileID: 2928555308454414447}
+    _scoreView: {fileID: 2928555308454414447}
   _healthScreenView: {fileID: 548561269895222117}
 --- !u!114 &5764159610076527036
 MonoBehaviour:

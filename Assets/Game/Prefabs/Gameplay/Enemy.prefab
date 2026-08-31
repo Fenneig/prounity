@@ -1658,8 +1658,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4361596233082998913}
+  - component: {fileID: 6656415674514062441}
   - component: {fileID: 8179233504444308434}
-  - component: {fileID: 8403088207822063823}
   - component: {fileID: 9040316608973050046}
   m_Layer: 10
   m_Name: Enemy
@@ -1690,6 +1690,32 @@ Transform:
   - {fileID: 4410944339874547077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &6656415674514062441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355162821186015845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 9040316608973050046}
+  - {fileID: 2644345756265274866}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
 --- !u!54 &8179233504444308434
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1717,32 +1743,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &8403088207822063823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355162821186015845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 9040316608973050046}
-  - {fileID: 2644345756265274866}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!114 &9040316608973050046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1760,8 +1760,6 @@ MonoBehaviour:
       value: 0.1
     _moveSpeed:
       value: 1
-  _reachDistance:
-    value: 0.75
   _rotateInstaller:
     _rotateSpeed:
       value: 720
@@ -1772,10 +1770,15 @@ MonoBehaviour:
       value: 2
     _health:
       value: 2
+    _healthParticlesInstaller:
+      _bloodParticle: {fileID: 7867977103327073178}
+      _deadParticle: {fileID: 3634830046846425720}
   _collider: {fileID: 1842272872912051803}
-  _weapon: {fileID: 5608337869560217858}
+  _weapon: {fileID: 1586085957014311329}
   _animationEvents:
     value: {fileID: 4057052806594214817}
+  _meleeAiInstaller:
+    _wantToFireAttackDistance: 1
 --- !u!1 &6519369982854541961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,9 +2062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59b118b10be4e178386c79cb7a6053b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZombieViewInstaller
-  _healthViewInstaller:
-    _bloodParticle: {fileID: 7867977103327073178}
-    _deadParticle: {fileID: 3634830046846425720}
   _animator: {fileID: 2415962780172116089}
   _audioSource: {fileID: 8082205103597057941}
   _painSounds:
@@ -2834,22 +2834,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e6a44bad4b46cc9bac3b3e2c92ca91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.MeleeWeaponInstaller
---- !u!4 &2845756347370805700 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-  m_PrefabInstance: {fileID: 3807615246241092946}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5608337869560217858 stripped
+--- !u!114 &1586085957014311329 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8719967748094809168, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2510111528495940851, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
   m_PrefabInstance: {fileID: 3807615246241092946}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3142498ee69840069f3a93c11b1e1f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Entities::Atomic.Entities.SceneEntity
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
+--- !u!4 &2845756347370805700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+  m_PrefabInstance: {fileID: 3807615246241092946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4012628793975234114
 PrefabInstance:
   m_ObjectHideFlags: 0

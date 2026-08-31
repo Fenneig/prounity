@@ -1,22 +1,23 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities.Animations
 {
-    public class AnimationEventBehaviour : IEntityInit, IEntityDispose
+    public class AnimationEventBehaviour : IGameEntityInit, IGameEntityDispose
     {
-        private IEntity _self;
+        private IGameEntity _self;
         private IValue<AnimationEvents> _animationEvents;
+        private IRequest _fireRequest;
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _self = entity;
             _animationEvents = entity.GetAnimationEvents();
             _animationEvents.Value.OnEvent += HandleEvent;
+            _fireRequest = entity.GetFireRequest();
         }
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             _animationEvents.Value.OnEvent -= HandleEvent;
         }
@@ -32,7 +33,7 @@ namespace Game.Entities.Animations
                     _self.GetMoveSoundRequest().Invoke();
                     break;
                 case "Attack":
-                    _self.GetAttackSoundRequest().Invoke();
+                    HandleAttack();
                     break;
                 case "StartAttack":
                     _self.GetShoutSoundRequest().Invoke();
@@ -40,6 +41,17 @@ namespace Game.Entities.Animations
                 default:
                     Debug.Log($"Couldn't handle animation event {eventName}");
                     break;
+            }
+        }
+
+        private void HandleAttack()
+        {
+            _self.GetAttackSoundRequest().Invoke();
+            bool wantToAttack = _self.GetWantsToFire().Value;
+            if (wantToAttack)
+            {
+                _fireRequest.Invoke();
+                _self.GetWantsToFire().Value = false;
             }
         }
     }

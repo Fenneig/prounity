@@ -1,13 +1,12 @@
-﻿using Atomic.Entities;
-
-namespace Game.Entities
+﻿namespace Game.Entities
 {
     public static class KillUseCase
     {
-        public static void ProcessKill(this IEntity entity)
+        public static void ProcessKill(this IGameEntity _)
         {
-            if (entity.TryGetScore(out var score))
-                score.Value++;
+            var score = GameContext.Instance.GetScore();
+
+            score.Value++;
         }
     }
 }

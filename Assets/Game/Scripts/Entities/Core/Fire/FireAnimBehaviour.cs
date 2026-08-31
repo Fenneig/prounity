@@ -1,16 +1,15 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public class FireAnimBehaviour : IEntityInit, IEntityDispose
+    public class FireAnimBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private static readonly int Attack = Animator.StringToHash("Attack");
         private Animator _animator;
         private ICommand _fireCommand;
         
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _animator = entity.GetAnimator();
             _fireCommand = entity.GetFireCommand();
@@ -18,7 +17,7 @@ namespace Game.Entities
             _fireCommand.Subscribe(OnFire);
         }
 
-        public void Dispose(IEntity entity) => 
+        public void Dispose(IGameEntity entity) => 
             _fireCommand.Unsubscribe(OnFire);
 
         private void OnFire() => 

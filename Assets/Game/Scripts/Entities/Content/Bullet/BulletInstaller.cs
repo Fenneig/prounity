@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Entities
 {
-    public sealed class BulletInstaller : SceneEntityInstaller
+    public sealed class BulletInstaller : SceneEntityInstaller<IGameEntity>
     {
         [SerializeField] private TransformInstaller _transformInstaller;
         [SerializeField] private MoveInstaller _moveInstaller;
@@ -12,13 +12,13 @@ namespace Game.Entities
         [SerializeField] private LifetimeInstaller _lifetimeInstaller;
         [SerializeField] private Const<int> _damage;
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             _transformInstaller.Install(entity);
             _moveInstaller.Install(entity);
             _lifetimeInstaller.Install(entity);
             
-            entity.AddOwner(new Variable<IEntity>(null));
+            entity.AddOwner(new Variable<IGameEntity>(null));
             
             entity.AddTrigger(_triggerEvents);
             entity.AddDamage(_damage);

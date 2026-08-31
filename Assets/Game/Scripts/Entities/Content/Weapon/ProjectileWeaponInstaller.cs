@@ -1,5 +1,4 @@
 ﻿using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
@@ -8,9 +7,8 @@ namespace Game.Entities
     {
         [SerializeField] private ReactiveVariable<int> _ammo;
         [SerializeField] private Transform _firePoint;
-        [SerializeField] private SceneEntity _bulletPrefab;
         
-        public override void Install(IEntity entity)
+        public override void Install(IGameEntity entity)
         {
             base.Install(entity);
 

@@ -1,10 +1,8 @@
-﻿using Atomic.Entities;
-
-namespace Game.Entities
+﻿namespace Game.Entities
 {
     public static class InteractUseCase
     {
-        public static void InteractWith(this IEntity character, IEntity interactable)
+        public static void InteractWith(this IGameEntity character, IGameEntity interactable)
         {
             if (interactable != null && 
                 interactable.HasInteractableTag() && 

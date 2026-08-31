@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Atomic.Elements;
-using Atomic.Entities;
 using UnityEngine;
 
 namespace Game.Entities
 {
-    public class HealthViewBehaviour : IEntityInit, IEntityDispose
+    public class HealthViewBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private static readonly int Death = Animator.StringToHash("Death");
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
@@ -21,7 +20,7 @@ namespace Game.Entities
         
         private int _lastHealth;
 
-        public void Init(IEntity entity)
+        public void Init(IGameEntity entity)
         {
             _animator = entity.GetAnimator();
             _health = entity.GetHealth();
@@ -59,7 +58,7 @@ namespace Game.Entities
         
         private AudioClip GetRandomSound(List<AudioClip> list) => list[Random.Range(0, list.Count)];
 
-        public void Dispose(IEntity entity)
+        public void Dispose(IGameEntity entity)
         {
             _health.OnEvent -= HealthChanged;
         }
