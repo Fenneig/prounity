@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Game
 {
@@ -10,9 +11,11 @@ namespace Game
         IPushComponent,
         ITossComponent
     {
-        [SerializeField] private float _attackAnticipation;
         [SerializeField] private GameObject _pushWeapon;
+        [SerializeField] private float _pushAnticipation;
         [SerializeField] private GameObject _tossWeapon;
+        [SerializeField] private float _tossAnticipation;
+        
 
         private HealthComponent _health;
 
@@ -23,6 +26,7 @@ namespace Game
         private GroundedComponent _groundedComponent;
 
         private FlipComponent _flipComponent;
+        private bool _isAttacking;
 
         private void Awake()
         {
@@ -52,8 +56,7 @@ namespace Game
             if (!CanAttack())
                 return;
 
-            StartCoroutine(_pushWeapon.GetComponent<AttackComponentView>().Attack(_attackAnticipation,
-                () => _pushWeapon.GetComponent<AttackRequestComponent>().Attack()));
+            StartCoroutine(AttackEternal(_pushWeapon, _pushAnticipation));
         }
 
         public void Toss()
@@ -61,15 +64,27 @@ namespace Game
             if (!CanAttack())
                 return;
 
-            StartCoroutine(_tossWeapon.GetComponent<AttackComponentView>().Attack(_attackAnticipation,
-                () => _tossWeapon.GetComponent<AttackRequestComponent>().Attack()));
+            StartCoroutine(AttackEternal(_tossWeapon, _tossAnticipation));
+        }
+
+        private IEnumerator AttackEternal(GameObject weapon, float tossAnticipation)
+        {
+            var view = weapon.GetComponent<AttackComponentView>();
+            view.StartAttack();
+
+            _isAttacking = true;
+            
+            yield return new WaitForSeconds(tossAnticipation);
+
+            _isAttacking = false;
+            weapon.GetComponent<AttackRequestComponent>().Attack();
+            view.FinalizeAttack();
         }
 
         private bool CanAttack() => _health.IsAlive &&
-                                  !_pushWeapon.GetComponent<AttackComponentView>().IsPlaying &&
-                                  !_tossWeapon.GetComponent<AttackComponentView>().IsPlaying &&
-                                  _pushWeapon.GetComponent<WeaponBaseComponent>().CanAttack &&
-                                  _tossWeapon.GetComponent<WeaponBaseComponent>().CanAttack;
+                                  !_isAttacking &&
+                                  _pushWeapon.GetComponent<CharacterWeapon>().CanAttack &&
+                                  _tossWeapon.GetComponent<CharacterWeapon>().CanAttack;
 
         private void OnDied() => GetComponent<Rigidbody2D>().simulated = false;
 

@@ -1,12 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
     public sealed class AttackRequestComponent : MonoBehaviour
     {
-        public event Action OnAttack;
-
         public interface IAction
         {
             void Invoke();
@@ -28,11 +25,8 @@ namespace Game
         
         private void FixedUpdate()
         {
-            if (_required && (_condition == null || _condition.Evaluate()))
-            {
+            if (_required && (_condition == null || _condition.Evaluate())) 
                 _action?.Invoke();
-                OnAttack?.Invoke();
-            }
             
             _required = false;
         }

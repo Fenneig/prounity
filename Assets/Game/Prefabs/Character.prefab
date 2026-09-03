@@ -258,9 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d400bfcab4a4b8ca5ef63c637d39119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameObjects.Content.Character.CharacterController
-  _attackAnticipation: 0.22
   _pushWeapon: {fileID: 6638340939541105720}
+  _pushAnticipation: 0.22
   _tossWeapon: {fileID: 2860556422706071794}
+  _tossAnticipation: 0.22
 --- !u!114 &8483445791109950397
 MonoBehaviour:
   m_ObjectHideFlags: 0

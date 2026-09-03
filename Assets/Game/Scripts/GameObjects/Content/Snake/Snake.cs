@@ -9,7 +9,7 @@ namespace Game
         AttackRequestComponent.ICondition,
         AttackRequestComponent.IAction
     {
-        private PushDamageWeapon _weapon;
+        private EnemyWeapon _weapon;
         private AttackRequestComponent _attackRequestComponent;
         private ForceComponent _forceComponent;
         private TargetComponent _targetComponent;
@@ -23,7 +23,7 @@ namespace Game
         private void Awake()
         {
             _forceComponent = GetComponent<ForceComponent>();
-            _weapon = GetComponent<PushDamageWeapon>();
+            _weapon = GetComponent<EnemyWeapon>();
             _attackRequestComponent = GetComponent<AttackRequestComponent>();
             _targetComponent = GetComponent<TargetComponent>();
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
@@ -58,11 +58,9 @@ namespace Game
 
         private void Attack() => _attackRequestComponent.Attack();
 
-        void MoveRequestComponent.IAction.Invoke(Vector2 direction)
-        {
-            _moveComponent.Move(direction);
-            _flipComponent.Flip(direction.x);
-        }
+        bool ForceComponent.ICondition.Evaluate() => _healthComponent.IsAlive &&
+                                                     _forceComponent.CanForce &&
+                                                     _groundedComponent.IsGrounded;
 
         bool MoveRequestComponent.ICondition.Evaluate() =>
             _healthComponent.IsAlive &&
@@ -70,15 +68,17 @@ namespace Game
             _weapon.CanAttack &&
             _groundedComponent.IsGrounded;
 
+        void MoveRequestComponent.IAction.Invoke(Vector2 direction)
+        {
+            _moveComponent.Move(direction);
+            _flipComponent.Flip(direction.x);
+        }
+
         bool AttackRequestComponent.ICondition.Evaluate() =>
             _healthComponent.IsAlive &&
             _targetComponent.HasTarget &&
             _weapon.CanAttack &&
             _groundedComponent.IsGrounded;
-
-        bool ForceComponent.ICondition.Evaluate() => _healthComponent.IsAlive &&
-                                                     _forceComponent.CanForce &&
-                                                     _groundedComponent.IsGrounded;
 
         void AttackRequestComponent.IAction.Invoke() => 
             _weapon.Attack();

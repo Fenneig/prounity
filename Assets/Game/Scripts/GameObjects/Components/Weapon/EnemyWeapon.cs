@@ -3,26 +3,30 @@
 namespace Game
 {
     [RequireComponent(typeof(ForceComponent), typeof(DealDamageComponent))]
-    public sealed class PushDamageWeapon : WeaponBaseComponent
+    public sealed class EnemyWeapon : MonoBehaviour
     {
+        [SerializeField] private float _cooldown;
         [SerializeField] private Transform _attackPoint;
         [SerializeField] private LayerMask _enemyMask;
         [SerializeField] private float _radius = .2f;
 
         private ForceComponent _forceComponent;
         private DealDamageComponent _dealDamageComponent;
+        private float _startAttackTime;
+        
+        public bool CanAttack => Time.time - _startAttackTime > _cooldown;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
-
+            _startAttackTime = Time.time;
+            
             _forceComponent = GetComponent<ForceComponent>();
             _dealDamageComponent = GetComponent<DealDamageComponent>();
         }
 
-        public override void Attack()
+        public void Attack()
         {
-            base.Attack();
+            _startAttackTime = Time.time;
             
             var hits = Physics2D.OverlapCircleAll(_attackPoint.position, _radius, _enemyMask);
             foreach (var hit in hits)

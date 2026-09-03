@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -14,20 +12,16 @@ namespace Game
         [Header("Audio")]
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _audioClip;
-        
-        public bool IsPlaying { get; private set; }
 
-        public IEnumerator Attack(float animationAnticipation, Action onHit)
+        public void StartAttack()
         {
-            IsPlaying = true;
             _animator.SetTrigger(_animatorKey);
             _audioSource.PlayOneShot(_audioClip);
-            
-            yield return new WaitForSeconds(animationAnticipation);
-            
-            IsPlaying = false;
+        }
+
+        public void FinalizeAttack()
+        {
             _vfx.Play();
-            onHit();
         }
     }
 }
