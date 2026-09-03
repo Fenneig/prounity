@@ -7,9 +7,9 @@ namespace Game.UI
     {
         public void Install(IGameUI entity)
         {
-            entity.AddBehaviour(new AmmoViewPresenter(GameContext.Instance));
-            entity.AddBehaviour(new HealthViewPresenter(GameContext.Instance));
-            entity.AddBehaviour(new ScoreViewPresenter(GameContext.Instance));
+            entity.AddBehaviour(new AmmoPresenter(GameContext.Instance));
+            entity.AddBehaviour(new HealthPresenter(GameContext.Instance));
+            entity.AddBehaviour(new ScorePresenter(GameContext.Instance));
         }
     }
 }

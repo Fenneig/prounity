@@ -3,7 +3,7 @@ using Game.Entities;
 
 namespace Game.UI
 {
-    public class HealthViewPresenter : IGameUIInit, IGameUIDispose
+    public class HealthPresenter : IGameUIInit, IGameUIDispose
     {
         private readonly IGameEntity _character;
 
@@ -12,7 +12,7 @@ namespace Game.UI
         private Subscription<int> _subscription;
         private HealthScreenView _healthScreenView;
 
-        public HealthViewPresenter(IGameContext context)
+        public HealthPresenter(IGameContext context)
         {
             _character = context.GetCharacter();
         }

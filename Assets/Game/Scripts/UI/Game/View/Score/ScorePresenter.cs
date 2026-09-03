@@ -2,7 +2,7 @@
 
 namespace Game.UI
 {
-    public class ScoreViewPresenter : IGameUIInit, IGameUIDispose
+    public class ScorePresenter : IGameUIInit, IGameUIDispose
     {
         private readonly IGameContext _context;
         
@@ -10,7 +10,7 @@ namespace Game.UI
         private IReactiveVariable<int> _score;
         private Subscription<int> _subscription;
 
-        public ScoreViewPresenter(IGameContext context)
+        public ScorePresenter(IGameContext context)
         {
             _context = context;
         }

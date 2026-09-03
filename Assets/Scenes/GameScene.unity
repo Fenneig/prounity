@@ -1281,9 +1281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 76841824}
-  - component: {fileID: 76841829}
   - component: {fileID: 76841826}
-  - component: {fileID: 76841828}
   - component: {fileID: 76841827}
   m_Layer: 0
   m_Name: Trigger4
@@ -1337,53 +1335,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 76841823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d8e5b40f8941859369cf18114fb2e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &76841828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76841823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fbb3c5b54843ed9680cae96bdce954, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.DetectionZone
   _occupiedEntities:
   - {fileID: 1293016463}
   - {fileID: 1905960601}
   - {fileID: 2028300185}
   - {fileID: 2093790473}
   - {fileID: 256725176}
-  _triggerEvents: {fileID: 76841827}
---- !u!114 &76841829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76841823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 76841828}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &91586453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2029,9 +1989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 137928204}
-  - component: {fileID: 137928209}
   - component: {fileID: 137928206}
-  - component: {fileID: 137928208}
   - component: {fileID: 137928207}
   m_Layer: 0
   m_Name: Trigger1
@@ -2085,50 +2043,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 137928203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d8e5b40f8941859369cf18114fb2e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &137928208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137928203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fbb3c5b54843ed9680cae96bdce954, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.DetectionZone
   _occupiedEntities:
   - {fileID: 2145657932}
   - {fileID: 950908919}
-  _triggerEvents: {fileID: 137928207}
---- !u!114 &137928209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137928203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 137928208}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &143138435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9918,9 +9838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680947262}
-  - component: {fileID: 680947267}
   - component: {fileID: 680947264}
-  - component: {fileID: 680947266}
   - component: {fileID: 680947265}
   m_Layer: 0
   m_Name: Trigger2
@@ -9974,50 +9892,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 680947261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d8e5b40f8941859369cf18114fb2e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &680947266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680947261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fbb3c5b54843ed9680cae96bdce954, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.DetectionZone
   _occupiedEntities:
   - {fileID: 974138739}
   - {fileID: 1987146905}
-  _triggerEvents: {fileID: 680947265}
---- !u!114 &680947267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680947261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 680947266}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &683460838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26297,9 +26177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2117813608}
-  - component: {fileID: 2117813613}
   - component: {fileID: 2117813610}
-  - component: {fileID: 2117813612}
   - component: {fileID: 2117813611}
   m_Layer: 0
   m_Name: Trigger3
@@ -26353,49 +26231,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117813607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d8e5b40f8941859369cf18114fb2e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &2117813612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117813607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26fbb3c5b54843ed9680cae96bdce954, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.ZoneInstaller
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.DetectionZone
   _occupiedEntities:
   - {fileID: 761039294}
-  _triggerEvents: {fileID: 2117813611}
---- !u!114 &2117813613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117813607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f495ed90d96a9649afc86a91911815e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Entities.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 2117813612}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1 &2125758030
 GameObject:
   m_ObjectHideFlags: 0

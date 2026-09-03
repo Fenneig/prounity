@@ -3,7 +3,7 @@ using Game.Entities;
 
 namespace Game.UI
 {
-    public class AmmoViewPresenter : IGameUIInit, IGameUIDispose
+    public class AmmoPresenter : IGameUIInit, IGameUIDispose
     {
         private readonly IGameEntity _weapon;
 
@@ -12,7 +12,7 @@ namespace Game.UI
         private Subscription<int> _subscription;
 
 
-        public AmmoViewPresenter(IGameContext context)
+        public AmmoPresenter(IGameContext context)
         {
             _weapon = context.GetCharacter().GetWeapon().Value;
         }
