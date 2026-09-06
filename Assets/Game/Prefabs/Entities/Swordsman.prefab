@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8692576747330127514}
-  - component: {fileID: 7379743911388441951}
+  - component: {fileID: -4340948728675567578}
   m_Layer: 0
   m_Name: Swordsman
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 8194177642520444206}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &7379743911388441951
+--- !u!114 &-4340948728675567578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +43,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8692576747330127513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5146d679894e4d68b78a16fd04026bc1, type: 3}
+  m_Script: {fileID: 11500000, guid: c9d37345681440819f0f4a77838628a2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntities.Content.SwordsmanAuthoring
-  _moveSpeed: 5
-  _rotateSpeed: 720
-  _target: {fileID: 8692576747330127513}
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntities.Content.SwordsmanView
+  _animator: {fileID: 1066569911321286636}
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,6 +180,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ade5523b6f916f43a919cde252ff319, type: 3}
+--- !u!95 &1066569911321286636 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3332189164640221200, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8194177642520444206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5856076907724214994, guid: 9ade5523b6f916f43a919cde252ff319,
